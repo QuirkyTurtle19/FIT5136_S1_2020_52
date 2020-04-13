@@ -7,8 +7,16 @@ public class ListOfMissionCoordinators {
     private FileIO reader;
     private ArrayList<MissionCoordinator> missionCoordinators;
 
+    public ListOfMissionCoordinators(){
+        missionCoordinators = new ArrayList<>();
+    }
+
     public void addMissionCoordinator(String id, String name){
         missionCoordinators.add(new MissionCoordinator(id, name));
+    }
+
+    public ArrayList<MissionCoordinator> getMissionCoordinators(){
+        return missionCoordinators;
     }
 
     public ArrayList<MissionCoordinator> createMissionCoordinators(){
