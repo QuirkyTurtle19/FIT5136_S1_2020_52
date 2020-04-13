@@ -1,20 +1,20 @@
 package com.MissionToMars;
 
 public class MissionCoordinator {
-    private int id;
+    private String id;
     private String name;
 
     public MissionCoordinator(){
-        id = 1;
+        id = "";
         name = "";
      }
 
-     public MissionCoordinator(int newId, String newName){
+     public MissionCoordinator(String newId, String newName){
         id = newId;
         name = newName;
      }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -22,7 +22,7 @@ public class MissionCoordinator {
         return name;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

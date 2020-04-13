@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class FileIO {
 
-    public String readFIle(String filename){
+    public String readFile(String filename){
         String output = "";
 
         try
@@ -24,7 +24,7 @@ public class FileIO {
             System.out.println("File not found");
             System.exit(1);
         }
-    return output;
+        return output;
     }
 
 
