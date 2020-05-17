@@ -2,29 +2,29 @@ package com.MissionToMars;
 
 public class Administrator {
 
-    private String admindName;
+    private String adminName;
     private String adminId;
 
     public Administrator(){
-        admindName = "";
+        adminName = "";
         adminId = "";
     }
 
     public Administrator(String name, String id){
-        admindName = name;
+        adminName = name;
         adminId = id;
     }
 
-    public String getAdmindName() {
-        return admindName;
+    public String getAdminName() {
+        return adminName;
     }
 
     public String getAdminId(){
         return adminId;
     }
 
-    public void setAdmindName(String admindName) {
-        this.admindName = admindName;
+    public void setAdminName(String adminName) {
+        this.adminName = adminName;
     }
 
     public void setAdminId(String adminId) {
