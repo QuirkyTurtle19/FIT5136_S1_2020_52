@@ -2,30 +2,37 @@ package com.MissionToMars;
 
 public class SpaceShuttle {
 
+    private String shuttleId;
     private String shuttleName;
     private String manufactureYear;
-    private Integer fuelCapacity;
-    private Integer passengerCapacity;
-    private Integer cargoCapacity;
-    private Double travelSpeed;
+    private String fuelCapacity;
+    private String passengerCapacity;
+    private String cargoCapacity;
+    private String travelSpeed;
+    private String origin;
 
     public SpaceShuttle() {
+        shuttleId = "";
         shuttleName = "";
         manufactureYear = "";
-        fuelCapacity = 0;
-        passengerCapacity = 0;
-        cargoCapacity = 0;
-        travelSpeed = 0.0;
+        fuelCapacity = "0";
+        passengerCapacity = "0";
+        cargoCapacity = "0";
+        travelSpeed = "0.0";
+        origin = "";
     }
 
-    public SpaceShuttle (String NewShuttleName, String NewManufactureYear, Integer NewFuelCapacity,
-                     Integer NewPassengerCapacity, Integer NewCargoCapacity, Double NewTravelSpeed){
+    public SpaceShuttle (String newShuttleId, String NewShuttleName, String NewManufactureYear, String NewFuelCapacity,
+                     String NewPassengerCapacity, String NewCargoCapacity, String NewTravelSpeed, String newOrigin){
+
+        shuttleId = newShuttleId;
         shuttleName = NewShuttleName;
         manufactureYear = NewManufactureYear;
         fuelCapacity = NewFuelCapacity;
         passengerCapacity = NewPassengerCapacity;
         cargoCapacity = NewCargoCapacity;
         travelSpeed = NewTravelSpeed;
+        origin = newOrigin;
 }
 
     public String getShuttleName(){
@@ -46,38 +53,36 @@ public class SpaceShuttle {
     }
 
 
-    public Integer getFuelCapacity(){
+    public String getFuelCapacity(){
         return fuelCapacity;
     }
 
-    public void setFuelCapacity(Integer fuelCapacity) {
+    public void setFuelCapacity(String fuelCapacity) {
         this.fuelCapacity = fuelCapacity;
     }
 
 
-    public Integer getPassengerCapacity(){
+    public String getPassengerCapacity(){
         return passengerCapacity;
     }
 
-    public void setPassengerCapacity(Integer passengerCapacity) {
+    public void setPassengerCapacity(String passengerCapacity) {
         this.passengerCapacity = passengerCapacity;
     }
 
 
-    public Integer getCargoCapacity(){
+    public String getCargoCapacity(){
         return cargoCapacity;
     }
 
-    public void setCargoCapacity(Integer cargoCapacity) {
+    public void setCargoCapacity(String cargoCapacity) {
         this.cargoCapacity = cargoCapacity;
     }
 
 
-    public Double getTravelSpeed(){
-        return travelSpeed;
-    }
+    public String getTravelSpeed(){ return travelSpeed; }
 
-    public void setTravelSpeed(Double travelSpeed) {
+    public void setTravelSpeed(String travelSpeed) {
         this.travelSpeed = travelSpeed;
     }
 }

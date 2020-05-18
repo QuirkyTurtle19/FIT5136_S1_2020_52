@@ -1,3 +1,9 @@
+package com.MissionToMars;
+
+import com.MissionToMars.ListOfCandidates;
+import com.MissionToMars.SelectionCriteria;
+import com.MissionToMars.SpaceShuttle;
+
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,9 +23,9 @@ public class Mission {
     private String destLocation;
     private Time missionDuration;
     private String missionStatus;
-    private SelectionCriteria  selectionCriteria;
+    private SelectionCriteria selectionCriteria;
     private SpaceShuttle spaceShuttle;
-    private ArrayList<Candidates> listOfCandidates;
+    private ListOfCandidates listOfCandidates;
 
     public void setMissionId(String newMissionId)
     {
@@ -186,20 +192,20 @@ public class Mission {
         return spaceShuttle;
     }
 
-    public void setListOfCandidates(ArrayList<Candidates> newListOfCandidates)
+    public void setListOfCandidates(ListOfCandidates newListOfCandidates)
     {
         this.listOfCandidates=newListOfCandidates;
     }
 
-    public ArrayList<Candidates> getListOfCandidates()
+    public ListOfCandidates getListOfCandidates()
     {
         return listOfCandidates;
     }
 
     //get specific index
-    public Candidates getSpecificCandidate(int index)
+    public Candidate getSpecificCandidate(int index)
     {
-        return listOfCandidates.get(index);
+        return listOfCandidates.getACandidate(index);
     }
 
     public static void main(String[] args)
