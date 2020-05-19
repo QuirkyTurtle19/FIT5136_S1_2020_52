@@ -14,6 +14,7 @@ public class SelectionCriteria {
     private String computerSkill;
     private String languageRequired;
     private ArrayList<String> secondaryLanguages;
+    private FileIO  reader;
 
     public SelectionCriteria(){
         minimumAge = 0;
@@ -106,5 +107,33 @@ public class SelectionCriteria {
 
     public void setSecondaryLanguages(ArrayList<String> secondaryLanguages) {
         this.secondaryLanguages = secondaryLanguages;
+    }
+
+    public void importSelectionCriteria(int index){
+
+        reader = new FileIO();
+
+        String selectionCriteriaString = reader.readFile("selectionCriteria");
+        String[] selectionCriteriaArray = selectionCriteriaString.split("\n");
+
+        String[] singleSelectionCriteriaArray = selectionCriteriaArray[index].split(";");
+
+        String[] secondaryLanguageArray = singleSelectionCriteriaArray[9].split(",");
+        ArrayList<String> secondLanguages = new ArrayList<>();
+
+        if (secondaryLanguageArray.length > 1){
+            int i = 0;
+            while (secondaryLanguageArray.length > i){
+                secondLanguages.add(secondaryLanguageArray[i]);
+                i++;
+            }
+        }else{
+            secondLanguages.add(singleSelectionCriteriaArray[9]);
+        }
+
+
+
+
+
     }
 }

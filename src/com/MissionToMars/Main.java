@@ -13,6 +13,7 @@ public class Main {
 
         ListOfCandidates list = new ListOfCandidates();
         list.createListOfCandidates();
+        System.out.println(list.getACandidate(6).getLanguageList().get(1));
 
         }
 

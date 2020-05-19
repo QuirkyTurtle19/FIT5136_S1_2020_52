@@ -4,28 +4,74 @@ import com.MissionToMars.ListOfCandidates;
 import com.MissionToMars.SelectionCriteria;
 import com.MissionToMars.SpaceShuttle;
 
+
+import java.sql.Array;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Mission {
     private String missionId;
     private String missionName;
-    private String missionDesc;
+    private String launchDate;
+    private String origin;
     private ArrayList<String> countriesAllowed;
-    private String jobName;
-    private String jobDesc;
-    private int numRequired;
-    private String journeyCargo;
-    private String missionCargo;
-    private String otherMissionCargo;
-    private Date launchDate;
+    private Integer missionDuration;
+    private String missionType;
+    private String missionDesc;
+    private String cargoFor;
+    private ArrayList<String[]> cargo;
     private String destLocation;
-    private Time missionDuration;
     private String missionStatus;
+    private ArrayList<String[]> jobs;
+    private ArrayList<String[]> employmentRequirements;
     private SelectionCriteria selectionCriteria;
     private SpaceShuttle spaceShuttle;
     private ListOfCandidates listOfCandidates;
+    private FileIO reader;
+
+    public Mission(){
+
+        missionId = "";
+        missionName = "";
+        launchDate = "01-01-2020";
+        origin = "";
+        countriesAllowed = new ArrayList<>();
+        missionDuration = 0;
+        missionType = "String";
+        missionDesc = "";
+        cargoFor = "";
+        cargo = new ArrayList<String[]>();
+        destLocation = "";
+        missionStatus = "";
+        jobs = new ArrayList<String[]>();
+        employmentRequirements = new ArrayList<String[]>();
+        selectionCriteria = new SelectionCriteria();
+        spaceShuttle = new SpaceShuttle();
+        listOfCandidates = new ListOfCandidates();
+    }
+
+    public Mission(String newMissionId, String newMissionName, String newLaunchDate, String newOrigin, ArrayList<String> newCountriesAllowed, Integer newMissionDuration, String newMissionType, String newMissionDescription, String newCargoFor, ArrayList<String[]> newCargo, Integer newCargoQuantityForEach, String newDestLocation, String newMissionStatus, ArrayList<String[]> newJobs, ArrayList<String[]> newEmploymentrequirements, SelectionCriteria newSelectionCriteria, SpaceShuttle newSpaceShuttle, ListOfCandidates newListOfCandidates){
+        missionId = newMissionId;
+        missionName = newMissionName;
+        launchDate = newLaunchDate;
+        origin = newOrigin;
+        countriesAllowed = newCountriesAllowed;
+        missionDuration = newMissionDuration;
+        missionType = newMissionType;
+        missionDesc = newMissionDescription;
+        cargoFor = newCargoFor;
+        cargo = newCargo;
+        destLocation = newDestLocation;
+        missionStatus = newMissionStatus;
+        jobs = newJobs;
+        employmentRequirements = newEmploymentrequirements;
+        selectionCriteria = newSelectionCriteria;
+        spaceShuttle = newSpaceShuttle;
+        listOfCandidates = newListOfCandidates;
+
+    }
 
     public void setMissionId(String newMissionId)
     {
@@ -61,6 +107,22 @@ public class Mission {
         this.countriesAllowed=newCountriesAllowed;
     }
 
+    public String getMissionType() {
+        return missionType;
+    }
+
+    public void setMissionType(String missionType) {
+        this.missionType = missionType;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
     public ArrayList<String> getCountriesAllowed()
     {
         return countriesAllowed;
@@ -72,72 +134,35 @@ public class Mission {
         return countriesAllowed.get(index);
     }
 
-    public void setJobName(String newJobName)
+
+    public void setCargoFor(String newCargoFor)
     {
-        jobName= newJobName;
+        cargoFor = newCargoFor;
     }
 
-    public String getJobName()
+    public String getCargoFor() { return cargoFor; }
+
+    public void setCargoRequired(String cargoRequired) {this.cargoRequired = cargoRequired;}
+
+    public String getCargoRequired()
     {
-        return jobName;
+        return cargoRequired;
     }
 
-    public void setJobDesc(String newJobDesc)
-    {
-        jobDesc= newJobDesc;
+    public void setCargoQuantityForEach(Integer cargoQuantityForEach) {
+        this.cargoQuantityForEach = cargoQuantityForEach;
     }
 
-    public String getJobDesc()
-    {
-        return jobDesc;
+    public Integer getCargoQuantityForEach() {
+        return cargoQuantityForEach;
     }
 
-    public void setNumRequired(int newNumRequired)
-    {
-        numRequired= newNumRequired;
-    }
-
-    public int getNumRequired()
-    {
-        return numRequired;
-    }
-
-    public void setJourneyCargo(String newJourneyCargo)
-    {
-        journeyCargo=newJourneyCargo;
-    }
-
-    public String getJourneyCargo()
-    {
-        return journeyCargo;
-    }
-
-    public void setMissionCargo(String newMissionCargo)
-    {
-        missionCargo = newMissionCargo;
-    }
-
-    public String getMissionCargo()
-    {
-        return missionCargo;
-    }
-
-    public void setOtherMissionCargo(String newOtherMissionCargo)
-    {
-        otherMissionCargo=newOtherMissionCargo;
-    }
-
-    public String getOtherMissionCargo()
-    {
-        return otherMissionCargo;
-    }
-
-    public void setLaunchDate(Date newLaunchDate)
+    public void setLaunchDate(String newLaunchDate)
     {
         launchDate=newLaunchDate;
     }
 
-    public Date getLaunchDate()
+    public String getLaunchDate()
     {
         return launchDate;
     }
@@ -152,12 +177,12 @@ public class Mission {
         return destLocation;
     }
 
-    public void setMissionDuration(Time newMissionDuration)
+    public void setMissionDuration(Integer newMissionDuration)
     {
         missionDuration=newMissionDuration;
     }
 
-    public Time getMissionDuration()
+    public Integer getMissionDuration()
     {
         return missionDuration;
     }
@@ -208,9 +233,6 @@ public class Mission {
         return listOfCandidates.getACandidate(index);
     }
 
-    public static void main(String[] args)
-    {
-        Mission m = new Mission();
-    }
+
 
 }
