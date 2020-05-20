@@ -5,6 +5,7 @@ import com.MissionToMars.SelectionCriteria;
 import com.MissionToMars.SpaceShuttle;
 
 
+import java.awt.*;
 import java.sql.Array;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
@@ -20,8 +21,9 @@ public class Mission {
     private Integer missionDuration;
     private String missionType;
     private String missionDesc;
-    private String cargoFor;
-    private ArrayList<String[]> cargo;
+    private ArrayList<Stock> journeyCargo;
+    private ArrayList<Stock> missionCargo;
+    private ArrayList<Stock> otherMissionCargo;
     private String destLocation;
     private String missionStatus;
     private ArrayList<String[]> jobs;
@@ -29,6 +31,7 @@ public class Mission {
     private SelectionCriteria selectionCriteria;
     private SpaceShuttle spaceShuttle;
     private ListOfCandidates listOfCandidates;
+    private MissionCoordinator coordinator;
     private FileIO reader;
 
     public Mission(){
@@ -41,8 +44,9 @@ public class Mission {
         missionDuration = 0;
         missionType = "String";
         missionDesc = "";
-        cargoFor = "";
-        cargo = new ArrayList<String[]>();
+        journeyCargo = new ArrayList<Stock>();
+        missionCargo = new ArrayList<Stock>();
+        otherMissionCargo = new ArrayList<Stock>();
         destLocation = "";
         missionStatus = "";
         jobs = new ArrayList<String[]>();
@@ -50,9 +54,10 @@ public class Mission {
         selectionCriteria = new SelectionCriteria();
         spaceShuttle = new SpaceShuttle();
         listOfCandidates = new ListOfCandidates();
+        coordinator = new MissionCoordinator();
     }
 
-    public Mission(String newMissionId, String newMissionName, String newLaunchDate, String newOrigin, ArrayList<String> newCountriesAllowed, Integer newMissionDuration, String newMissionType, String newMissionDescription, String newCargoFor, ArrayList<String[]> newCargo, Integer newCargoQuantityForEach, String newDestLocation, String newMissionStatus, ArrayList<String[]> newJobs, ArrayList<String[]> newEmploymentrequirements, SelectionCriteria newSelectionCriteria, SpaceShuttle newSpaceShuttle, ListOfCandidates newListOfCandidates){
+    public Mission(String newMissionId, String newMissionName, String newLaunchDate, String newOrigin, ArrayList<String> newCountriesAllowed, Integer newMissionDuration, String newMissionType, String newMissionDescription, ArrayList<Stock> newJourneyCargo, ArrayList<Stock> newMissionCargo, ArrayList<Stock> newOtherMissionCargo, String newDestLocation, String newMissionStatus, ArrayList<String[]> newJobs, ArrayList<String[]> newEmploymentrequirements, SelectionCriteria newSelectionCriteria, SpaceShuttle newSpaceShuttle, ListOfCandidates newListOfCandidates, MissionCoordinator newCoordinator){
         missionId = newMissionId;
         missionName = newMissionName;
         launchDate = newLaunchDate;
@@ -61,8 +66,9 @@ public class Mission {
         missionDuration = newMissionDuration;
         missionType = newMissionType;
         missionDesc = newMissionDescription;
-        cargoFor = newCargoFor;
-        cargo = newCargo;
+        journeyCargo = newJourneyCargo;
+        missionCargo = newMissionCargo;
+        otherMissionCargo = newOtherMissionCargo;
         destLocation = newDestLocation;
         missionStatus = newMissionStatus;
         jobs = newJobs;
@@ -70,6 +76,7 @@ public class Mission {
         selectionCriteria = newSelectionCriteria;
         spaceShuttle = newSpaceShuttle;
         listOfCandidates = newListOfCandidates;
+        coordinator = newCoordinator;
 
     }
 
@@ -135,26 +142,52 @@ public class Mission {
     }
 
 
-    public void setCargoFor(String newCargoFor)
-    {
-        cargoFor = newCargoFor;
+    public ArrayList<Stock> getJourneyCargo() {
+        return journeyCargo;
     }
 
-    public String getCargoFor() { return cargoFor; }
-
-    public void setCargoRequired(String cargoRequired) {this.cargoRequired = cargoRequired;}
-
-    public String getCargoRequired()
-    {
-        return cargoRequired;
+    public void setJourneyCargo(ArrayList<Stock> journeyCargo) {
+        this.journeyCargo = journeyCargo;
     }
 
-    public void setCargoQuantityForEach(Integer cargoQuantityForEach) {
-        this.cargoQuantityForEach = cargoQuantityForEach;
+    public ArrayList<Stock> getMissionCargo() {
+        return missionCargo;
     }
 
-    public Integer getCargoQuantityForEach() {
-        return cargoQuantityForEach;
+    public void setMissionCargo(ArrayList<Stock> missionCargo) {
+        this.missionCargo = missionCargo;
+    }
+
+    public ArrayList<Stock> getOtherMissionCargo() {
+        return otherMissionCargo;
+    }
+
+    public void setOtherMissionCargo(ArrayList<Stock> otherMissionCargo) {
+        this.otherMissionCargo = otherMissionCargo;
+    }
+
+    public ArrayList<String[]> getEmploymentRequirements() {
+        return employmentRequirements;
+    }
+
+    public void setEmploymentRequirements(ArrayList<String[]> employmentRequirements) {
+        this.employmentRequirements = employmentRequirements;
+    }
+
+    public ArrayList<String[]> getJobs() {
+        return jobs;
+    }
+
+    public void setJobs(ArrayList<String[]> jobs) {
+        this.jobs = jobs;
+    }
+
+    public MissionCoordinator getCoordinator() {
+        return coordinator;
+    }
+
+    public void setCoordinator(MissionCoordinator coordinator) {
+        this.coordinator = coordinator;
     }
 
     public void setLaunchDate(String newLaunchDate)

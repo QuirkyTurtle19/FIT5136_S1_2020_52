@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class SelectionCriteria {
 
-    private int minimumAge;
-    private int maximumAge;
+    private Integer minimumAge;
+    private Integer maximumAge;
     private String qualification;
-    private int workExperience;
+    private Integer workExperience;
     private String occupation;
     private ArrayList<String> healthRecord;
     private ArrayList<String> criminalRecord;
@@ -27,14 +27,17 @@ public class SelectionCriteria {
         computerSkill = "";
     }
 
-    public SelectionCriteria(int min, int max, String quals, int experience, String newComputerSkill){
+    public SelectionCriteria(Integer min, Integer max, Integer experience, String quals, String newOccupation, String newComputerSkill, String newLanguageRequired, ArrayList<String> newSecondaryLanguage){
         maximumAge = min;
         maximumAge = max;
         qualification = quals;
+        occupation = newOccupation;
         workExperience = experience;
         computerSkill = newComputerSkill;
-        languageRequired = "English";
-        secondaryLanguages = new ArrayList<>();
+        languageRequired = newLanguageRequired;
+        secondaryLanguages = newSecondaryLanguage;
+        healthRecord = null;
+        criminalRecord = null;
     }
 
     public int getMinimumAge() {
