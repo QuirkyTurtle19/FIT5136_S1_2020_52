@@ -1,5 +1,6 @@
 package com.MissionToMars;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -18,13 +19,14 @@ public class Candidate
     private String phoneNumber;
     private String identificationType;
     private String gender;
-    private String allergies;
-    private String foodPreference;
+    private ArrayList<String> allergies;
+    private ArrayList<String> foodPreference;
     private String compSkills;
     private ArrayList<String> qualificationList;
-    private ArrayList<String> workExpYears;
-    private ArrayList<String> occupationList;
-    private ArrayList<String> languageList;
+    private ArrayList<String[]> work;
+    private ArrayList<String> languages;
+    private ArrayList<String> missionsInterestedIn;
+    private ArrayList<String> missionOffers;
 
     /**
      * Constructor for objects of class Candidate
@@ -37,21 +39,19 @@ public class Candidate
         address = "";
         nationality = "";
         phoneNumber = "";
-        identificationType = "";
         gender = "";
-        allergies = "";
-        foodPreference = "";
+        allergies = new ArrayList<String>();
+        foodPreference = new ArrayList<String>();
         qualificationList = new ArrayList<>();
-        workExpYears = new ArrayList<>();
-        occupationList = new ArrayList<>();
+        work = new ArrayList<String[]>();
         compSkills = "";
-        languageList = new ArrayList<>();
+        languages = new ArrayList<String>();
     }
 
     /**
      * Non-Default constructor for objects of class University
      */
-    public Candidate(String candidateId, String candidateName, String candidateDOB, String address, String nationality, String phoneNumber, String identificationType, String gender, String allergies, String foodPreference, ArrayList<String> qualificationList, ArrayList<String> workExpYears, ArrayList<String> occupationList, String compSkills, ArrayList<String> languageList)
+    public Candidate(String candidateId, String candidateName, String candidateDOB, String address, String nationality, String phoneNumber, String identificationType, String gender, ArrayList<String> allergies, ArrayList<String> foodPreference, ArrayList<String> qualificationList, ArrayList<String[]> work, String compSkills, ArrayList<String> languageList, ArrayList<String> missionsInterestedIn, ArrayList<String> missionOffers)
     {
         this.candidateId = candidateId;
         this.candidateName = candidateName;
@@ -64,10 +64,11 @@ public class Candidate
         this.allergies = allergies;
         this.foodPreference = foodPreference;
         this.qualificationList = qualificationList;
-        this.workExpYears = workExpYears;
-        this.occupationList = occupationList;
+        this.work = work;
         this.compSkills = compSkills;
-        this.languageList = languageList;
+        this.languages = languageList;
+        this.missionOffers = missionOffers;
+        this.missionsInterestedIn = missionsInterestedIn;
     }
 
     public String getCandidateId()
@@ -130,24 +131,19 @@ public class Candidate
         this.gender = gender;
     }
 
-    public String getAllergies()
+    public ArrayList<String> getAllergies()
     {
         return allergies;
     }
 
-    public void setAllergies(String allergies)
+    public void setAllergies(ArrayList<String> allergies)
     {
         this.allergies = allergies;
     }
 
-    public String getFoodPreference()
+    public ArrayList<String> getFoodPreference()
     {
         return foodPreference;
-    }
-
-    public void setFoodPreference(String foodPreference)
-    {
-        this.foodPreference = foodPreference;
     }
 
     public String getCompSkills()
@@ -170,33 +166,55 @@ public class Candidate
         this.qualificationList = qualificationList;
     }
 
-    public ArrayList<String> getWorkExpYears()
-    {
-        return workExpYears;
+    public ArrayList<String> getLanguages() {
+        return languages;
     }
 
-    public void setWorkExpYears(ArrayList<String> workExpYears)
-    {
-        this.workExpYears = workExpYears;
+    public void setLanguages(ArrayList<String> languages) {
+        this.languages = languages;
     }
 
-    public ArrayList<String> getOccupationList()
-    {
-        return occupationList;
+    public ArrayList<String> getMissionOffers() {
+        return missionOffers;
     }
 
-    public void setOccupationList(ArrayList<String> occupationList)
-    {
-        this.occupationList = occupationList;
+    public void setMissionOffers(ArrayList<String> missionOffers) {
+        this.missionOffers = missionOffers;
     }
 
-    public ArrayList<String> getLanguageList()
-    {
-        return languageList;
+    public ArrayList<String> getMissionsInterestedIn() {
+        return missionsInterestedIn;
     }
 
-    public void setLanguageList(ArrayList<String> languageList)
-    {
-        this.languageList = languageList;
+    public void setMissionsInterestedIn(ArrayList<String> missionsInterestedIn) {
+        this.missionsInterestedIn = missionsInterestedIn;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setFoodPreference(ArrayList<String> foodPreference) {
+        this.foodPreference = foodPreference;
+    }
+
+    public ArrayList<String[]> getWork() {
+        return work;
+    }
+
+    public void setWork(ArrayList<String[]> work) {
+        this.work = work;
+    }
+
+    public String getIdentificationType() {
+        return identificationType;
+    }
+
+    public void setIdentificationType(String identificationType) {
+        this.identificationType = identificationType;
     }
 }

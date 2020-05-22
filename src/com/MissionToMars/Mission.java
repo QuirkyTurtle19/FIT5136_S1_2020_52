@@ -1,6 +1,6 @@
 package com.MissionToMars;
 
-import com.MissionToMars.ListOfCandidates;
+
 import com.MissionToMars.SelectionCriteria;
 import com.MissionToMars.SpaceShuttle;
 
@@ -30,7 +30,7 @@ public class Mission {
     private ArrayList<String[]> employmentRequirements;
     private SelectionCriteria selectionCriteria;
     private SpaceShuttle spaceShuttle;
-    private ListOfCandidates listOfCandidates;
+    private ArrayList<Candidate> candidates;
     private MissionCoordinator coordinator;
     private FileIO reader;
 
@@ -53,11 +53,11 @@ public class Mission {
         employmentRequirements = new ArrayList<String[]>();
         selectionCriteria = new SelectionCriteria();
         spaceShuttle = new SpaceShuttle();
-        listOfCandidates = new ListOfCandidates();
+        candidates = new ArrayList<Candidate>();
         coordinator = new MissionCoordinator();
     }
 
-    public Mission(String newMissionId, String newMissionName, String newLaunchDate, String newOrigin, ArrayList<String> newCountriesAllowed, Integer newMissionDuration, String newMissionType, String newMissionDescription, ArrayList<Stock> newJourneyCargo, ArrayList<Stock> newMissionCargo, ArrayList<Stock> newOtherMissionCargo, String newDestLocation, String newMissionStatus, ArrayList<String[]> newJobs, ArrayList<String[]> newEmploymentrequirements, SelectionCriteria newSelectionCriteria, SpaceShuttle newSpaceShuttle, ListOfCandidates newListOfCandidates, MissionCoordinator newCoordinator){
+    public Mission(String newMissionId, String newMissionName, String newLaunchDate, String newOrigin, ArrayList<String> newCountriesAllowed, Integer newMissionDuration, String newMissionType, String newMissionDescription, ArrayList<Stock> newJourneyCargo, ArrayList<Stock> newMissionCargo, ArrayList<Stock> newOtherMissionCargo, String newDestLocation, String newMissionStatus, ArrayList<String[]> newJobs, ArrayList<String[]> newEmploymentrequirements, SelectionCriteria newSelectionCriteria, SpaceShuttle newSpaceShuttle, ArrayList<Candidate> newCandidates, MissionCoordinator newCoordinator){
         missionId = newMissionId;
         missionName = newMissionName;
         launchDate = newLaunchDate;
@@ -75,7 +75,7 @@ public class Mission {
         employmentRequirements = newEmploymentrequirements;
         selectionCriteria = newSelectionCriteria;
         spaceShuttle = newSpaceShuttle;
-        listOfCandidates = newListOfCandidates;
+        candidates = newCandidates;
         coordinator = newCoordinator;
 
     }
@@ -250,20 +250,20 @@ public class Mission {
         return spaceShuttle;
     }
 
-    public void setListOfCandidates(ListOfCandidates newListOfCandidates)
+    public void setListOfCandidates(ArrayList<Candidate> newListOfCandidates)
     {
-        this.listOfCandidates=newListOfCandidates;
+        this.candidates=newListOfCandidates;
     }
 
-    public ListOfCandidates getListOfCandidates()
+    public ArrayList<Candidate> getListOfCandidates()
     {
-        return listOfCandidates;
+        return candidates;
     }
 
     //get specific index
     public Candidate getSpecificCandidate(int index)
     {
-        return listOfCandidates.getACandidate(index);
+        return candidates.get(index);
     }
 
 
