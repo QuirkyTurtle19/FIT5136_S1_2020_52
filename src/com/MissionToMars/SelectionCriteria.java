@@ -1,6 +1,10 @@
 package com.MissionToMars;
 
-import java.util.ArrayList;
+import java.util.*;
+import java.io.*;
+import java.lang.*;
+
+import static java.lang.Boolean.TRUE;
 
 public class SelectionCriteria {
 
@@ -24,6 +28,7 @@ public class SelectionCriteria {
         occupation = "";
         healthRecord = new ArrayList<>();
         criminalRecord = new ArrayList<>();
+        languageRequired="";
         computerSkill = "";
     }
 
@@ -108,6 +113,14 @@ public class SelectionCriteria {
         this.languageRequired = languageRequired;
     }
 
+    public void setHealthRecord(ArrayList<String> healthRecord) {
+        this.healthRecord = healthRecord;
+    }
+
+    public void setCriminalRecord(ArrayList<String> criminalRecord) {
+        this.criminalRecord = criminalRecord;
+    }
+
     public void setSecondaryLanguages(ArrayList<String> secondaryLanguages) {
         this.secondaryLanguages = secondaryLanguages;
     }
@@ -135,8 +148,161 @@ public class SelectionCriteria {
         }
 
 
+    }
 
+    public void askAge()
+    {
+        int min,max;
+        Scanner console = new Scanner(System.in);
+        System.out.println("Enter Minimum Age : ");
+        min=console.nextInt();
+        setMinimumAge(min);
+        System.out.println("Enter Maximum Age : ");
+        max=console.nextInt();
+        setMaximumAge(max);
+    }
 
+    public void askQualifications()
+    {
+        String qual;
+        Scanner console = new Scanner(System.in);
+        System.out.println("Enter Qualifications Required:");
+        qual=console.nextLine();
+        setQualification(qual);
+    }
+
+    public void askExperience()
+    {
+        int we;
+        Scanner console = new Scanner(System.in);
+        System.out.println("Enter Experience Required:");
+        we=console.nextInt();
+        setWorkExperience(we);
+    }
+
+    public void askOccupation()
+    {
+        String occ;
+        Scanner console = new Scanner(System.in);
+        System.out.println("Enter Occupations Done:");
+        occ=console.nextLine();
+        setOccupation(occ);
+    }
+
+    public void askHealthRecord()
+    {
+        String input,choice,str1;
+        Scanner console = new Scanner(System.in);
+        ArrayList<String> str = new ArrayList<>();
+        System.out.println("Enter Health Requirements:");
+        System.out.println("Note : Enter Atleast One Requirement");
+        input=console.nextLine();
+        str.add(input);
+        System.out.println("Do You want to add more ?");
+        System.out.println("Press y/n");
+        choice=console.nextLine();
+        if(choice.trim().equals("y")==TRUE)
+        {
+            while (choice.trim().equals("y")==TRUE)
+            {
+                System.out.println("Enter Requirement");
+                str1 = console.nextLine();
+                str.add(str1);
+                System.out.println("Do You want to add more ?");
+                System.out.println("Press y/n");
+                choice = console.nextLine();
+            }
+        }
+        else
+            System.out.println("Health Updated");
+        setHealthRecord(str);
+    }
+
+    public void askCriminalRecord()
+    {
+        String input,choice,str1;
+        Scanner console = new Scanner(System.in);
+        ArrayList<String> str = new ArrayList<>();
+        System.out.println("Enter Criminal Record Requirements:");
+        System.out.println("Note : Enter Atleast One Requirement");
+        input=console.nextLine();
+        str.add(input);
+        System.out.println("Do You want to add more ?");
+        System.out.println("Press y/n");
+        choice=console.nextLine();
+        if(choice.trim().equals("y")==TRUE)
+        {
+            while (choice.trim() .equals("y")==TRUE)
+            {
+                System.out.println("Enter Requirement");
+                str1 = console.nextLine();
+                str.add(str1);
+                System.out.println("Do You want to add more ?");
+                System.out.println("Press y/n");
+                choice = console.nextLine();
+            }
+        }
+        else
+            System.out.println("Criminal record Updated");
+
+        setCriminalRecord(str);
 
     }
+
+    public void askComputerSkill()
+    {
+        String skill;
+        Scanner console = new Scanner(System.in);
+        System.out.println("Enter Skill:");
+        skill =console.nextLine();
+        setComputerSkill(skill);
+    }
+
+    public void askLanguageRequired()
+    {
+        String lang;
+        Scanner console = new Scanner(System.in);
+        System.out.println("Enter language Required:");
+        lang =console.nextLine();
+        setLanguageRequired(lang);
+    }
+
+    public void askSecondaryLanguages()
+    {
+        String input,choice,str1;
+        Scanner console = new Scanner(System.in);
+        ArrayList<String> str = new ArrayList<>();
+        System.out.println("Enter Secondary language Requirements:");
+        System.out.println("Note : Enter Atleast One Requirement");
+        input=console.nextLine();
+        str.add(input);
+        System.out.println("Do You want to add more ?");
+        System.out.println("Press y/n");
+        choice=console.nextLine();
+        if(choice.trim().equals("y")==TRUE)
+        {
+            while (choice.trim().equals("y")==TRUE)
+            {
+                System.out.println("Enter Language");
+                str1 = console.nextLine();
+                str.add(str1);
+                System.out.println("Do You want to add more ?");
+                System.out.println("Press y/n");
+                choice = console.nextLine();
+            }
+        }
+        else
+            System.out.println("Secondary languages Updated");
+
+        setSecondaryLanguages(str);
+
+    }
+
+    public static void main(String[] args)
+    {
+        SelectionCriteria st = new SelectionCriteria();
+        st.askHealthRecord();
+        System.out.println(st.getHealthRecord());
+    }
+
 }
