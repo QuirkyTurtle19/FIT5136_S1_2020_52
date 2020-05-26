@@ -14,6 +14,8 @@ public class Main {
         Control control = new Control();
         control.importAllData();
 
+        UI start = new UI();
+        start.createMission();
 
         }
 

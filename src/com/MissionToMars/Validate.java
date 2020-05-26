@@ -1,5 +1,7 @@
 package com.MissionToMars;
 
+import java.util.Scanner;
+
 public class Validate {
 
     public boolean stringNotZeroLength(String aString){
@@ -38,6 +40,20 @@ public class Validate {
             position++;
         }
         return false;
+    }
+
+    public String acceptStringInput(String displayMessage)
+    {
+        Scanner input = new Scanner(System.in);
+        System.out.println(displayMessage);
+        return input.nextLine();
+    }
+
+    public int acceptIntegerInput(String displayMessage)
+    {
+        Scanner input = new Scanner(System.in);
+        System.out.println(displayMessage);
+        return input.nextInt();
     }
 
 

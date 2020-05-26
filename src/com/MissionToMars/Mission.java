@@ -11,6 +11,7 @@ import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 public class Mission {
     private String missionId;
@@ -57,7 +58,13 @@ public class Mission {
         coordinator = new MissionCoordinator();
     }
 
-    public Mission(String newMissionId, String newMissionName, String newLaunchDate, String newOrigin, ArrayList<String> newCountriesAllowed, Integer newMissionDuration, String newMissionType, String newMissionDescription, ArrayList<Stock> newJourneyCargo, ArrayList<Stock> newMissionCargo, ArrayList<Stock> newOtherMissionCargo, String newDestLocation, String newMissionStatus, ArrayList<String[]> newJobs, ArrayList<String[]> newEmploymentrequirements, SelectionCriteria newSelectionCriteria, SpaceShuttle newSpaceShuttle, ArrayList<Candidate> newCandidates, MissionCoordinator newCoordinator){
+    public Mission(String newMissionId, String newMissionName, String newLaunchDate, String newOrigin,
+                   ArrayList<String> newCountriesAllowed, Integer newMissionDuration, String newMissionType,
+                   String newMissionDescription, ArrayList<Stock> newJourneyCargo, ArrayList<Stock> newMissionCargo,
+                   ArrayList<Stock> newOtherMissionCargo, String newDestLocation, String newMissionStatus,
+                   ArrayList<String[]> newJobs, ArrayList<String[]> newEmploymentrequirements,
+                   SelectionCriteria newSelectionCriteria, SpaceShuttle newSpaceShuttle,
+                   ArrayList<Candidate> newCandidates, MissionCoordinator newCoordinator){
         missionId = newMissionId;
         missionName = newMissionName;
         launchDate = newLaunchDate;
@@ -265,7 +272,5 @@ public class Mission {
     {
         return candidates.get(index);
     }
-
-
 
 }
