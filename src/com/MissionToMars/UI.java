@@ -1,6 +1,5 @@
 package com.MissionToMars;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -11,35 +10,54 @@ public class UI
 
     }
 
-    public void createMission()
+    public void createMission(Mission mission)
     {
         Validate va = new Validate();
 
+        //get user's input
         String mId = va.acceptStringInput("Please Enter Mission ID: ");
+        mission.setMissionId(mId);
         String mName = va.acceptStringInput("Please Enter Mission Name: ");
+        mission.setMissionName(mName);
         String mDesc = va.acceptStringInput("Please Enter Mission Description: ");
+        mission.setMissionDesc(mDesc);
         String mType = va.acceptStringInput("Please Enter Mission Type: ");
+        mission.setMissionType(mType);
         String origin = va.acceptStringInput("Please Enter Country of origin: ");
+        mission.setOrigin(origin);
         ArrayList<String> countries = inputCountriesAllowed();
+        mission.setCountriesAllowed(countries);
         String date = va.acceptStringInput("Please Enter the Launch Date: ");
+        mission.setLaunchDate(date);
         String destLocation = va.acceptStringInput("Please Enter the Destination Location: ");
+        mission.setDestLocation(destLocation);
         int duration = va.acceptIntegerInput("Please Enter Mission Duration:");
+        mission.setMissionDuration(duration);
         String mStatus = selectMissionStatus();
+        mission.setMissionStatus(mStatus);
         ArrayList<String[]> jobs = inputJobs();
+        mission.setJobs(jobs);
         ArrayList<String[]> requirements = inputRequirements();
-        MissionCoordinator coordinator = new MissionCoordinator();
+        mission.setEmploymentRequirements(requirements);
+        MissionCoordinator coordinator = inputCoordinator();
+        mission.setCoordinator(coordinator);
+
+        //cargo requirements
+        ArrayList < Stock > newJourneyCargo = new ArrayList<>();
+        ArrayList < Stock > newMissionCargo = new ArrayList<>();
+        ArrayList < Stock > newOtherMissionCargo = new ArrayList<>();
 
         //Method for create Selection Criteria here
+        SelectionCriteria newSelectionCriteria = new SelectionCriteria();
 
+        //Method for create SpaceShuttle here
+        SpaceShuttle newSpaceShuttle = new SpaceShuttle();
+        ArrayList < Candidate > newCandidates = new ArrayList<>();
 
-//        Mission newMission = new Mission(mId, mName, date, origin, countries, duration, mType, mDesc,
-//                ArrayList < Stock > newJourneyCargo, ArrayList < Stock > newMissionCargo,
-//                ArrayList < Stock > newOtherMissionCargo, destLocation, mStatus, jobs, requirements,
-//                SelectionCriteria newSelectionCriteria, SpaceShuttle newSpaceShuttle,
-//                ArrayList < Candidate > newCandidates, MissionCoordinator newCoordinator);
+//        new Mission(mId, mName, date, origin, countries, duration, mType, mDesc,
+//                newJourneyCargo, newMissionCargo, newOtherMissionCargo, destLocation, mStatus, jobs, requirements,
+//                newSelectionCriteria, newSpaceShuttle, newCandidates, coordinator);
 
-        //return newMission;
-        //newMission.setMissionId(mId);
     }
 
 
@@ -157,10 +175,16 @@ public class UI
         return requirements;
     }
 
-//    public MissionCoordinator inputCoordinator()
-//    {
-//        MissionCoordinator coordinator = new MissionCoordinator();
-//    }
+    public MissionCoordinator inputCoordinator()
+    {
+        Validate va = new Validate();
+        MissionCoordinator coordinator = new MissionCoordinator();
+        String cName = va.acceptStringInput("Please Enter the Coordinator’s name: ");
+        coordinator.setName(cName);
+        String cInfo = va.acceptStringInput("Please Enter the Coordinator’s contact information: ");
+        coordinator.setContactNumber(cInfo);
+        return coordinator;
+    }
 
 
 }

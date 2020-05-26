@@ -14,14 +14,12 @@ public class Main {
         Control control = new Control();
         control.importAllData();
 
+        //Creating a mission
         UI start = new UI();
-        start.createMission();
+        Mission mission = new Mission();
+        start.createMission(mission);
 
         }
-
-
-
-
 
 
 }
