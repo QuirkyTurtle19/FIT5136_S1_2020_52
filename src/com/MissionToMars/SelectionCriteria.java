@@ -164,11 +164,11 @@ public class SelectionCriteria {
 
     public void askQualifications()
     {
-        String qual;
+        String qualifications;
         Scanner console = new Scanner(System.in);
         System.out.println("Enter Qualifications Required:");
-        qual=console.nextLine();
-        setQualification(qual);
+        qualifications=console.nextLine();
+        setQualification(qualifications);
     }
 
     public void askExperience()
