@@ -210,10 +210,43 @@ public class Control {
 
                 }
 
+
         }
 
 
+
+        public void selectSpaceShuttle(){
+
+            Console console = new Console();
+            importAllData();
+
+            for (int i = 0; i < spaceShuttles.size(); i++){
+                SpaceShuttle shuttle = spaceShuttles.get(i);
+                System.out.println("Shuttle ID: " + shuttle.getShuttleId() + " Shuttle name: " + shuttle.getShuttleName() + " Manufacture year: " + shuttle.getManufactureYear() + " Fuel capacity (Litres): " + shuttle.getFuelCapacity() + " Passenger capacity: " + shuttle.getPassengerCapacity() + " Cargo Capacity (kgs): " + " Travel speed: " + shuttle.getTravelSpeed() + " Origin: " + shuttle.getOrigin());
+
+            }
+
+            String shuttleSelection = console.acceptString("Please enter the Shuttle ID you would like to select");
+
+            for (int z = 0; z < spaceShuttles.size(); z++){
+                 if (spaceShuttles.get(z).getShuttleId().equals(shuttleSelection) == true){
+
+                     System.out.println(spaceShuttles.get(z).getShuttleName());
+                 }
+            }
+
+
+
+
+
+
     }
+
+
+
+}
+
+
 
 
 

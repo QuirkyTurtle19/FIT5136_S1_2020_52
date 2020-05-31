@@ -35,6 +35,22 @@ public class SpaceShuttle {
         origin = newOrigin;
 }
 
+    public String getShuttleId() {
+        return shuttleId;
+    }
+
+    public void setShuttleId(String shuttleId) {
+        this.shuttleId = shuttleId;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
     public String getShuttleName(){
         return shuttleName;
     }
@@ -85,4 +101,6 @@ public class SpaceShuttle {
     public void setTravelSpeed(String travelSpeed) {
         this.travelSpeed = travelSpeed;
     }
+
+
 }
