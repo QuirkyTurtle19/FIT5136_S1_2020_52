@@ -14,12 +14,12 @@ public class Main {
         Control control = new Control();
         control.selectSpaceShuttle();
 
+        //Creating a mission
+        UI start = new UI();
+        Mission mission = new Mission();
+        start.createMission(mission);
 
         }
-
-
-
-
 
 
 }
