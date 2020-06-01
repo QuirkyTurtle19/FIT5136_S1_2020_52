@@ -279,7 +279,6 @@ public class Control {
 
     public boolean userSelection(String userInput,Mission mission,Administrator administrator)
     {
-        //Administrator administrator = new Administrator();
         UI ui = new UI();
         switch (userInput)
         {
@@ -319,7 +318,8 @@ public class Control {
                     return true;
                 }
             case "4":
-                System.out.println("Edit mission");
+                //validation needed
+                ui.getEditInput(mission);
                 return true;
             case "5":
                 System.out.println("Thanks for using!");

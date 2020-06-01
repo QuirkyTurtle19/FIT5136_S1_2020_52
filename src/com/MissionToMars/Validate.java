@@ -1,6 +1,8 @@
 package com.MissionToMars;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Validate {
 
@@ -64,5 +66,10 @@ public class Validate {
         return withinRange;
     }
 
+    public boolean isEditNumber (String inputString) {
+        Pattern pattern = Pattern.compile("^([1-9]|1[0-2])$");
+        Matcher matcher = pattern.matcher(inputString);
+        return matcher.find();
+    }
 
 }

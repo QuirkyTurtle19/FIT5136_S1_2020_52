@@ -80,13 +80,13 @@ public class UI
 //                newJourneyCargo, newMissionCargo, newOtherMissionCargo, destLocation, mStatus, jobs, requirements,
 //                newSelectionCriteria, newSpaceShuttle, newCandidates, coordinator);
 
+        System.out.println("Mission Created!");
         displayMission(mission);
     }
 
     public void displayMission(Mission mission)
     {
-
-        System.out.println("Mission Created!");
+        //System.out.println("Mission Created!");
         System.out.println("1.Mission ID: " + mission.getMissionId());
         System.out.println("2.Mission Name: " + mission.getMissionName());
         System.out.println("3.Country of origin: " + mission.getOrigin());
@@ -106,7 +106,8 @@ public class UI
             System.out.println(Arrays.toString(mission.getEmploymentRequirements().get(i)));
         }
 
-        System.out.println("8.Cargo requirements for journey: ");
+        System.out.println("8.Cargo requirements");
+        System.out.println("a.Cargo requirements for journey: ");
         for(int i = 0 ;i < mission.getJourneyCargo().size(); i++)
         {
             ArrayList<String> js = new ArrayList<>();
@@ -114,11 +115,153 @@ public class UI
             System.out.print(js);
         }
         System.out.println();
+        System.out.println("b.Cargo requirements for Mission: ");
+        for(int i = 0 ;i < mission.getMissionCargo().size(); i++)
+        {
+            ArrayList<String> ms = new ArrayList<>();
+            ms.add(mission.getMissionCargo().get(i).getName());
+            System.out.print(ms);
+        }
+        System.out.println();
+        System.out.println("c.Cargo requirements for other Missions: ");
+        for(int i = 0 ;i < mission.getOtherMissionCargo().size(); i++)
+        {
+            ArrayList<String> os = new ArrayList<>();
+            os.add(mission.getOtherMissionCargo().get(i).getName());
+            System.out.print(os);
+        }
+        System.out.println();
         System.out.println("9.Launch date: " + mission.getLaunchDate());
         System.out.println("10.Location of the destination: " + mission.getDestLocation());
         System.out.println("11.Duration of the mission: " + mission.getMissionDuration());
         System.out.println("12.Status of the mission: " + mission.getMissionStatus());
     }
+
+    public void getEditInput(Mission mission)
+    {
+        Boolean flag = true;
+        Validate va = new Validate();
+        //mission select
+        while(flag){
+            displayMission(mission);
+            String option = va.acceptStringInput("Please select which information do you want to edit: ");
+            if (va.isEditNumber(option)){
+                editMission(mission, option);
+                System.out.println("Note : Enter y for YES and n for NO.");
+                String choice = va.acceptStringInput("Do You want to edit another information ? Enter y/n");
+                if (choice.trim().equals("n"))
+                {
+                    System.out.println("Edit completed");
+                    flag = false;
+                }
+            }
+            else{
+                System.out.println("Please enter an option from 1-12");
+            }
+        }
+    }
+
+    //if (mission.getMissionId().equals(mId))
+
+    public void editMission(Mission mission, String option){
+        //Boolean flag = true;
+        Validate va = new Validate();
+        switch (option)
+        {
+            case "1":
+                String mName = va.acceptStringInput("Please Enter a new Mission Name: ");
+                mission.setMissionName(mName);
+                System.out.println("1.New Mission Name: " + mission.getMissionName());
+                break;
+            case "2":
+                String mId = va.acceptStringInput("Please Enter a new Mission Description: ");
+                mission.setMissionDesc(mId);
+                System.out.println("2.New Mission Description: " + mission.getMissionDesc());
+                break;
+            case "3":
+                String origin = va.acceptStringInput("Please Enter a new Country of origin: ");
+                mission.setOrigin(origin);
+                System.out.println("3.New Country of origin: " + mission.getOrigin());
+                break;
+            case "4":
+                ArrayList<String> countries = inputCountriesAllowed();
+                mission.setCountriesAllowed(countries);
+                System.out.println("4.New Countries allowed: " + mission.getCountriesAllowed());
+                break;
+            case "5":
+                MissionCoordinator coordinator = inputCoordinator();
+                mission.setCoordinator(coordinator);
+                System.out.println("5.new Coordinator is: " + mission.getCoordinator().getName() +
+                        " info:" +mission.getCoordinator().getContactNumber());
+                break;
+            case "6":
+                ArrayList<String[]> jobs = inputJobs();
+                mission.setJobs(jobs);
+                System.out.println("6.New Job: ");
+                for(int i = 0; i < mission.getJobs().size(); i++)
+                {
+                    System.out.println(Arrays.toString(mission.getJobs().get(i)));
+                }
+
+            case "7":
+                ArrayList<String[]> requirements = inputRequirements();
+                mission.setEmploymentRequirements(requirements);
+                System.out.println("7.New Employment requirements: ");
+                for(int i = 0 ;i < mission.getEmploymentRequirements().size(); i++)
+                {
+                    System.out.println(Arrays.toString(mission.getEmploymentRequirements().get(i)));
+                }
+                break;
+            case "8":
+                ArrayList<ArrayList<String>> cargo = cargoRequirements();
+                ArrayList<Stock> stockList = new ArrayList<>();
+                ArrayList < String > newJourneyCargo = cargo.get(0);
+                for(int i = 0; i < newJourneyCargo.size(); i++)
+                {
+                    Stock stock = new Stock();
+                    stock.setName(newJourneyCargo.get(i));
+                    stockList.add(stock);
+                }
+                ArrayList < String > newMissionCargo = cargo.get(1);
+                for(int i = 0; i < newMissionCargo.size(); i++)
+                {
+                    Stock stock = new Stock();
+                    stock.setName(newMissionCargo.get(i));
+                    stockList.add(stock);
+                }
+                ArrayList < String > newOtherCargo = cargo.get(2);
+                for(int i = 0; i < newOtherCargo.size(); i++)
+                {
+                    Stock stock = new Stock();
+                    stock.setName(newOtherCargo.get(i));
+                    stockList.add(stock);
+                }
+                mission.setJourneyCargo(stockList);
+                System.out.println("8.New Cargo requirements");
+                break;
+            case "9":
+                String date = va.acceptStringInput("Please Enter a new Launch Date: ");
+                mission.setLaunchDate(date);
+                System.out.println("9.New Launch date: " + mission.getLaunchDate());
+                break;
+            case "10":
+                String destLocation = va.acceptStringInput("Please Enter a New Destination Location: ");
+                mission.setDestLocation(destLocation);
+                System.out.println("10.New Location of the destination: " + mission.getDestLocation());
+                break;
+            case "11":
+                int duration = va.acceptIntegerInput("Please Enter a new Mission Duration:");
+                mission.setMissionDuration(duration);
+                System.out.println("11.New Duration of the mission: " + mission.getMissionDuration());
+                break;
+            case "12":
+                String mStatus = selectMissionStatus();
+                mission.setMissionStatus(mStatus);
+                System.out.println("12.New Status of the mission: " + mission.getMissionStatus());
+        }
+    }
+
+
 
 //    Validate va = new Validate();
 //    String choice = va.acceptStringInput("Enter y to exit and n to home menu. ");
@@ -362,97 +505,5 @@ public class UI
         cargo.add(newOtherMissionCargo);
         return cargo;
     }
-
-//    public int menuSelect()
-//    {
-//        Validate va = new Validate();
-//        String menu = "======================Mission to Mars========================\n"
-//                + "Please select from the following options\n"
-//                + "Press 1 to Login\n"
-//                + "Press 2 to select the Space Shuttle\n"
-//                + "Press 3 to create Mission\n"
-//                + "Press 4 to edit Mission\n"
-//                + "Press 5 to Exit\n";
-//        System.out.println(menu);
-//        int input = va.acceptIntegerInput("");
-//        return input;
-//    }
-//
-//    public void startProgram()
-//    {
-//        Mission mission = new Mission();
-//        boolean start = true;
-//        while (start)
-//        {
-//            int integerInput = menuSelect();
-//            start = userSelection(integerInput, mission);
-//        }
-//    }
-//
-//    public boolean userSelection(int userInput,Mission mission)
-//    {
-//        Administrator administrator = new Administrator();
-//        switch (userInput)
-//        {
-//            case 1:
-//                login(administrator);
-//                return true;
-//            case 2:
-//                if (administrator.getAdminName().trim().length() == 0)
-//                {
-//                    System.out.println("You need to login first. \n"
-//                            +"Please press [Enter] to return to the main menu.");
-//                    new Scanner(System.in).nextLine();
-//                    return true;
-//                }
-//                else
-//                    startGame(player);
-//                return false;
-//            case 3:
-//                System.out.println("---> HELP MENU <--- \n"
-//                        + "For each round, each player will play ONE tile, \n"
-//                        + "with the tile value adding to the game total for that round. \n"
-//                        + "Provided the game total is less than or equal to 21, \n"
-//                        + "the player will get the score for using that tile. \n"
-//                        + "However, if the game total is greater than 21, \n"
-//                        + "no score is allocated to the player who played the last tile causing the score to become greater than 21. \n"
-//                        + "---> Please press [Enter] to return to the main menu. <---");
-//                new Scanner(System.in).nextLine();
-//                return true;
-//            case 4:
-//                System.out.println("Thanks for play!");
-//                return false;
-//        }
-//        return true;
-//    }
-
-//    public void login(Administrator administrator)
-//    {
-//        Validate va = new Validate();
-//        boolean flag = true;
-//        do
-//        {
-//            String userName = va.acceptStringInput("Please input your user name: ");
-//            if (va.stringLengthWithinRange(userName, 3, 10))
-//                System.out.println("user name must between 3 and 10 characters");
-//            else
-//            {
-//                administrator.setAdminName(userName);
-//                flag = false;
-//            }
-//        } while (flag);
-//        flag = true;
-//        do
-//        {
-//            String password = va.acceptStringInput("Please input your password: ");
-//            if (!password.equals("0000"))
-//                System.out.println("Wrong password");
-//            else
-//            {
-//                System.out.println("Welcome to Mission to Mars");
-//                flag = false;
-//            }
-//        } while (flag);
-//    }
 
 }
