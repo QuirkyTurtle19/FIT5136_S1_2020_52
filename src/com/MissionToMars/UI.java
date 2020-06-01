@@ -14,7 +14,7 @@ public class UI
     public void createMission(Mission mission)
     {
         Validate va = new Validate();
-
+        System.out.println("Space shuttle " + mission.getSpaceShuttle().getShuttleName() + "is selected to start the mission");
         //get user's input
         String mId = va.acceptStringInput("Please Enter Mission ID: ");
         mission.setMissionId(mId);
@@ -73,8 +73,6 @@ public class UI
         //Method for create Selection Criteria here
         SelectionCriteria newSelectionCriteria = new SelectionCriteria();
 
-        //Method for create SpaceShuttle here
-        SpaceShuttle newSpaceShuttle = new SpaceShuttle();
         ArrayList < Candidate > newCandidates = new ArrayList<>();
 
 //        new Mission(mId, mName, date, origin, countries, duration, mType, mDesc,
@@ -224,7 +222,6 @@ public class UI
             {
                 flag = false;
                 System.out.println("Jobs added");
-                //System.out.println(Arrays.toString(jobs.get(jobs.size() - 1)));
             }
         }
         return jobs;
@@ -331,23 +328,6 @@ public class UI
                     System.out.println("Mission Cargo requirements added" + newMissionCargo);
                 }
             }
-
-//            if (newMissionCargo.size() > 0 && mCargo.equals(newMissionCargo.get(newMissionCargo.size() - 1)))
-//            {
-//                System.out.println(mCargo + " already exist! Please Enter another cargo for mission: ");
-//                continue;
-//            }
-//            else if(mCargo.trim().equals("p"))
-//            {
-//                break;
-//            }
-//            newMissionCargo.add(mCargo);
-//            String choice = va.acceptStringInput("Do You want to add more ? Enter y/n");
-//            if (choice.trim().equals("n"))
-//            {
-//                flag = false;
-//                System.out.println("Mission Cargo requirements added" + newMissionCargo);
-//            }
         }
         cargo.add(newMissionCargo);
         flag = true;
@@ -377,27 +357,22 @@ public class UI
                     System.out.println("Other Mission Cargo requirements added" + newOtherMissionCargo);
                 }
             }
-
-//            if (newOtherMissionCargo.size() > 0 && oCargo.equals(newOtherMissionCargo.get(newOtherMissionCargo.size() - 1)))
-//            {
-//                System.out.println(oCargo + " already exist! Please Enter another cargo for other mission: ");
-//                continue;
-//            }
-//            else if(oCargo.trim().equals("p"))
-//            {
-//                break;
-//            }
-//            newOtherMissionCargo.add(oCargo);
-//            String choice = va.acceptStringInput("Do You want to add more ? Enter y/n");
-//            if (choice.trim().equals("n"))
-//            {
-//                flag = false;
-//                System.out.println("Other Mission Cargo requirements added" + newOtherMissionCargo);
-//            }
         }
         cargo.add(newOtherMissionCargo);
         return cargo;
     }
+
+//    public int menuSelect()
+//    {
+//        System.out.println("Please select from the following options");
+//        System.out.println("Press 1 to register a player");
+//        System.out.println("Press 2 to start a new game");
+//        System.out.println("Press 3 to view a help menu");
+//        System.out.println("Press 4 to exit");
+//        int input = acceptIntegerInput("");
+//        return input;
+//    }
+
 
 
 }

@@ -56,5 +56,13 @@ public class Validate {
         return input.nextInt();
     }
 
+    public boolean stringLengthWithinRange(String value, int min, int max)
+    {
+        boolean withinRange = true;
+        if ((value.trim().length() >= min) && (value.trim().length() <= max))
+            withinRange = false;
+        return withinRange;
+    }
+
 
 }

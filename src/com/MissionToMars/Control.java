@@ -215,7 +215,7 @@ public class Control {
 
 
 
-        public void selectSpaceShuttle(){
+        public void selectSpaceShuttle(Mission mission){
 
             Console console = new Console();
             importAllData();
@@ -229,20 +229,46 @@ public class Control {
             String shuttleSelection = console.acceptString("Please enter the Shuttle ID you would like to select");
 
             for (int z = 0; z < spaceShuttles.size(); z++){
-                 if (spaceShuttles.get(z).getShuttleId().equals(shuttleSelection) == true){
+                 if (spaceShuttles.get(z).getShuttleId().equals(shuttleSelection)){
+
+                     mission.setSpaceShuttle(spaceShuttles.get(z));
 
                      System.out.println(spaceShuttles.get(z).getShuttleName());
                  }
             }
 
+        }
 
 
-
-
-
+    public void login()
+    {
+        Administrator administrator = new Administrator();
+        Validate va = new Validate();
+        boolean flag = true;
+        do
+        {
+            String userName = va.acceptStringInput("Please input your user name: ");
+            if (va.stringLengthWithinRange(userName, 3, 10))
+                System.out.println("user name must between 3 and 10 characters");
+            else
+            {
+                administrator.setAdminName(userName);
+                flag = false;
+            }
+        } while (flag);
+        flag = true;
+        do
+        {
+            String password = va.acceptStringInput("Please input your password: ");
+            if (!password.equals("0000"))
+                System.out.println("Wrong password");
+            else
+            {
+                System.out.println("Welcome to Mission to Mars");
+                flag = false;
+            }
+        } while (flag);
     }
-
-
 
 }
 
