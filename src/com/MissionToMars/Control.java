@@ -1,6 +1,7 @@
 package com.MissionToMars;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Control {
 
@@ -240,9 +241,95 @@ public class Control {
         }
 
 
-    public void login()
+
+    public String menuSelect()
     {
+        boolean flag = true;
+        String input = "";
+        Validate va = new Validate();
+        while(flag){
+            String menu = "======================Mission to Mars========================\n"
+                    + "Please select from the following options\n"
+                    + "Press 1 to Login\n"
+                    + "Press 2 to select the Space Shuttle\n"
+                    + "Press 3 to create Mission\n"
+                    + "Press 4 to edit Mission\n"
+                    + "Press 5 to Exit\n";
+            System.out.println(menu);
+            input = va.acceptStringInput("");
+            if (input.equals("1") || input.equals("2") || input.equals("3") || input.equals("4") || input.equals("5"))
+                flag = false;
+            else
+                System.out.println("***** Select from given options(1,2,3,4,5) only! ****");
+        }
+        return input;
+    }
+
+    public void startProgram()
+    {
+        Mission mission = new Mission();
         Administrator administrator = new Administrator();
+        boolean start = true;
+        while (start)
+        {
+            String StringInput = menuSelect();
+            start = userSelection(StringInput, mission, administrator);
+        }
+    }
+
+    public boolean userSelection(String userInput,Mission mission,Administrator administrator)
+    {
+        //Administrator administrator = new Administrator();
+        UI ui = new UI();
+        switch (userInput)
+        {
+            case "1":
+                login(administrator);
+                return true;
+            case "2":
+                if (administrator.getAdminName().trim().length() == 0)
+                {
+                    System.out.println("You need to login first. \n"
+                            +"Please press [Enter] to return to the main menu.");
+                    new Scanner(System.in).nextLine();
+                    return true;
+                }
+                else
+                    selectSpaceShuttle(mission);
+                    System.out.println("Space shuttle " + mission.getSpaceShuttle().getShuttleName() + "is selected to start the mission");
+                    System.out.println("You can create a mission now");
+                return true;
+            case "3":
+                if (administrator.getAdminName().trim().length() == 0)
+                {
+                    System.out.println("You need to login first. \n"
+                            +"Please press [Enter] to return to the main menu.");
+                    new Scanner(System.in).nextLine();
+                    return true;
+                }
+                else if (mission.getSpaceShuttle().getShuttleName().trim().length() == 0){
+                    System.out.println("You need to select a Space Shuttle first. \n"
+                            +"Please press [Enter] to return to the main menu.");
+                    new Scanner(System.in).nextLine();
+                    return true;
+                }
+                else
+                {
+                    ui.createMission(mission);
+                    return true;
+                }
+            case "4":
+                System.out.println("Edit mission");
+                return true;
+            case "5":
+                System.out.println("Thanks for using!");
+                return false;
+        }
+        return true;
+    }
+
+    public void login(Administrator administrator)
+    {
         Validate va = new Validate();
         boolean flag = true;
         do

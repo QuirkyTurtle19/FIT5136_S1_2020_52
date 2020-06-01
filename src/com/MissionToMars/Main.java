@@ -10,15 +10,17 @@ public class Main {
 
     public static void main(String[] args) {
 	// write your code here
-        Mission mission = new Mission();
 
         Control control = new Control();
-        control.login();//password:0000
-        control.selectSpaceShuttle(mission);//select a shuttle to start the planning of the mission
+        control.startProgram();
 
+        /*
+        Mission mission = new Mission();
+        control.selectSpaceShuttle(mission);//select a shuttle to start the planning of the mission
         //Creating a mission
         UI start = new UI();
         start.createMission(mission);
+         */
 
         }
 

@@ -3,6 +3,7 @@ package com.MissionToMars;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class UI
 {
@@ -364,15 +365,94 @@ public class UI
 
 //    public int menuSelect()
 //    {
-//        System.out.println("Please select from the following options");
-//        System.out.println("Press 1 to register a player");
-//        System.out.println("Press 2 to start a new game");
-//        System.out.println("Press 3 to view a help menu");
-//        System.out.println("Press 4 to exit");
-//        int input = acceptIntegerInput("");
+//        Validate va = new Validate();
+//        String menu = "======================Mission to Mars========================\n"
+//                + "Please select from the following options\n"
+//                + "Press 1 to Login\n"
+//                + "Press 2 to select the Space Shuttle\n"
+//                + "Press 3 to create Mission\n"
+//                + "Press 4 to edit Mission\n"
+//                + "Press 5 to Exit\n";
+//        System.out.println(menu);
+//        int input = va.acceptIntegerInput("");
 //        return input;
 //    }
+//
+//    public void startProgram()
+//    {
+//        Mission mission = new Mission();
+//        boolean start = true;
+//        while (start)
+//        {
+//            int integerInput = menuSelect();
+//            start = userSelection(integerInput, mission);
+//        }
+//    }
+//
+//    public boolean userSelection(int userInput,Mission mission)
+//    {
+//        Administrator administrator = new Administrator();
+//        switch (userInput)
+//        {
+//            case 1:
+//                login(administrator);
+//                return true;
+//            case 2:
+//                if (administrator.getAdminName().trim().length() == 0)
+//                {
+//                    System.out.println("You need to login first. \n"
+//                            +"Please press [Enter] to return to the main menu.");
+//                    new Scanner(System.in).nextLine();
+//                    return true;
+//                }
+//                else
+//                    startGame(player);
+//                return false;
+//            case 3:
+//                System.out.println("---> HELP MENU <--- \n"
+//                        + "For each round, each player will play ONE tile, \n"
+//                        + "with the tile value adding to the game total for that round. \n"
+//                        + "Provided the game total is less than or equal to 21, \n"
+//                        + "the player will get the score for using that tile. \n"
+//                        + "However, if the game total is greater than 21, \n"
+//                        + "no score is allocated to the player who played the last tile causing the score to become greater than 21. \n"
+//                        + "---> Please press [Enter] to return to the main menu. <---");
+//                new Scanner(System.in).nextLine();
+//                return true;
+//            case 4:
+//                System.out.println("Thanks for play!");
+//                return false;
+//        }
+//        return true;
+//    }
 
-
+//    public void login(Administrator administrator)
+//    {
+//        Validate va = new Validate();
+//        boolean flag = true;
+//        do
+//        {
+//            String userName = va.acceptStringInput("Please input your user name: ");
+//            if (va.stringLengthWithinRange(userName, 3, 10))
+//                System.out.println("user name must between 3 and 10 characters");
+//            else
+//            {
+//                administrator.setAdminName(userName);
+//                flag = false;
+//            }
+//        } while (flag);
+//        flag = true;
+//        do
+//        {
+//            String password = va.acceptStringInput("Please input your password: ");
+//            if (!password.equals("0000"))
+//                System.out.println("Wrong password");
+//            else
+//            {
+//                System.out.println("Welcome to Mission to Mars");
+//                flag = false;
+//            }
+//        } while (flag);
+//    }
 
 }
