@@ -11,9 +11,14 @@ public class UI
 
     }
 
-    public void createMission(Mission mission)
-    {
+
+
+
+
+    public void createMission(){
         Validate va = new Validate();
+
+        Mission mission = new Mission();
 
         //get user's input
         String mId = va.acceptStringInput("Please Enter Mission ID: ");
@@ -399,5 +404,10 @@ public class UI
         return cargo;
     }
 
+
+    public void editMission(Mission mission){
+
+
+    }
 
 }
