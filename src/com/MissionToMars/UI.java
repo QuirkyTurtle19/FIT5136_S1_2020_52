@@ -1,9 +1,7 @@
 package com.MissionToMars;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class UI
 {
@@ -12,14 +10,10 @@ public class UI
 
     }
 
-
-
-
-
-    public void createMission(){
+    public void createMission(Mission mission)
+    {
         Validate va = new Validate();
-        //System.out.println("Space shuttle " + mission.getSpaceShuttle().getShuttleName() + "is selected to start the mission");
-        Mission mission = new Mission();
+        System.out.println("Space shuttle " + mission.getSpaceShuttle().getShuttleName() + "is selected to start the mission");
         //get user's input
         String mId = va.acceptStringInput("Please Enter Mission ID: ");
         mission.setMissionId(mId);
@@ -510,9 +504,4 @@ public class UI
         return cargo;
     }
 
-
-    public void editMission(Mission mission){
-
-
-    }
 }

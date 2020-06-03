@@ -749,7 +749,31 @@ public class Control {
 
         }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 
+    public void selectSpaceShuttle2 (Mission mission){
+
+        Console console = new Console();
+        importAllData();
+
+        for (int i = 0; i < spaceShuttles.size(); i++){
+            SpaceShuttle shuttle = spaceShuttles.get(i);
+            System.out.println("Shuttle ID: " + shuttle.getShuttleId() + " Shuttle name: " + shuttle.getShuttleName() + " Manufacture year: " + shuttle.getManufactureYear() + " Fuel capacity (Litres): " + shuttle.getFuelCapacity() + " Passenger capacity: " + shuttle.getPassengerCapacity() + " Cargo Capacity (kgs): " + " Travel speed: " + shuttle.getTravelSpeed() + " Origin: " + shuttle.getOrigin());
+
+        }
+
+        String shuttleSelection = console.acceptString("Please enter the Shuttle ID you would like to select");
+
+        for (int z = 0; z < spaceShuttles.size(); z++){
+            if (spaceShuttles.get(z).getShuttleId().equals(shuttleSelection)){
+
+                mission.setSpaceShuttle(spaceShuttles.get(z));
+
+                System.out.println(spaceShuttles.get(z).getShuttleName());
+            }
+        }
+
+    }
 
     public String menuSelect()
     {
@@ -788,7 +812,7 @@ public class Control {
 
     public boolean userSelection(String userInput,Mission mission,Administrator administrator)
     {
-        //UI ui = new UI();
+        UI ui = new UI();
         switch (userInput)
         {
             case "1":
@@ -803,7 +827,7 @@ public class Control {
                     return true;
                 }
                 else
-                    //selectSpaceShuttle(mission);
+                    selectSpaceShuttle2(mission);
                     System.out.println("Space shuttle " + mission.getSpaceShuttle().getShuttleName() + "is selected to start the mission");
                     System.out.println("You can create a mission now");
                 return true;
@@ -823,12 +847,13 @@ public class Control {
                 }
                 else
                 {
-                    //ui.createMission(mission);
+                    ui.createMission(mission);
+                    ui.createMission(mission);
                     return true;
                 }
             case "4":
                 //validation needed
-                //ui.getEditInput(mission);
+                ui.getEditInput(mission);
                 return true;
             case "5":
                 System.out.println("Thanks for using!");
