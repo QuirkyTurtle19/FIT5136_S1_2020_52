@@ -11,7 +11,9 @@ public class Main {
     public static void main(String[] args) {
 	// write your code here
 
+
         Control control = new Control();
+<<<<<<< HEAD
         control.startProgram();
 
         /*
@@ -21,6 +23,11 @@ public class Main {
         UI start = new UI();
         start.createMission(mission);
          */
+=======
+
+
+
+>>>>>>> master
 
         }
 
