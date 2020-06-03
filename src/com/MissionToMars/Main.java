@@ -13,7 +13,7 @@ public class Main {
 
 
         Control control = new Control();
-<<<<<<< HEAD
+
         control.startProgram();
 
         /*
@@ -23,11 +23,6 @@ public class Main {
         UI start = new UI();
         start.createMission(mission);
          */
-=======
-
-
-
->>>>>>> master
 
         }
 

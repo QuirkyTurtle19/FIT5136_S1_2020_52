@@ -1,12 +1,12 @@
 package com.MissionToMars;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
+
 import java.util.Scanner;
-=======
+
 import java.lang.reflect.Array;
 import java.util.Arrays;
->>>>>>> master
+
 
 public class Control {
 
@@ -182,20 +182,6 @@ public class Control {
                 System.out.println("12.Status of the mission: " + mission.getMissionStatus());
             }
         }
-
-//    Validate va = new Validate();
-//    String choice = va.acceptStringInput("Enter y to exit and n to home menu. ");
-//    while (flag)
-//    {
-//        //create mission
-//        //display mission
-//        //ask to edit
-//        if (choice.trim().equals("n"))
-//        {
-//            flag = false;
-//            System.out.println("Countries allowed added" + countryList);
-//        }
-//    }
 
 
     public void editMission() {
@@ -508,23 +494,6 @@ public class Control {
                     System.out.println("Mission Cargo requirements added" + newMissionCargo);
                 }
             }
-
-//            if (newMissionCargo.size() > 0 && mCargo.equals(newMissionCargo.get(newMissionCargo.size() - 1)))
-//            {
-//                System.out.println(mCargo + " already exist! Please Enter another cargo for mission: ");
-//                continue;
-//            }
-//            else if(mCargo.trim().equals("p"))
-//            {
-//                break;
-//            }
-//            newMissionCargo.add(mCargo);
-//            String choice = va.acceptStringInput("Do You want to add more ? Enter y/n");
-//            if (choice.trim().equals("n"))
-//            {
-//                flag = false;
-//                System.out.println("Mission Cargo requirements added" + newMissionCargo);
-//            }
         }
         cargo.add(newMissionCargo);
         flag = true;
@@ -554,23 +523,6 @@ public class Control {
                     System.out.println("Other Mission Cargo requirements added" + newOtherMissionCargo);
                 }
             }
-
-//            if (newOtherMissionCargo.size() > 0 && oCargo.equals(newOtherMissionCargo.get(newOtherMissionCargo.size() - 1)))
-//            {
-//                System.out.println(oCargo + " already exist! Please Enter another cargo for other mission: ");
-//                continue;
-//            }
-//            else if(oCargo.trim().equals("p"))
-//            {
-//                break;
-//            }
-//            newOtherMissionCargo.add(oCargo);
-//            String choice = va.acceptStringInput("Do You want to add more ? Enter y/n");
-//            if (choice.trim().equals("n"))
-//            {
-//                flag = false;
-//                System.out.println("Other Mission Cargo requirements added" + newOtherMissionCargo);
-//            }
         }
         cargo.add(newOtherMissionCargo);
         return cargo;
@@ -775,7 +727,7 @@ public class Control {
 
 
 
-        public void selectSpaceShuttle(Mission mission){
+        public void selectSpaceShuttle(){
 
             Console console = new Console();
             importAllData();
@@ -790,9 +742,7 @@ public class Control {
 
             for (int z = 0; z < spaceShuttles.size(); z++){
                  if (spaceShuttles.get(z).getShuttleId().equals(shuttleSelection)){
-
-                     mission.setSpaceShuttle(spaceShuttles.get(z));
-
+                     //mission.setSpaceShuttle(spaceShuttles.get(z));
                      System.out.println(spaceShuttles.get(z).getShuttleName());
                  }
             }
@@ -838,7 +788,7 @@ public class Control {
 
     public boolean userSelection(String userInput,Mission mission,Administrator administrator)
     {
-        UI ui = new UI();
+        //UI ui = new UI();
         switch (userInput)
         {
             case "1":
@@ -853,7 +803,7 @@ public class Control {
                     return true;
                 }
                 else
-                    selectSpaceShuttle(mission);
+                    //selectSpaceShuttle(mission);
                     System.out.println("Space shuttle " + mission.getSpaceShuttle().getShuttleName() + "is selected to start the mission");
                     System.out.println("You can create a mission now");
                 return true;
@@ -873,12 +823,12 @@ public class Control {
                 }
                 else
                 {
-                    ui.createMission(mission);
+                    //ui.createMission(mission);
                     return true;
                 }
             case "4":
                 //validation needed
-                ui.getEditInput(mission);
+                //ui.getEditInput(mission);
                 return true;
             case "5":
                 System.out.println("Thanks for using!");

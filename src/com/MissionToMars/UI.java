@@ -18,13 +18,8 @@ public class UI
 
     public void createMission(){
         Validate va = new Validate();
-<<<<<<< HEAD
-        System.out.println("Space shuttle " + mission.getSpaceShuttle().getShuttleName() + "is selected to start the mission");
-=======
-
+        //System.out.println("Space shuttle " + mission.getSpaceShuttle().getShuttleName() + "is selected to start the mission");
         Mission mission = new Mission();
-
->>>>>>> master
         //get user's input
         String mId = va.acceptStringInput("Please Enter Mission ID: ");
         mission.setMissionId(mId);
@@ -515,13 +510,9 @@ public class UI
         return cargo;
     }
 
-<<<<<<< HEAD
-=======
 
     public void editMission(Mission mission){
 
 
     }
-
->>>>>>> master
 }
