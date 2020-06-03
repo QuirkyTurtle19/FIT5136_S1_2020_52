@@ -19,7 +19,7 @@ public class SelectionCriteria {
     private String languageRequired;
     private ArrayList<String> secondaryLanguages;
     private FileIO  reader;
-
+    Validate validate = new Validate();
     public SelectionCriteria(){
         minimumAge = 0;
         maximumAge = 100;
