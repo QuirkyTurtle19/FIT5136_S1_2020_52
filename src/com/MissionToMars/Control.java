@@ -41,265 +41,484 @@ public class Control {
     }
 
     public void mainMenu(String name){
+        Console console = new Console();
 
-            Console console = new Console();
+        System.out.println("Welcome: " + name);
+        System.out.println("*****Main Menu*****");
+        System.out.println("1. Create Mission");
+        System.out.println("2. Edit Mission");
+        System.out.println("3. Select Space Shuttle");
+        System.out.println("4. Create Selection Criteria");
+        int selection = console.acceptInt("please select an option");
 
-            System.out.println("Welcome: " + name);
-            System.out.println("*****Main Menu*****");
-            System.out.println("1. Create Mission");
-            System.out.println("2. Edit Mission");
-            System.out.println("3. Select Space Shuttle");
-            System.out.println("4. Create Selection Criteria");
-            int selection = console.acceptInt("please select an option");
+        Mission mission = new Mission();
 
-            Mission mission = new Mission();
+        switch (selection){
+            case 1:
+                //createMission();
+            case 2:
+                //editMission();
+            case 3:
+                selectSpaceShuttle();
+            case 4:
 
-            switch (selection){
-                case 1:
-                    createMission();
-                case 2:
-                    editMission();
-                case 3:
-                    selectSpaceShuttle();
-                case 4:
-
-
-            }
 
         }
+    }
 
+    public void createMission(Mission mission){
+        Validate va = new Validate();
+        System.out.println("Space shuttle " + mission.getSpaceShuttle().getShuttleName() + "is selected to start the mission");
+        //Mission mission = new Mission();
 
-        public void createMission(){
-            Validate va = new Validate();
+        //get user's input
+        String mId = va.acceptStringInput("Please Enter Mission ID: ");
+        mission.setMissionId(mId);
+        String mName = va.acceptStringInput("Please Enter Mission Name: ");
+        mission.setMissionName(mName);
+        String mDesc = va.acceptStringInput("Please Enter Mission Description: ");
+        mission.setMissionDesc(mDesc);
+        String mType = va.acceptStringInput("Please Enter Mission Type: ");
+        mission.setMissionType(mType);
+        String origin = va.acceptStringInput("Please Enter Country of origin: ");
+        mission.setOrigin(origin);
+        ArrayList<String> countries = inputCountriesAllowed();
+        mission.setCountriesAllowed(countries);
+        String date = va.acceptStringInput("Please Enter the Launch Date: ");
+        mission.setLaunchDate(date);
+        String destLocation = va.acceptStringInput("Please Enter the Destination Location: ");
+        mission.setDestLocation(destLocation);
+        int duration = va.acceptIntegerInput("Please Enter Mission Duration:");
+        mission.setMissionDuration(duration);
+        String mStatus = selectMissionStatus();
+        mission.setMissionStatus(mStatus);
+        ArrayList<String[]> jobs = inputJobs();
+        mission.setJobs(jobs);
+        ArrayList<String[]> requirements = inputRequirements();
+        mission.setEmploymentRequirements(requirements);
+        MissionCoordinator coordinator = inputCoordinator();
+        mission.setCoordinator(coordinator);
 
-            Mission mission = new Mission();
+        //cargo requirements
+        ArrayList<ArrayList<String>> cargo = cargoRequirements();
+        ArrayList<Stock> stockList = new ArrayList<>();
 
-            //get user's input
-            String mId = va.acceptStringInput("Please Enter Mission ID: ");
-            mission.setMissionId(mId);
-            String mName = va.acceptStringInput("Please Enter Mission Name: ");
-            mission.setMissionName(mName);
-            String mDesc = va.acceptStringInput("Please Enter Mission Description: ");
-            mission.setMissionDesc(mDesc);
-            String mType = va.acceptStringInput("Please Enter Mission Type: ");
-            mission.setMissionType(mType);
-            String origin = va.acceptStringInput("Please Enter Country of origin: ");
-            mission.setOrigin(origin);
-            ArrayList<String> countries = inputCountriesAllowed();
-            mission.setCountriesAllowed(countries);
-            String date = va.acceptStringInput("Please Enter the Launch Date: ");
-            mission.setLaunchDate(date);
-            String destLocation = va.acceptStringInput("Please Enter the Destination Location: ");
-            mission.setDestLocation(destLocation);
-            int duration = va.acceptIntegerInput("Please Enter Mission Duration:");
-            mission.setMissionDuration(duration);
-            String mStatus = selectMissionStatus();
-            mission.setMissionStatus(mStatus);
-            ArrayList<String[]> jobs = inputJobs();
-            mission.setJobs(jobs);
-            ArrayList<String[]> requirements = inputRequirements();
-            mission.setEmploymentRequirements(requirements);
-            MissionCoordinator coordinator = inputCoordinator();
-            mission.setCoordinator(coordinator);
+        ArrayList < String > newJourneyCargo = cargo.get(0);
+        for(int i = 0; i < newJourneyCargo.size(); i++)
+        {
+            Stock stock = new Stock();
+            stock.setName(newJourneyCargo.get(i));
+            stockList.add(stock);
+        }
+        ArrayList < String > newMissionCargo = cargo.get(1);
+        for(int i = 0; i < newMissionCargo.size(); i++)
+        {
+            Stock stock = new Stock();
+            stock.setName(newMissionCargo.get(i));
+            stockList.add(stock);
+        }
+        ArrayList < String > newOtherCargo = cargo.get(2);
+        for(int i = 0; i < newOtherCargo.size(); i++)
+        {
+            Stock stock = new Stock();
+            stock.setName(newOtherCargo.get(i));
+            stockList.add(stock);
+        }
+        mission.setJourneyCargo(stockList);
 
-            //cargo requirements
-            ArrayList<ArrayList<String>> cargo = cargoRequirements();
-            ArrayList<Stock> stockList = new ArrayList<>();
+        //Method for create Selection Criteria here
+        SelectionCriteria newSelectionCriteria = new SelectionCriteria();
 
-            ArrayList < String > newJourneyCargo = cargo.get(0);
-            for(int i = 0; i < newJourneyCargo.size(); i++)
-            {
-                Stock stock = new Stock();
-                stock.setName(newJourneyCargo.get(i));
-                stockList.add(stock);
-            }
-            ArrayList < String > newMissionCargo = cargo.get(1);
-            for(int i = 0; i < newMissionCargo.size(); i++)
-            {
-                Stock stock = new Stock();
-                stock.setName(newMissionCargo.get(i));
-                stockList.add(stock);
-            }
-            ArrayList < String > newOtherCargo = cargo.get(2);
-            for(int i = 0; i < newOtherCargo.size(); i++)
-            {
-                Stock stock = new Stock();
-                stock.setName(newOtherCargo.get(i));
-                stockList.add(stock);
-            }
-            mission.setJourneyCargo(stockList);
-
-            //Method for create Selection Criteria here
-            SelectionCriteria newSelectionCriteria = new SelectionCriteria();
-
-            //Method for create SpaceShuttle here
-            SpaceShuttle newSpaceShuttle = new SpaceShuttle();
-            ArrayList < Candidate > newCandidates = new ArrayList<>();
+        //Method for create SpaceShuttle here
+        SpaceShuttle newSpaceShuttle = new SpaceShuttle();
+        ArrayList < Candidate > newCandidates = new ArrayList<>();
 
 //        new Mission(mId, mName, date, origin, countries, duration, mType, mDesc,
 //                newJourneyCargo, newMissionCargo, newOtherMissionCargo, destLocation, mStatus, jobs, requirements,
 //                newSelectionCriteria, newSpaceShuttle, newCandidates, coordinator);
+        System.out.println("Mission Created!");
+        missions.add(mission);
+        //displayMission(true,mission);
+    }
 
-            displayMission(true,mission);
+    public void displayMission(Mission mission)
+    {
+        //System.out.println("Mission Created!");
+        System.out.println("* Mission ID: " + mission.getMissionId());
+        System.out.println("1.Mission Name: " + mission.getMissionName());
+        System.out.println("2.Mission description: " + mission.getMissionDesc());
+        System.out.println("3.Country of origin: " + mission.getOrigin());
+        System.out.println("4.Countries allowed: " + mission.getCountriesAllowed());
+        System.out.println("5.Coordinator: " + mission.getCoordinator().getName() +
+                " info:" +mission.getCoordinator().getContactNumber());
+
+        System.out.println("6.Job: ");
+        for(int i = 0; i < mission.getJobs().size(); i++)
+        {
+            System.out.println(Arrays.toString(mission.getJobs().get(i)));
         }
 
+        System.out.println("7.Employment requirements: ");
+        for(int i = 0 ;i < mission.getEmploymentRequirements().size(); i++)
+        {
+            System.out.println(Arrays.toString(mission.getEmploymentRequirements().get(i)));
+        }
 
-        public void displayMission(boolean newMission, Mission mission) {
+        System.out.println("8.Cargo requirements");
+        System.out.println("a.Cargo requirements for journey: ");
+        try
+        {
+            for (int i = 0; i < mission.getJourneyCargo().size(); i++)
+            {
+                ArrayList<String> js = new ArrayList<>();
+                js.add(mission.getJourneyCargo().get(i).getName());
+                System.out.print(js);
+                System.out.println();
+            }
+        }catch(Exception e){
+            e.fillInStackTrace();
+        }
+        try
+        {
+            System.out.println("b.Cargo requirements for Mission: ");
+            for (int i = 0; i < mission.getMissionCargo().size(); i++)
+            {
+                ArrayList<String> ms = new ArrayList<>();
+                ms.add(mission.getMissionCargo().get(i).getName());
+                System.out.print(ms);
+                System.out.println();
+            }
+        }catch(Exception e){
+            e.fillInStackTrace();
+        }
+        try
+        {
+            System.out.println("c.Cargo requirements for other Missions: ");
+            for (int i = 0; i < mission.getOtherMissionCargo().size(); i++)
+            {
+                ArrayList<String> os = new ArrayList<>();
+                os.add(mission.getOtherMissionCargo().get(i).getName());
+                System.out.print(os);
+                System.out.println();
+            }
+        }catch(Exception e){
+            e.fillInStackTrace();
+        }
+        System.out.println("9.Launch date: " + mission.getLaunchDate());
+        System.out.println("10.Location of the destination: " + mission.getDestLocation());
+        System.out.println("11.Duration of the mission: " + mission.getMissionDuration());
+        System.out.println("12.Status of the mission: " + mission.getMissionStatus());
+    }
 
+//    public void displayMission(boolean newMission, Mission mission) {
+//
+//
+//        if (newMission) {
+//            System.out.println("Mission Created!");
+//        } else {
+//
+//
+//
+//            System.out.println("1.Mission ID: " + mission.getMissionId());
+//            System.out.println("2.Mission Name: " + mission.getMissionName());
+//            System.out.println("3.Country of origin: " + mission.getOrigin());
+//            System.out.println("4.Countries allowed: " + mission.getCountriesAllowed());
+//            System.out.println("5.Coordinator: " + mission.getCoordinator().getName());
+//
+//            System.out.println("6.Job: ");
+//            for (int i = 0; i < mission.getJobs().size(); i++) {
+//                System.out.println(Arrays.toString(mission.getJobs().get(i)));
+//            }
+//
+//            System.out.println("7.Employment requirements: ");
+//            for (int i = 0; i < mission.getEmploymentRequirements().size(); i++) {
+//                System.out.println(Arrays.toString(mission.getEmploymentRequirements().get(i)));
+//            }
+//
+//            System.out.println("8.Cargo requirements for journey: ");
+//            for (int i = 0; i < mission.getJourneyCargo().size(); i++) {
+//                ArrayList<String> js = new ArrayList<>();
+//                js.add(mission.getJourneyCargo().get(i).getName());
+//                System.out.print(js);
+//            }
+//            System.out.println();
+//            System.out.println("9.Launch date: " + mission.getLaunchDate());
+//            System.out.println("10.Location of the destination: " + mission.getDestLocation());
+//            System.out.println("11.Duration of the mission: " + mission.getMissionDuration());
+//            System.out.println("12.Status of the mission: " + mission.getMissionStatus());
+//        }
+//    }
 
-            if (newMission == true) {
-                System.out.println("Mission Created!");
-            } else {
+    public void getEditInput()
+    {
+        Console console = new Console();
+        Mission mission = new Mission();
+        //String id = console.acceptString("Input Mission ID");
+        boolean missionExist = true;
+        while(missionExist){
+            String id = console.acceptString("Input Mission ID");
+            for (Mission value : missions)
+            {
+                if (value.getMissionId().equals(id))
+                {
+                    mission = value;
+                    missionExist = false;
+                    break;
+                }
+            }
+            if(missionExist){
+                System.out.println("Mission not exist! ");
+            }
+        }
 
+        Boolean flag = true;
+        Validate va = new Validate();
+        //mission select
+        while(flag){
+            displayMission(mission);
+            String option = va.acceptStringInput("Please select which information do you want to edit: ");
+            if (va.isEditNumber(option)){
+                Mission newMission = editMission(mission, option);
+                System.out.println("Note : Enter y for YES and n for NO.");
+                //displayMission(newMission);
+                String choice = va.acceptStringInput("Do You want to edit another information ? Enter y/n");
+                if (choice.trim().equals("n"))
+                {
+                    displayMission(newMission);
+                    System.out.println("Edit completed");
+                    flag = false;
+                }
+            }
+            else{
+                System.out.println("Please enter an option from 1-12");
+            }
+        }
+    }
 
-
-                System.out.println("1.Mission ID: " + mission.getMissionId());
-                System.out.println("2.Mission Name: " + mission.getMissionName());
-                System.out.println("3.Country of origin: " + mission.getOrigin());
-                System.out.println("4.Countries allowed: " + mission.getCountriesAllowed());
-                System.out.println("5.Coordinator: " + mission.getCoordinator().getName());
-
-                System.out.println("6.Job: ");
-                for (int i = 0; i < mission.getJobs().size(); i++) {
+    public Mission editMission(Mission mission, String option){
+        //Boolean flag = true;
+        Validate va = new Validate();
+        switch (option)
+        {
+            case "1":
+                String mName = va.acceptStringInput("Please Enter a new Mission Name: ");
+                mission.setMissionName(mName);
+                System.out.println("1.New Mission Name: " + mission.getMissionName());
+                return mission;
+            case "2":
+                String mId = va.acceptStringInput("Please Enter a new Mission Description: ");
+                mission.setMissionDesc(mId);
+                System.out.println("2.New Mission Description: " + mission.getMissionDesc());
+                return mission;
+            case "3":
+                String origin = va.acceptStringInput("Please Enter a new Country of origin: ");
+                mission.setOrigin(origin);
+                System.out.println("3.New Country of origin: " + mission.getOrigin());
+                return mission;
+            case "4":
+                ArrayList<String> countries = inputCountriesAllowed();
+                mission.setCountriesAllowed(countries);
+                System.out.println("4.New Countries allowed: " + mission.getCountriesAllowed());
+                return mission;
+            case "5":
+                MissionCoordinator coordinator = inputCoordinator();
+                mission.setCoordinator(coordinator);
+                System.out.println("5.new Coordinator is: " + mission.getCoordinator().getName() +
+                        " info:" +mission.getCoordinator().getContactNumber());
+                return mission;
+            case "6":
+                ArrayList<String[]> jobs = inputJobs();
+                mission.setJobs(jobs);
+                System.out.println("6.New Job: ");
+                for(int i = 0; i < mission.getJobs().size(); i++)
+                {
                     System.out.println(Arrays.toString(mission.getJobs().get(i)));
                 }
-
-                System.out.println("7.Employment requirements: ");
-                for (int i = 0; i < mission.getEmploymentRequirements().size(); i++) {
+                return mission;
+            case "7":
+                ArrayList<String[]> requirements = inputRequirements();
+                mission.setEmploymentRequirements(requirements);
+                System.out.println("7.New Employment requirements: ");
+                for(int i = 0 ;i < mission.getEmploymentRequirements().size(); i++)
+                {
                     System.out.println(Arrays.toString(mission.getEmploymentRequirements().get(i)));
                 }
-
-                System.out.println("8.Cargo requirements for journey: ");
-                for (int i = 0; i < mission.getJourneyCargo().size(); i++) {
-                    ArrayList<String> js = new ArrayList<>();
-                    js.add(mission.getJourneyCargo().get(i).getName());
-                    System.out.print(js);
+                return mission;
+            case "8":
+                ArrayList<ArrayList<String>> cargo = cargoRequirements();
+                ArrayList<Stock> stockList = new ArrayList<>();
+                ArrayList < String > newJourneyCargo = cargo.get(0);
+                for(int i = 0; i < newJourneyCargo.size(); i++)
+                {
+                    Stock stock = new Stock();
+                    stock.setName(newJourneyCargo.get(i));
+                    stockList.add(stock);
                 }
-                System.out.println();
-                System.out.println("9.Launch date: " + mission.getLaunchDate());
-                System.out.println("10.Location of the destination: " + mission.getDestLocation());
-                System.out.println("11.Duration of the mission: " + mission.getMissionDuration());
-                System.out.println("12.Status of the mission: " + mission.getMissionStatus());
-            }
-        }
-
-
-    public void editMission() {
-        Console console = new Console();
-        Mission placeholderMission = new Mission();
-        Mission mission = new Mission();
-        String id = console.acceptString("Input Mission ID");
-
-        for (int i = 0; i < missions.size(); i++) {
-
-            if (missions.get(i).getMissionId().equals(id) == true) {
-                mission = missions.get(i);
-            }
-        }
-
-
-
-            placeholderMission = mission;
-
-            displayMission(false, mission);
-            System.out.println("13. Finish editing mission");
-
-            boolean cont = true;
-            while (cont == true) {
-
-                int selection = console.acceptInt("select which attribute you would like to edit");
-
-                switch (selection) {
-                    case 1:
-                        System.out.println("Current mission ID: " + mission.getMissionId());
-                        String newID = console.acceptString("enter new ID");
-                        placeholderMission.setMissionId(newID);
-                        break;
-                    case 2:
-                        System.out.println("Current mission name: " + mission.getMissionName());
-                        String newMissionName = console.acceptString("Enter new mission name");
-                        placeholderMission.setMissionName(newMissionName);
-                        break;
-                    case 3:
-                        System.out.println("Current country of origin: " + mission.getMissionName());
-                        String newCountryOfOrigin = console.acceptString("Enter new country of origin");
-                        placeholderMission.setOrigin(newCountryOfOrigin);
-                        break;
-                    case 4:
-                        System.out.println("Current countries allowed:");
-                        for (int case4 = 0; case4 < mission.getCountriesAllowed().size(); case4++) {
-                            System.out.println(mission.getCountriesAllowed().get(case4));
-                        }
-                        placeholderMission.setCountriesAllowed(inputCountriesAllowed());
-                        break;
-                    case 5:
-                        System.out.println("Current Coordinator details are: " + mission.getCoordinator().getName());
-                        placeholderMission.setCoordinator(inputCoordinator());
-                        break;
-                    case 6:
-                        System.out.println("Current jobs:");
-                        for (int case6 = 0; case6 < mission.getJobs().size(); case6++) {
-                            System.out.println(Arrays.toString(mission.getJobs().get(case6)));
-                        }
-                        placeholderMission.setJobs(inputJobs());
-                        break;
-                    case 7:
-                        System.out.println("Current employment requirements:");
-                        for (int case7 = 0; case7 < mission.getEmploymentRequirements().size(); case7++) {
-                            System.out.println(Arrays.toString(mission.getEmploymentRequirements().get(case7)));
-                        }
-                        placeholderMission.setEmploymentRequirements(inputRequirements());
-                        break;
-                    case 8:
-                        //need to fix cargo requirements
-                    case 9:
-                        System.out.println("Current launch date: " + mission.getLaunchDate());
-                        String newDate = console.acceptString("Enter new launch date");
-                        placeholderMission.setLaunchDate(newDate);
-                        break;
-                    case 10:
-                        System.out.println("Current destination: " + mission.getDestLocation());
-                        String newDestination = console.acceptString("Please enter new Destination");
-                        placeholderMission.setDestLocation(newDestination);
-                        break;
-                    case 11:
-                        System.out.println(" Current duration of the mission: " + mission.getMissionDuration());
-                        int newDuration = console.acceptInt("Enter new duration");
-                        placeholderMission.setMissionDuration(newDuration);
-                        break;
-                    case 12:
-                        System.out.println("Current status of the mission: " + mission.getMissionStatus());
-                        placeholderMission.setMissionStatus(selectMissionStatus());
-                        break;
-                    case 13:
-                        cont = false;
-                        break;
-                    default:
-                        System.out.println("invalid selection");
-                        break;
+                ArrayList<Stock> stockList2 = new ArrayList<>();
+                ArrayList < String > newMissionCargo = cargo.get(1);
+                for(int i = 0; i < newMissionCargo.size(); i++)
+                {
+                    Stock stock = new Stock();
+                    stock.setName(newMissionCargo.get(i));
+                    stockList2.add(stock);
                 }
-            }
-
-
-                System.out.println("Previous Mission Details:");
-                displayMission(false, mission);
-                System.out.println("****************************************************");
-                System.out.println("New Mission Details");
-                displayMission(false, placeholderMission);
-
-                System.out.println("Note : Enter y for YES and n for NO.");
-                String choice = console.acceptString("Do you want to confirm changes? Enter y/n");
-                if (choice.trim().equals("y")){
-                    missions.remove(mission);
-                    missions.add(placeholderMission);
+                ArrayList<Stock> stockList3 = new ArrayList<>();
+                ArrayList < String > newOtherCargo = cargo.get(2);
+                for(int i = 0; i < newOtherCargo.size(); i++)
+                {
+                    Stock stock = new Stock();
+                    stock.setName(newOtherCargo.get(i));
+                    stockList3.add(stock);
                 }
-
-
-
-
-
-
+                mission.setJourneyCargo(stockList);
+                mission.setMissionCargo(stockList2);
+                mission.setOtherMissionCargo(stockList3);
+                System.out.println("8.New Cargo requirements");
+                return mission;
+            case "9":
+                String date = va.acceptStringInput("Please Enter a new Launch Date: ");
+                mission.setLaunchDate(date);
+                System.out.println("9.New Launch date: " + mission.getLaunchDate());
+                return mission;
+            case "10":
+                String destLocation = va.acceptStringInput("Please Enter a New Destination Location: ");
+                mission.setDestLocation(destLocation);
+                System.out.println("10.New Location of the destination: " + mission.getDestLocation());
+                return mission;
+            case "11":
+                int duration = va.acceptIntegerInput("Please Enter a new Mission Duration:");
+                mission.setMissionDuration(duration);
+                System.out.println("11.New Duration of the mission: " + mission.getMissionDuration());
+                return mission;
+            case "12":
+                String mStatus = selectMissionStatus();
+                mission.setMissionStatus(mStatus);
+                System.out.println("12.New Status of the mission: " + mission.getMissionStatus());
+                return mission;
         }
+        return mission;
+    }
+
+//    public void editMission() {
+//        Console console = new Console();
+//        //Mission placeholderMission = new Mission();
+//        Mission mission = new Mission();
+//        //String id = console.acceptString("Input Mission ID");
+//        boolean missionExist = true;
+//        while(missionExist){
+//            String id = console.acceptString("Input Mission ID");
+//            for (Mission value : missions)
+//            {
+//                if (value.getMissionId().equals(id))
+//                {
+//                    mission = value;
+//                    missionExist = false;
+//                    System.out.println("Mission not exist! ");
+//                    break;
+//                }
+//            }
+//        }
+//            //placeholderMission = mission;
+//
+//            displayMission(false, mission);
+//            System.out.println("13. Finish editing mission");
+//
+//            boolean cont = true;
+//            while (cont == true) {
+//
+//                int selection = console.acceptInt("select which attribute you would like to edit");
+//
+//                switch (selection) {
+//                    case 1:
+//                        System.out.println("Current mission ID: " + mission.getMissionId());
+//                        String newID = console.acceptString("enter new ID");
+//                        mission.setMissionId(newID);
+//                        break;
+//                    case 2:
+//                        System.out.println("Current mission name: " + mission.getMissionName());
+//                        String newMissionName = console.acceptString("Enter new mission name");
+//                        mission.setMissionName(newMissionName);
+//                        break;
+//                    case 3:
+//                        System.out.println("Current country of origin: " + mission.getMissionName());
+//                        String newCountryOfOrigin = console.acceptString("Enter new country of origin");
+//                        mission.setOrigin(newCountryOfOrigin);
+//                        break;
+//                    case 4:
+//                        System.out.println("Current countries allowed:");
+//                        for (int case4 = 0; case4 < mission.getCountriesAllowed().size(); case4++) {
+//                            System.out.println(mission.getCountriesAllowed().get(case4));
+//                        }
+//                        mission.setCountriesAllowed(inputCountriesAllowed());
+//                        break;
+//                    case 5:
+//                        System.out.println("Current Coordinator details are: " + mission.getCoordinator().getName());
+//                        mission.setCoordinator(inputCoordinator());
+//                        break;
+//                    case 6:
+//                        System.out.println("Current jobs:");
+//                        for (int case6 = 0; case6 < mission.getJobs().size(); case6++) {
+//                            System.out.println(Arrays.toString(mission.getJobs().get(case6)));
+//                        }
+//                        mission.setJobs(inputJobs());
+//                        break;
+//                    case 7:
+//                        System.out.println("Current employment requirements:");
+//                        for (int case7 = 0; case7 < mission.getEmploymentRequirements().size(); case7++) {
+//                            System.out.println(Arrays.toString(mission.getEmploymentRequirements().get(case7)));
+//                        }
+//                        mission.setEmploymentRequirements(inputRequirements());
+//                        break;
+//                    case 8:
+//                        //need to fix cargo requirements
+//                    case 9:
+//                        System.out.println("Current launch date: " + mission.getLaunchDate());
+//                        String newDate = console.acceptString("Enter new launch date");
+//                        mission.setLaunchDate(newDate);
+//                        break;
+//                    case 10:
+//                        System.out.println("Current destination: " + mission.getDestLocation());
+//                        String newDestination = console.acceptString("Please enter new Destination");
+//                        mission.setDestLocation(newDestination);
+//                        break;
+//                    case 11:
+//                        System.out.println(" Current duration of the mission: " + mission.getMissionDuration());
+//                        int newDuration = console.acceptInt("Enter new duration");
+//                        mission.setMissionDuration(newDuration);
+//                        break;
+//                    case 12:
+//                        System.out.println("Current status of the mission: " + mission.getMissionStatus());
+//                        mission.setMissionStatus(selectMissionStatus());
+//                        break;
+//                    case 13:
+//                        cont = false;
+//                        break;
+//                    default:
+//                        System.out.println("invalid selection");
+//                        break;
+//                }
+//            }
+//
+//
+//                System.out.println("Previous Mission Details:");
+//                displayMission(false, mission);
+//                System.out.println("****************************************************");
+//                System.out.println("New Mission Details");
+//                displayMission(false, mission);
+//
+//                System.out.println("Note : Enter y for YES and n for NO.");
+//                String choice = console.acceptString("Do you want to confirm changes? Enter y/n");
+//                if (choice.trim().equals("y")){
+//                    missions.remove(mission);
+//                    missions.add(mission);
+//                }
+//
+//
+//
+//
+//
+//
+//        }
 
 
 
@@ -754,7 +973,7 @@ public class Control {
     public void selectSpaceShuttle2 (Mission mission){
 
         Console console = new Console();
-        importAllData();
+        //importAllData();
 
         for (int i = 0; i < spaceShuttles.size(); i++){
             SpaceShuttle shuttle = spaceShuttles.get(i);
@@ -800,6 +1019,7 @@ public class Control {
 
     public void startProgram()
     {
+        importAllData();
         Mission mission = new Mission();
         Administrator administrator = new Administrator();
         boolean start = true;
@@ -812,7 +1032,7 @@ public class Control {
 
     public boolean userSelection(String userInput,Mission mission,Administrator administrator)
     {
-        UI ui = new UI();
+        //UI ui = new UI();
         switch (userInput)
         {
             case "1":
@@ -847,13 +1067,14 @@ public class Control {
                 }
                 else
                 {
-                    ui.createMission(mission);
-                    ui.createMission(mission);
+                    //ui.createMission(mission);
+                    createMission(mission);
                     return true;
                 }
             case "4":
                 //validation needed
-                ui.getEditInput(mission);
+                //ui.getEditInput;
+                getEditInput();
                 return true;
             case "5":
                 System.out.println("Thanks for using!");

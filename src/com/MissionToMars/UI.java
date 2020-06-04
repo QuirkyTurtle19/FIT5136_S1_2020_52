@@ -106,29 +106,44 @@ public class UI
 
         System.out.println("8.Cargo requirements");
         System.out.println("a.Cargo requirements for journey: ");
-        for(int i = 0 ;i < mission.getJourneyCargo().size(); i++)
+        try
         {
-            ArrayList<String> js = new ArrayList<>();
-            js.add(mission.getJourneyCargo().get(i).getName());
-            System.out.print(js);
+            for (int i = 0; i < mission.getJourneyCargo().size(); i++)
+            {
+                ArrayList<String> js = new ArrayList<>();
+                js.add(mission.getJourneyCargo().get(i).getName());
+                System.out.print(js);
+                System.out.println();
+            }
+        }catch(Exception e){
+            e.fillInStackTrace();
         }
-        System.out.println();
-        System.out.println("b.Cargo requirements for Mission: ");
-        for(int i = 0 ;i < mission.getMissionCargo().size(); i++)
+        try
         {
-            ArrayList<String> ms = new ArrayList<>();
-            ms.add(mission.getMissionCargo().get(i).getName());
-            System.out.print(ms);
+            System.out.println("b.Cargo requirements for Mission: ");
+            for (int i = 0; i < mission.getMissionCargo().size(); i++)
+            {
+                ArrayList<String> ms = new ArrayList<>();
+                ms.add(mission.getMissionCargo().get(i).getName());
+                System.out.print(ms);
+                System.out.println();
+            }
+        }catch(Exception e){
+            e.fillInStackTrace();
         }
-        System.out.println();
-        System.out.println("c.Cargo requirements for other Missions: ");
-        for(int i = 0 ;i < mission.getOtherMissionCargo().size(); i++)
+        try
         {
-            ArrayList<String> os = new ArrayList<>();
-            os.add(mission.getOtherMissionCargo().get(i).getName());
-            System.out.print(os);
+            System.out.println("c.Cargo requirements for other Missions: ");
+            for (int i = 0; i < mission.getOtherMissionCargo().size(); i++)
+            {
+                ArrayList<String> os = new ArrayList<>();
+                os.add(mission.getOtherMissionCargo().get(i).getName());
+                System.out.print(os);
+                System.out.println();
+            }
+        }catch(Exception e){
+            e.fillInStackTrace();
         }
-        System.out.println();
         System.out.println("9.Launch date: " + mission.getLaunchDate());
         System.out.println("10.Location of the destination: " + mission.getDestLocation());
         System.out.println("11.Duration of the mission: " + mission.getMissionDuration());
