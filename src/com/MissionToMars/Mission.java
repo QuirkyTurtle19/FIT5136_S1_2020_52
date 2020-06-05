@@ -34,7 +34,7 @@ public class Mission {
     private ArrayList<Candidate> candidates;
     private MissionCoordinator coordinator;
     private FileIO reader;
-
+    SelectionCriteria criteria = new SelectionCriteria();
     public Mission(){
 
         missionId = "";
@@ -271,6 +271,45 @@ public class Mission {
     public Candidate getSpecificCandidate(int index)
     {
         return candidates.get(index);
+    }
+
+    public void Criteria()
+    {
+        String age = "Age Range";
+        String qual = "Qualifications";
+        String work = "Years of work experience";
+        String occ= "Occupations";
+        String health = "Health records";
+        String criminal = "Criminal Records";
+        String skills = "Computer skills";
+        String lang = "Languages spoken";
+        Scanner console = new Scanner(System.in);
+        Validate va = new Validate();
+        String choice = "";
+        ArrayList<String> display = new ArrayList<>();
+        System.out.println("Select Criteria you want for selecting the candidates ");
+        System.out.println("=======================================================");
+        /*System.out.println("1.Age Range");
+        System.out.println("2.Qualifications");
+        System.out.println("3.Years of work experience");
+        System.out.println("4.Occupations");
+        System.out.println("5.Health records");
+        System.out.println("6.Criminal Records");
+        System.out.println("7.Computer skills");
+        System.out.println("8.Languages spoken");
+        System.out.println("Enter number to select");*/
+        display.add(age);
+        display.add(qual);
+        display.add(work);
+        display.add(occ);
+        display.add(health);
+        display.add(criminal);
+        display.add(skills);
+        display.add(lang);
+        for(String name:display) {
+            System.out.println(name);
+        }
+
     }
 
 
