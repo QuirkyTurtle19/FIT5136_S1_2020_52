@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+
 public class Mission {
     private String missionId;
     private String missionName;
@@ -35,7 +38,8 @@ public class Mission {
     private MissionCoordinator coordinator;
     private FileIO reader;
     SelectionCriteria criteria = new SelectionCriteria();
-    public Mission(){
+
+    public Mission() {
 
         missionId = "";
         missionName = "";
@@ -64,7 +68,7 @@ public class Mission {
                    ArrayList<Stock> newOtherMissionCargo, String newDestLocation, String newMissionStatus,
                    ArrayList<String[]> newJobs, ArrayList<String[]> newEmploymentrequirements,
                    SelectionCriteria newSelectionCriteria, SpaceShuttle newSpaceShuttle,
-                   ArrayList<Candidate> newCandidates, MissionCoordinator newCoordinator){
+                   ArrayList<Candidate> newCandidates, MissionCoordinator newCoordinator) {
         missionId = newMissionId;
         missionName = newMissionName;
         launchDate = newLaunchDate;
@@ -87,38 +91,32 @@ public class Mission {
 
     }
 
-    public void setMissionId(String newMissionId)
-    {
+    public void setMissionId(String newMissionId) {
         missionId = newMissionId;
     }
 
-    public String getMissionId()
-    {
+    public String getMissionId() {
         return missionId;
     }
 
-    public void setMissionName(String newMissionName)
-    {
+    public void setMissionName(String newMissionName) {
         missionName = newMissionName;
     }
 
-    public String getMissionName()
-    {
+    public String getMissionName() {
         return missionName;
     }
 
-    public void setMissionDesc(String newMissionDesc)
-    {
-        missionDesc= newMissionDesc;
+    public void setMissionDesc(String newMissionDesc) {
+        missionDesc = newMissionDesc;
     }
-    public String getMissionDesc()
-    {
+
+    public String getMissionDesc() {
         return missionDesc;
     }
 
-    public void setCountriesAllowed(ArrayList<String> newCountriesAllowed)
-    {
-        this.countriesAllowed=newCountriesAllowed;
+    public void setCountriesAllowed(ArrayList<String> newCountriesAllowed) {
+        this.countriesAllowed = newCountriesAllowed;
     }
 
     public String getMissionType() {
@@ -137,14 +135,12 @@ public class Mission {
         this.origin = origin;
     }
 
-    public ArrayList<String> getCountriesAllowed()
-    {
+    public ArrayList<String> getCountriesAllowed() {
         return countriesAllowed;
     }
 
     //get specific index
-    public String getSpecificCountriesAllowed(int index)
-    {
+    public String getSpecificCountriesAllowed(int index) {
         return countriesAllowed.get(index);
     }
 
@@ -197,107 +193,85 @@ public class Mission {
         this.coordinator = coordinator;
     }
 
-    public void setLaunchDate(String newLaunchDate)
-    {
-        launchDate=newLaunchDate;
+    public void setLaunchDate(String newLaunchDate) {
+        launchDate = newLaunchDate;
     }
 
-    public String getLaunchDate()
-    {
+    public String getLaunchDate() {
         return launchDate;
     }
 
-    public void setDestLocation(String newDestLocation)
-    {
-        destLocation=newDestLocation;
+    public void setDestLocation(String newDestLocation) {
+        destLocation = newDestLocation;
     }
 
-    public String getDestLocation()
-    {
+    public String getDestLocation() {
         return destLocation;
     }
 
-    public void setMissionDuration(Integer newMissionDuration)
-    {
-        missionDuration=newMissionDuration;
+    public void setMissionDuration(Integer newMissionDuration) {
+        missionDuration = newMissionDuration;
     }
 
-    public Integer getMissionDuration()
-    {
+    public Integer getMissionDuration() {
         return missionDuration;
     }
 
-    public void setMissionStatus(String newMissionStatus)
-    {
-        missionStatus=newMissionStatus;
+    public void setMissionStatus(String newMissionStatus) {
+        missionStatus = newMissionStatus;
     }
 
-    public String getMissionStatus()
-    {
+    public String getMissionStatus() {
         return missionStatus;
     }
 
-    public void setSelectionCriteria(SelectionCriteria newSelectionCriteria)
-    {
-        selectionCriteria=newSelectionCriteria;
+    public void setSelectionCriteria(SelectionCriteria newSelectionCriteria) {
+        selectionCriteria = newSelectionCriteria;
     }
 
-    public SelectionCriteria  getSelectionCriteria()
-    {
+    public SelectionCriteria getSelectionCriteria() {
         return selectionCriteria;
     }
 
-    public void setSpaceShuttle(SpaceShuttle newSpaceShuttle)
-    {
-        spaceShuttle=newSpaceShuttle;
+    public void setSpaceShuttle(SpaceShuttle newSpaceShuttle) {
+        spaceShuttle = newSpaceShuttle;
     }
 
-    public SpaceShuttle getSpaceShuttle()
-    {
+    public SpaceShuttle getSpaceShuttle() {
         return spaceShuttle;
     }
 
-    public void setListOfCandidates(ArrayList<Candidate> newListOfCandidates)
-    {
-        this.candidates=newListOfCandidates;
+    public void setListOfCandidates(ArrayList<Candidate> newListOfCandidates) {
+        this.candidates = newListOfCandidates;
     }
 
-    public ArrayList<Candidate> getListOfCandidates()
-    {
+    public ArrayList<Candidate> getListOfCandidates() {
         return candidates;
     }
 
     //get specific index
-    public Candidate getSpecificCandidate(int index)
-    {
+    public Candidate getSpecificCandidate(int index) {
         return candidates.get(index);
     }
 
-    public void Criteria()
-    {
+    public void Criteria() {
+        ArrayList<Integer> choice = new ArrayList<>();
+        int opt = 0;
+        String Select = "";
         String age = "Age Range";
         String qual = "Qualifications";
         String work = "Years of work experience";
-        String occ= "Occupations";
+        String occ = "Occupations";
         String health = "Health records";
         String criminal = "Criminal Records";
         String skills = "Computer skills";
         String lang = "Languages spoken";
         Scanner console = new Scanner(System.in);
         Validate va = new Validate();
-        String choice = "";
+        boolean choice1 = TRUE;
         ArrayList<String> display = new ArrayList<>();
-        System.out.println("Select Criteria you want for selecting the candidates ");
+        System.out.println("\n Select Criteria you want for selecting the candidates ");
         System.out.println("=======================================================");
-        /*System.out.println("1.Age Range");
-        System.out.println("2.Qualifications");
-        System.out.println("3.Years of work experience");
-        System.out.println("4.Occupations");
-        System.out.println("5.Health records");
-        System.out.println("6.Criminal Records");
-        System.out.println("7.Computer skills");
-        System.out.println("8.Languages spoken");
-        System.out.println("Enter number to select");*/
         display.add(age);
         display.add(qual);
         display.add(work);
@@ -306,12 +280,43 @@ public class Mission {
         display.add(criminal);
         display.add(skills);
         display.add(lang);
-        for(String name:display) {
-            System.out.println(name);
+        displayList(display);
+        do {
+            System.out.println("\n Enter Option : ");
+            opt = console.nextInt();
+            choice.add(opt - 1);//add to array list of options
+            deleteOption(opt, display);
+            displayList(display);
+            System.out.println(" \n Do you want to continue adding to the list? (y/n) :");
+            Select = console.nextLine();
+            Select=Select.trim();
+            if (Select == "y")
+                choice1 = FALSE;
+            else
+                break;
+        } while (choice1 == TRUE && display.size() >= 1);
+        System.out.println(("Im out of the loop"));
+
+    }
+
+    public void deleteOption(int option, ArrayList<String> display) {
+        for (int i = 0; i <= display.size(); i++) {
+            if (option == (i)) {
+                display.remove(i - 1);
+            }
+        }
+    }
+
+    public void displayList(ArrayList<String> display) {
+        for (int i = 0; i < display.size(); i++) {
+            System.out.println(i + 1 + "." + display.get(i));
         }
 
     }
 
-
+    public static void main(String[] args) {
+        Mission mission = new Mission();
+        mission.Criteria();
+    }
 
 }
