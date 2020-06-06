@@ -301,8 +301,7 @@ public class SelectionCriteria {
     public static void main(String[] args)
     {
         SelectionCriteria st = new SelectionCriteria();
-        st.askHealthRecord();
-        System.out.println(st.getHealthRecord());
+
     }
 
 }
