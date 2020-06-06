@@ -1154,7 +1154,7 @@ public class Control {
         //String id = console.acceptString("Input Mission ID");
         boolean missionExist = true;
         while(missionExist) {
-            String id = console.acceptString("Input Mission ID");
+            String id = console.acceptString("Input Mission ID: ");
             for (Mission value : missions) {
                 if (value.getMissionId().equals(id)) {
                     mission = value;
@@ -1162,99 +1162,124 @@ public class Control {
                     break;
                 }
             }
-        }
             if(missionExist){
                 System.out.println("Mission not exist! ");
             }
-
+        }
 
             int noCandidates = console.acceptInt("Please enter the number of candidates you wish to add to the mission");
 
             //add all candidates to the list that have at least one criteria
             ArrayList<Candidate> possibleCandidates = new ArrayList<>();
 
+try
+{
+    if (Integer.toString(mission.getSelectionCriteria().getMinimumAge()) != null)
+    {
+        for (int i = 0; i < candidates.size(); i++)
+        {
+            int age = ageCalculator(LocalDate.parse(candidates.get(i).getCandidateDOB(), DateTimeFormatter.ofPattern("MM/dd/yyyy")));
 
-            if (Integer.toString(mission.getSelectionCriteria().getMinimumAge()) != null) {
-                    for (int i = 0; i < candidates.size(); i++) {
-                        int age = ageCalculator(LocalDate.parse(candidates.get(i).getCandidateDOB(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            if (age > mission.getSelectionCriteria().getMinimumAge() && possibleCandidates.contains(candidates.get(i)) == false)
+            {
+                possibleCandidates.add(candidates.get(i));
 
-                        if (age > mission.getSelectionCriteria().getMinimumAge() && possibleCandidates.contains(candidates.get(i)) == false) {
-                            possibleCandidates.add(candidates.get(i));
-
-                        }
-                    }
-                }
-
-                if (Integer.toString(mission.getSelectionCriteria().getMaximumAge()) != null){
-                    for (int i = 0; i < candidates.size(); i++) {
-                        int age = ageCalculator(LocalDate.parse(candidates.get(i).getCandidateDOB(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-
-                        if (age < mission.getSelectionCriteria().getMaximumAge() && possibleCandidates.contains(candidates.get(i)) == false) {
-                            possibleCandidates.add(candidates.get(i));
-
-                        }
-                    }
-                }
-
-                if (Integer.toString(mission.getSelectionCriteria().getWorkExperience()) != null){
-                    for (int i = 0; i < candidates.size(); i++) {
-                        int exp = 0;
-                        for (int j = 0; j < candidates.get(i).getWork().size(); j++){
-                            if (exp < Integer.parseInt(candidates.get(i).getWork().get(j)[1])) {
-                                exp = Integer.parseInt(candidates.get(i).getWork().get(j)[1]);
-                            }
-
-                            }
-                        if ( exp >= mission.getSelectionCriteria().getWorkExperience() && possibleCandidates.contains(candidates.get(i)) == false){
-                            possibleCandidates.add(candidates.get(i));
-                        }
-
-                    }
-
-                }
-
-                //remove candidates that do not have all criteria
-        if (Integer.toString(mission.getSelectionCriteria().getMinimumAge()) != null) {
-            for (int i = 0; i < possibleCandidates.size(); i++) {
-                int age = ageCalculator(LocalDate.parse(possibleCandidates.get(i).getCandidateDOB(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-
-                if (age < mission.getSelectionCriteria().getMinimumAge()) {
-                    possibleCandidates.remove(possibleCandidates.get(i));
-
-                }
             }
         }
+    }
 
-        if (Integer.toString(mission.getSelectionCriteria().getMaximumAge()) != null){
-            for (int i = 0; i < possibleCandidates.size(); i++) {
-                int age = ageCalculator(LocalDate.parse(possibleCandidates.get(i).getCandidateDOB(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+    if (Integer.toString(mission.getSelectionCriteria().getMaximumAge()) != null)
+    {
+        for (int i = 0; i < candidates.size(); i++)
+        {
+            int age = ageCalculator(LocalDate.parse(candidates.get(i).getCandidateDOB(), DateTimeFormatter.ofPattern("MM/dd/yyyy")));
 
-                if (age > mission.getSelectionCriteria().getMaximumAge()) {
-                    possibleCandidates.remove(possibleCandidates.get(i));
+            if (age < mission.getSelectionCriteria().getMaximumAge() && possibleCandidates.contains(candidates.get(i)) == false)
+            {
+                possibleCandidates.add(candidates.get(i));
 
-                }
             }
         }
+    }
 
-        if (Integer.toString(mission.getSelectionCriteria().getWorkExperience()) != null){
-            for (int i = 0; i < possibleCandidates.size(); i++) {
-                int exp = 0;
-                for (int j = 0; j < possibleCandidates.get(i).getWork().size(); j++){
-                    if (exp < Integer.parseInt(possibleCandidates.get(i).getWork().get(j)[1])) {
-                        exp = Integer.parseInt(possibleCandidates.get(i).getWork().get(j)[1]);
-                    }
-
-                }
-                if ( exp < mission.getSelectionCriteria().getWorkExperience() ){
-                    possibleCandidates.remove(possibleCandidates.get(i));
+    if (Integer.toString(mission.getSelectionCriteria().getWorkExperience()) != null)
+    {
+        for (int i = 0; i < candidates.size(); i++)
+        {
+            int exp = 0;
+            for (int j = 0; j < candidates.get(i).getWork().size(); j++)
+            {
+                if (exp < Integer.parseInt(candidates.get(i).getWork().get(j)[1]))
+                {
+                    exp = Integer.parseInt(candidates.get(i).getWork().get(j)[1]);
                 }
 
             }
+            if (exp >= mission.getSelectionCriteria().getWorkExperience() && possibleCandidates.contains(candidates.get(i)) == false)
+            {
+                possibleCandidates.add(candidates.get(i));
+            }
 
         }
+
+    }
+
+    //remove candidates that do not have all criteria
+    if (Integer.toString(mission.getSelectionCriteria().getMinimumAge()) != null)
+    {
+        for (int i = 0; i < possibleCandidates.size(); i++)
+        {
+            int age = ageCalculator(LocalDate.parse(possibleCandidates.get(i).getCandidateDOB(), DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+
+            if (age < mission.getSelectionCriteria().getMinimumAge())
+            {
+                possibleCandidates.remove(possibleCandidates.get(i));
+
+            }
+        }
+    }
+
+    if (Integer.toString(mission.getSelectionCriteria().getMaximumAge()) != null)
+    {
+        for (int i = 0; i < possibleCandidates.size(); i++)
+        {
+            int age = ageCalculator(LocalDate.parse(possibleCandidates.get(i).getCandidateDOB(), DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+
+            if (age > mission.getSelectionCriteria().getMaximumAge())
+            {
+                possibleCandidates.remove(possibleCandidates.get(i));
+
+            }
+        }
+    }
+
+    if (Integer.toString(mission.getSelectionCriteria().getWorkExperience()) != null)
+    {
+        for (int i = 0; i < possibleCandidates.size(); i++)
+        {
+            int exp = 0;
+            for (int j = 0; j < possibleCandidates.get(i).getWork().size(); j++)
+            {
+                if (exp < Integer.parseInt(possibleCandidates.get(i).getWork().get(j)[1]))
+                {
+                    exp = Integer.parseInt(possibleCandidates.get(i).getWork().get(j)[1]);
+                }
+
+            }
+            if (exp < mission.getSelectionCriteria().getWorkExperience())
+            {
+                possibleCandidates.remove(possibleCandidates.get(i));
+            }
+
+        }
+
+    }
+}catch(Exception e){
+    e.fillInStackTrace();
+}
 
         //display all Candidates
-         ArrayList<Candidate> shortlistCandidates = new ArrayList<Candidate>(possibleCandidates.subList(0, noCandidates-1));
+         ArrayList<Candidate> shortlistCandidates = new ArrayList<Candidate>(possibleCandidates.subList(0, noCandidates));
 
 
         for (int i = 0; i < shortlistCandidates.size(); i++){

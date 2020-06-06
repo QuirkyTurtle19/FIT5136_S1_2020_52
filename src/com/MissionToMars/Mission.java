@@ -37,7 +37,7 @@ public class Mission {
     private ArrayList<Candidate> candidates;
     private MissionCoordinator coordinator;
     private FileIO reader;
-    SelectionCriteria criteria = new SelectionCriteria();
+
 
     public Mission() {
 
@@ -375,10 +375,12 @@ public class Mission {
 
     public void setValues(String option)
     {
+        SelectionCriteria criteria = new SelectionCriteria();
         switch(option)
         {
             case "Age Range" : {
                 criteria.askAge();
+                setSelectionCriteria(criteria);
             }
             break;
             case "Qualifications" : {
