@@ -33,6 +33,8 @@ public class Control {
         return missions;
     }
 
+
+    //For Testing
     public void mainMenu(String name){
         Console console = new Console();
 
@@ -47,39 +49,25 @@ public class Control {
 
         switch (selection){
             case 1:
-                //createMission();
+                createMission();
             case 2:
-                //editMission();
+                getEditInput();
             case 3:
-                //selectSpaceShuttle();
+                selectSpaceShuttle();
             case 4:
-                //Mission mission = new Mission();
                 Mission mission = inputMissionId();
-//                boolean missionExist = true;
-//                while(missionExist){
-//                    String id = console.acceptString("Input Mission ID");
-//                    for (Mission value : missions)
-//                    {
-//                        if (value.getMissionId().equals(id))
-//                        {
-//                            mission = value;
-//                            missionExist = false;
-//                            break;
-//                        }
-//                    }
-//                    if(missionExist){
-//                        System.out.println("Mission not exist! ");
-//                    }
-//                }
                 mission.Criteria();
             case 5:
                 selectCandidates();
         }
     }
 
-    public void createMission(Mission mission){
+    /**
+     * Method to create a new mission
+     */
+    public void createMission(){
+        Mission mission = new Mission();
         Validate va = new Validate();
-        //System.out.println("Space shuttle " + mission.getSpaceShuttle().getShuttleName() + "is selected to start the mission");
         //get user's input
         String mId = va.acceptStringInput("Please Enter Mission ID: ");
         mission.setMissionId(mId);
@@ -107,11 +95,9 @@ public class Control {
         mission.setEmploymentRequirements(requirements);
         MissionCoordinator coordinator = inputCoordinator();
         mission.setCoordinator(coordinator);
-
         //cargo requirements
         ArrayList<ArrayList<String>> cargo = cargoRequirements();
         ArrayList<Stock> stockList = new ArrayList<>();
-
         ArrayList < String > newJourneyCargo = cargo.get(0);
         for(int i = 0; i < newJourneyCargo.size(); i++)
         {
@@ -134,25 +120,13 @@ public class Control {
             stockList.add(stock);
         }
         mission.setJourneyCargo(stockList);
-
-        //Method for create Selection Criteria here
-        SelectionCriteria newSelectionCriteria = new SelectionCriteria();
-
-        //Method for create SpaceShuttle here
-        SpaceShuttle newSpaceShuttle = new SpaceShuttle();
-        ArrayList < Candidate > newCandidates = new ArrayList<>();
-
-//        new Mission(mId, mName, date, origin, countries, duration, mType, mDesc,
-//                newJourneyCargo, newMissionCargo, newOtherMissionCargo, destLocation, mStatus, jobs, requirements,
-//                newSelectionCriteria, newSpaceShuttle, newCandidates, coordinator);
-        System.out.println("Mission Created!");
         missions.add(mission);
-        //displayMission(true,mission);
+        displayMission(mission);
+        System.out.println("Mission Created!");
     }
 
     public void displayMission(Mission mission)
     {
-        //System.out.println("Mission Created!");
         System.out.println("* Mission ID: " + mission.getMissionId());
         System.out.println("1.Mission Name: " + mission.getMissionName());
         System.out.println("2.Mission description: " + mission.getMissionDesc());
@@ -219,68 +193,10 @@ public class Control {
         System.out.println("12.Status of the mission: " + mission.getMissionStatus());
     }
 
-//    public void displayMission(boolean newMission, Mission mission) {
-//
-//
-//        if (newMission) {
-//            System.out.println("Mission Created!");
-//        } else {
-//
-//
-//
-//            System.out.println("1.Mission ID: " + mission.getMissionId());
-//            System.out.println("2.Mission Name: " + mission.getMissionName());
-//            System.out.println("3.Country of origin: " + mission.getOrigin());
-//            System.out.println("4.Countries allowed: " + mission.getCountriesAllowed());
-//            System.out.println("5.Coordinator: " + mission.getCoordinator().getName());
-//
-//            System.out.println("6.Job: ");
-//            for (int i = 0; i < mission.getJobs().size(); i++) {
-//                System.out.println(Arrays.toString(mission.getJobs().get(i)));
-//            }
-//
-//            System.out.println("7.Employment requirements: ");
-//            for (int i = 0; i < mission.getEmploymentRequirements().size(); i++) {
-//                System.out.println(Arrays.toString(mission.getEmploymentRequirements().get(i)));
-//            }
-//
-//            System.out.println("8.Cargo requirements for journey: ");
-//            for (int i = 0; i < mission.getJourneyCargo().size(); i++) {
-//                ArrayList<String> js = new ArrayList<>();
-//                js.add(mission.getJourneyCargo().get(i).getName());
-//                System.out.print(js);
-//            }
-//            System.out.println();
-//            System.out.println("9.Launch date: " + mission.getLaunchDate());
-//            System.out.println("10.Location of the destination: " + mission.getDestLocation());
-//            System.out.println("11.Duration of the mission: " + mission.getMissionDuration());
-//            System.out.println("12.Status of the mission: " + mission.getMissionStatus());
-//        }
-//    }
-
     public void getEditInput()
     {
-        Console console = new Console();
-        Mission mission = new Mission();
-        //String id = console.acceptString("Input Mission ID");
-        boolean missionExist = true;
-        while(missionExist){
-            String id = console.acceptString("Input Mission ID");
-            for (Mission value : missions)
-            {
-                if (value.getMissionId().equals(id))
-                {
-                    mission = value;
-                    missionExist = false;
-                    break;
-                }
-            }
-            if(missionExist){
-                System.out.println("Mission not exist! ");
-            }
-        }
-
-        Boolean flag = true;
+        Mission mission = inputMissionId();
+        boolean flag = true;
         Validate va = new Validate();
         //mission select
         while(flag){
@@ -305,7 +221,6 @@ public class Control {
     }
 
     public Mission editMission(Mission mission, String option){
-        //Boolean flag = true;
         Validate va = new Validate();
         switch (option)
         {
@@ -407,7 +322,6 @@ public class Control {
         }
         return mission;
     }
-
 //    public void editMission() {
 //        Console console = new Console();
 //        //Mission placeholderMission = new Mission();
@@ -507,8 +421,6 @@ public class Control {
 //                        break;
 //                }
 //            }
-//
-//
 //                System.out.println("Previous Mission Details:");
 //                displayMission(false, mission);
 //                System.out.println("****************************************************");
@@ -521,12 +433,6 @@ public class Control {
 //                    missions.remove(mission);
 //                    missions.add(mission);
 //                }
-//
-//
-//
-//
-//
-//
 //        }
     public ArrayList<String> inputCountriesAllowed() {
 
@@ -556,7 +462,6 @@ public class Control {
         }
         return countryList;
     }
-
 
     public String selectMissionStatus(){
         String statusSelect = "Planning phase";
@@ -656,12 +561,10 @@ public class Control {
     public ArrayList<ArrayList<String>> cargoRequirements(){
         Validate va = new Validate();
         boolean flag = true;
-
         ArrayList<String> newJourneyCargo = new ArrayList<>();
         ArrayList<String> newMissionCargo = new ArrayList<>();
         ArrayList<String> newOtherMissionCargo = new ArrayList<>();
         ArrayList<ArrayList<String>> cargo = new ArrayList<>();
-
         System.out.println("Note : Enter p to skip.");
         System.out.println("Note : Enter y for YES and n for NO.");
         while (flag)
@@ -691,7 +594,6 @@ public class Control {
         }
         cargo.add(newJourneyCargo);
         flag = true;
-
         while (flag)
         {
             String mCargo = va.acceptStringInput("Please Enter the Cargo requirement for mission: ");
@@ -720,7 +622,6 @@ public class Control {
         }
         cargo.add(newMissionCargo);
         flag = true;
-
         while (flag)
         {
             String oCargo = va.acceptStringInput("Please Enter the Cargo requirement for other mission: ");
@@ -753,39 +654,29 @@ public class Control {
 
     public void importAllData(){
         reader = new FileIO();
-
         //import mission coordinators
         String coordinatorsString = reader.readFile("missionCoordinators.txt");
-
         String[] coordinatorsArray;
         coordinatorsArray = coordinatorsString.split("\n");
-
         for (int i = 0; i < coordinatorsArray.length; i++){
             String[] singleCoordinatorArray = coordinatorsArray[i].split(";");
 
             missionCoordinators.add(new MissionCoordinator(singleCoordinatorArray[0], singleCoordinatorArray[1], singleCoordinatorArray[2]));
         }
         missionCoordinators.trimToSize();
-
-
         //import shuttle data
         String shuttlesString = reader.readFile("shuttles.txt");
-
         String[] shuttlesArray = shuttlesString.split("\n");
-
         for (int i = 0; i < shuttlesArray.length; i++){
             String[] singleShuttleArray = shuttlesArray[i].split(";");
 
             spaceShuttles.add(new SpaceShuttle(singleShuttleArray[0], singleShuttleArray[1], singleShuttleArray[2], singleShuttleArray[3], singleShuttleArray[4], singleShuttleArray[5], singleShuttleArray[6], singleShuttleArray[7]));
         }
         spaceShuttles.trimToSize();
-
         //import candidate data
         candidates = new ArrayList<Candidate>();
         String candidatesString = reader.readFile("candidates.txt");
-
         String[] candidatesArray = candidatesString.split("\n");
-
         for (int i = 0; i < candidatesArray.length; i++) {
             String[] singleCandidateArray = candidatesArray[i].trim().split(";");
 
@@ -796,13 +687,9 @@ public class Control {
                 qualifications.add(qualsArray[j]);
                 j = j+1;
             }
-
-
             String[] occupationArray = singleCandidateArray[11].trim().split(",");
             String[] workYearsArray = singleCandidateArray[12].trim().split(",");
             ArrayList<String[]> work = new ArrayList<String[]>();
-
-
             if (singleCandidateArray[11].equals("N/A") == false) {
                 if (occupationArray.length > 1) {
                     int a = 0;
@@ -816,7 +703,6 @@ public class Control {
             }else{
                 work = null;
             }
-
             String[] languagesArray = singleCandidateArray[14].trim().split(",");
             ArrayList<String> languages = new ArrayList<String>();
             if (languagesArray.length > 1) {
@@ -828,20 +714,13 @@ public class Control {
             }else{
                 languages.add(singleCandidateArray[14]);
             }
-
             ArrayList<String> allergies = new ArrayList<>();
             allergies.add(singleCandidateArray[8]);
-
             ArrayList<String> food = new ArrayList<>();
             food.add(singleCandidateArray[9]);
-
-
             candidates.add(new Candidate(singleCandidateArray[0], singleCandidateArray[1], singleCandidateArray[2], singleCandidateArray[3], singleCandidateArray[4], singleCandidateArray[5], singleCandidateArray[6], singleCandidateArray[7], allergies, food, qualifications, work, singleCandidateArray[13],  languages, null, null));
-
-
         }
         candidates.trimToSize();
-
         //import stock data
         String stockString = reader.readFile("warehouse.txt");
 
@@ -853,19 +732,15 @@ public class Control {
             listOfStock.add(new Stock(singleStockArray[0], singleStockArray[1], Integer.parseInt(singleStockArray[2])));
         }
         listOfStock.trimToSize();
-
         // import mission data
         missions = new ArrayList<>();
-
         String missionsString = reader.readFile("missions.txt");
         String[] missionsArray = missionsString.split("\n");
-
         for (int i = 0; i < missionsArray.length; i++) {
             String[] singleMissionArray = missionsArray[i].split(";");
-
             String[] journeyCargoArray = singleMissionArray[8].trim().split(",");
             ArrayList<Stock> journeyCargo = new ArrayList<>();
-            if (singleMissionArray[10].trim().equals("N/A") == false) {
+            if (!singleMissionArray[10].trim().equals("N/A")) {
                 if (journeyCargoArray.length > 1) {
                     int j = 0;
                     while (j < journeyCargoArray.length) {
@@ -883,10 +758,9 @@ public class Control {
             } else {
                 journeyCargo = null;
             }
-
             String[] missionCargoArray = singleMissionArray[10].trim().split(",");
             ArrayList<Stock> missionCargo = new ArrayList<>();
-            if (singleMissionArray[10].equals("N/A") == false) {
+            if (!singleMissionArray[10].equals("N/A")) {
                 if (missionCargoArray.length > 1) {
                     int j = 0;
                     while (j < missionCargoArray.length) {
@@ -905,23 +779,15 @@ public class Control {
             } else {
                 missionCargo = null;
             }
-
             //creating jobs
             ArrayList<String[]> jobs = new ArrayList<>();
             jobs.add(new String[] {singleMissionArray[16], singleMissionArray[17]});
-
             ArrayList<String[]> employmentRequirements = new ArrayList<>();
             employmentRequirements.add(new String[] {singleMissionArray[18], singleMissionArray[19]});
-
-
-
             //import selection criteria for the mission
             String selectionString = reader.readFile("selectionCriteria.txt");
             String[] selectionArray = selectionString.split("\n");
-
-
             String[] singleSelection = selectionArray[i].trim().split(";");
-
             String[] languagesArray = singleSelection[7].trim().split(",");
             ArrayList<String> secondLanguages = new ArrayList<String>();
             if (languagesArray.length > 1) {
@@ -933,14 +799,15 @@ public class Control {
             }else{
                 secondLanguages.add(singleSelection[7]);
             }
+            SelectionCriteria selectionCriteria = new SelectionCriteria(Integer.parseInt(singleSelection[0])
+                    , Integer.parseInt(singleSelection[1]), Integer.parseInt(singleSelection[2]), singleSelection[3]
+                    , singleSelection[4], singleSelection[5], singleSelection[6],secondLanguages);
 
-            SelectionCriteria selectionCriteria = new SelectionCriteria(Integer.parseInt(singleSelection[0]), Integer.parseInt(singleSelection[1]), Integer.parseInt(singleSelection[2]), singleSelection[3], singleSelection[4], singleSelection[5], singleSelection[6],secondLanguages);
-
-            missions.add(new Mission(singleMissionArray[0], singleMissionArray[1], singleMissionArray[2], singleMissionArray[3], null, Integer.parseInt(singleMissionArray[5]), singleMissionArray[6], singleMissionArray[7], journeyCargo, missionCargo, null, singleMissionArray[11], singleMissionArray[12], jobs, employmentRequirements, selectionCriteria, null, null, new MissionCoordinator()));
-
+            missions.add(new Mission(singleMissionArray[0], singleMissionArray[1], singleMissionArray[2], singleMissionArray[3]
+                    , null, Integer.parseInt(singleMissionArray[5]), singleMissionArray[6], singleMissionArray[7]
+                    , journeyCargo, missionCargo, null, singleMissionArray[11], singleMissionArray[12]
+                    , jobs, employmentRequirements, selectionCriteria, null, null, new MissionCoordinator()));
         }
-
-
     }
 
     /**
@@ -985,8 +852,8 @@ public class Control {
                     + "Enter 4 to edit Mission\n"
                     + "Enter 5 to create Selection Criteria\n"
                     + "Enter 6 to find N Best Candidates\n"
-                    + "Enter 7 to exit\n";
-            System.out.println(menu);
+                    + "Enter 7 to exit";
+            System.out.print(menu);
             input = va.acceptStringInput("");
             if (input.equals("1") || input.equals("2") || input.equals("3") || input.equals("4") || input.equals("5")
                     || input.equals("6") || input.equals("7"))
@@ -1000,13 +867,12 @@ public class Control {
     public void startProgram()
     {
         importAllData();
-        Mission mission = new Mission();
         Administrator administrator = new Administrator();
         boolean start = true;
         while (start)
         {
             String StringInput = menuSelect();
-            start = userSelection(StringInput, mission, administrator);
+            start = userSelection(StringInput, administrator);
         }
     }
 
@@ -1015,7 +881,7 @@ public class Control {
      *
      * @return A boolean
      */
-    public boolean userSelection(String userInput,Mission mission,Administrator administrator)
+    public boolean userSelection(String userInput,Administrator administrator)
     {
         switch (userInput)
         {
@@ -1043,15 +909,50 @@ public class Control {
                 }
                 else
                 {
-                    createMission(mission);
+                    createMission();
                     return true;
                 }
             case "4":
-                //validation needed
-                //ui.getEditInput;
-                getEditInput();
-                return true;
+                if (administrator.getAdminName().trim().length() == 0)
+                {
+                    System.out.println("You need to login first. \n"
+                            +"Please press [Enter] to return to the main menu.");
+                    new Scanner(System.in).nextLine();
+                    return true;
+                }
+                else
+                {
+                    getEditInput();
+                    return true;
+                }
             case "5":
+                if (administrator.getAdminName().trim().length() == 0)
+                {
+                    System.out.println("You need to login first. \n"
+                            +"Please press [Enter] to return to the main menu.");
+                    new Scanner(System.in).nextLine();
+                    return true;
+                }
+                else
+                {
+                    Mission mission = inputMissionId();
+                    mission.Criteria();
+                    return true;
+                }
+            case "6":
+                if (administrator.getAdminName().trim().length() == 0)
+                {
+                    System.out.println("You need to login first. \n"
+                            +"Please press [Enter] to return to the main menu.");
+                    new Scanner(System.in).nextLine();
+                    return true;
+                }
+                else
+                {
+                    selectCandidates();
+                    return true;
+                }
+            case "7":
                 System.out.println("Thanks for using!");
                 return false;
         }
@@ -1227,6 +1128,7 @@ try
 }
 
         //display all Candidates
+        //****** need try catch here *****
          ArrayList<Candidate> shortlistCandidates = new ArrayList<Candidate>(possibleCandidates.subList(0, noCandidates));
 
 
