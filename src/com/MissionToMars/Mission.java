@@ -255,9 +255,6 @@ public class Mission {
     }
 
     public void Criteria() {
-        ArrayList<Integer> choice = new ArrayList<>();
-        int opt = 0;
-        String Select = "";
         String age = "Age Range";
         String qual = "Qualifications";
         String work = "Years of work experience";
@@ -268,8 +265,9 @@ public class Mission {
         String lang = "Languages spoken";
         Scanner console = new Scanner(System.in);
         Validate va = new Validate();
-        boolean choice1 = TRUE;
+        boolean choice1 = FALSE,choice2 = FALSE;
         ArrayList<String> display = new ArrayList<>();
+        ArrayList<String> selected = new ArrayList<>();
         System.out.println("\n Select Criteria you want for selecting the candidates ");
         System.out.println("=======================================================");
         display.add(age);
@@ -281,30 +279,91 @@ public class Mission {
         display.add(skills);
         display.add(lang);
         displayList(display);
+        String Select = "",del = "";
+        int opt = 0;
         do {
             System.out.println("\n Enter Option : ");
             opt = console.nextInt();
-            choice.add(opt - 1);//add to array list of options
-            deleteOption(opt, display);
+            del=deleteOption(opt, display);
+            selected.add(del);
             displayList(display);
             System.out.println(" \n Do you want to continue adding to the list? (y/n) :");
-            Select = console.nextLine();
-            Select=Select.trim();
-            if (Select == "y")
-                choice1 = FALSE;
-            else
+            Select = console.next();
+            if(Select.trim().equals("y"))
+                choice1 = TRUE;
+            else if(Select.trim().equals("n"))
                 break;
-        } while (choice1 == TRUE && display.size() >= 1);
-        System.out.println(("Im out of the loop"));
+        } while (display.size() >= 1 && choice1==TRUE);
+         // display final selected criteria
+        System.out.println("\n Criteria  List for selecting candidates \n");
+        displayList(selected);
+        System.out.println("\n Do you want to make changes to the final Selection Criteria List (y/n)\n ");
+        Select = console.next();
+        if(Select.trim().equals("y"))
+        {
+            System.out.println("\n Which Edit Operation to want to perform on the List");
+            System.out.println("\n 1.Add Criteria ");
+            System.out.println("\n 2.Remove Criteria ");
+            opt = console.nextInt();
+            if(opt==1)
+            {
+                System.out.println("\n Enter Option to add from the list ");
+                do {
+                    displayList(display);
+                    System.out.println("\n Enter Option : ");
+                    opt = console.nextInt();
+                    del=deleteOption(opt, display);
+                    selected.add(del);
+                    displayList(selected);
+                    System.out.println(" \n Do you want to continue adding to the list? (y/n) :");
+                    Select = console.next();
+                    if(Select.trim().equals("y"))
+                        choice1 = TRUE;
+                    else if(Select.trim().equals("n"))
+                        break;
+                } while (display.size() >= 1 && choice1==TRUE);
+            }
+            else if(opt==2)
+            {
+                System.out.println("\n Enter Option to Remove from the list ");
+                do{
+                    displayList(selected);
+                    System.out.println("Enter Option :");
+                    opt=console.nextInt();
+                    del=deleteOption(opt,selected);
+                    display.add(del);
+                    System.out.println(" \n Do you want to continue Remove more options list? (y/n) :");
+                    Select = console.next();
+                    if(Select.trim().equals("y"))
+                        choice2 = TRUE;
+                    else if(Select.trim().equals("n"))
+                        break;
+                }while(selected.size() >=1 && choice2 == TRUE);
+            }
+            else System.out.println("Enter Valid Option");
+
+        }
+
+        System.out.println("\n ________ FINAL SELECTION CRITERIA ________ \n");
+        displayList(selected);
+        for (int i = 0; i < selected.size(); i++)
+        {
+            setValues(selected.get(i));
+        }
+
 
     }
 
-    public void deleteOption(int option, ArrayList<String> display) {
+
+
+    public String deleteOption(int option, ArrayList<String> display) {
+        String delete="";
         for (int i = 0; i <= display.size(); i++) {
             if (option == (i)) {
-                display.remove(i - 1);
+               delete= display.remove(i - 1);
             }
         }
+        return delete;
     }
 
     public void displayList(ArrayList<String> display) {
@@ -312,6 +371,50 @@ public class Mission {
             System.out.println(i + 1 + "." + display.get(i));
         }
 
+    }
+
+    public void setValues(String option)
+    {
+        switch(option)
+        {
+            case "Age Range" : {
+                criteria.askAge();
+            }
+            break;
+            case "Qualifications" : {
+                criteria.askQualifications();
+            }
+            break;
+            case "Years of work experience" : {
+                criteria.askExperience();
+            }
+            break;
+            case "Occupations" : {
+                criteria.askOccupation();
+            }
+            break;
+            case "Health records" : {
+                criteria.askHealthRecord();
+            }
+            break;
+            case "Criminal Records" : {
+                criteria.askCriminalRecord();
+            }
+            break;
+            case "Computer skills" : {
+                criteria.askComputerSkill();
+            }
+            break;
+            case "Languages spoken" : {
+                criteria.askLanguageRequired();
+            }
+            break;
+            default: {
+                System.out.println("Invalid Numbers entered");
+            }
+            break;
+
+        }
     }
 
     public static void main(String[] args) {
