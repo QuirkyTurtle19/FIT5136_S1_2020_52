@@ -53,9 +53,16 @@ public class Validate {
 
     public int acceptIntegerInput(String displayMessage)
     {
-        Scanner input = new Scanner(System.in);
-        System.out.println(displayMessage);
-        return input.nextInt();
+        while (true) {
+            System.out.println(displayMessage);
+            Scanner input = new Scanner(System.in);
+            String line = input.nextLine();
+            if (line.matches("[0-9]*") && line.length() > 0) {
+                return Integer.parseInt(line);
+            } else {
+                System.out.println("Enter numbers only");
+            }
+        }
     }
 
     public boolean stringLengthWithinRange(String value, int min, int max)

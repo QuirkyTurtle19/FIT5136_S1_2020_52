@@ -13,8 +13,11 @@ public class Main {
 
 
        Control control = new Control();
-       control.importAllData();
-       control.mainMenu("Rory");
+
+//       control.importAllData();
+//       control.mainMenu("Rory");
+
+        control.startProgram();
 
         }
 
