@@ -21,15 +21,15 @@ public class SelectionCriteria {
     private FileIO  reader;
     Validate validate = new Validate();
     public SelectionCriteria(){
-        minimumAge = 0;
-        maximumAge = 100;
-        qualification = "";
-        workExperience = 0;
-        occupation = "";
-        healthRecord = new ArrayList<>();
-        criminalRecord = new ArrayList<>();
-        languageRequired="";
-        computerSkill = "";
+        minimumAge = null;
+        maximumAge = null;
+        qualification = null;
+        workExperience = null;
+        occupation = null;
+        healthRecord = null;
+        criminalRecord = null;
+        languageRequired= null;
+        computerSkill = null;
     }
 
     public SelectionCriteria(Integer min, Integer max, Integer experience, String quals, String newOccupation, String newComputerSkill, String newLanguageRequired, ArrayList<String> newSecondaryLanguage){
@@ -224,7 +224,7 @@ public class SelectionCriteria {
         Scanner console = new Scanner(System.in);
         ArrayList<String> str = new ArrayList<>();
         System.out.println("Enter Criminal Record Requirements:");
-        System.out.println("Note : Enter Atleast One Requirement");
+        System.out.println("Note : Enter At least One Requirement");
         input=console.nextLine();
         str.add(input);
         System.out.println("Do You want to add more ?");

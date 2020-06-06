@@ -12,17 +12,9 @@ public class Main {
 	// write your code here
 
 
-        Control control = new Control();
-
-        control.startProgram();
-
-        /*
-        Mission mission = new Mission();
-        control.selectSpaceShuttle(mission);//select a shuttle to start the planning of the mission
-        //Creating a mission
-        UI start = new UI();
-        start.createMission(mission);
-         */
+       Control control = new Control();
+       control.importAllData();
+       control.mainMenu("Rory");
 
         }
 

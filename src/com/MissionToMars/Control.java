@@ -1,8 +1,13 @@
 package com.MissionToMars;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import java.util.Scanner;
+import java.util.Date;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
@@ -49,9 +54,9 @@ public class Control {
         System.out.println("2. Edit Mission");
         System.out.println("3. Select Space Shuttle");
         System.out.println("4. Create Selection Criteria");
+        System.out.println("5. Select N Best Candidates");
         int selection = console.acceptInt("please select an option");
 
-        Mission mission = new Mission();
 
         switch (selection){
             case 1:
@@ -61,6 +66,28 @@ public class Control {
             case 3:
                 selectSpaceShuttle();
             case 4:
+                Mission mission = new Mission();
+                //String id = console.acceptString("Input Mission ID");
+                boolean missionExist = true;
+                while(missionExist){
+                    String id = console.acceptString("Input Mission ID");
+                    for (Mission value : missions)
+                    {
+                        if (value.getMissionId().equals(id))
+                        {
+                            mission = value;
+                            missionExist = false;
+                            break;
+                        }
+                    }
+                    if(missionExist){
+                        System.out.println("Mission not exist! ");
+                    }
+                }
+                mission.Criteria();
+            case 5:
+                selectCandidates();
+
 
 
         }
@@ -1111,6 +1138,141 @@ public class Control {
             }
         } while (flag);
     }
+
+    public int ageCalculator(LocalDate dob){
+
+            int age = Period.between(dob, LocalDate.now()).getYears();
+            return age;
+    }
+
+    public void selectCandidates(){
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+        Console console = new Console();
+        Mission mission = new Mission();
+        //String id = console.acceptString("Input Mission ID");
+        boolean missionExist = true;
+        while(missionExist) {
+            String id = console.acceptString("Input Mission ID");
+            for (Mission value : missions) {
+                if (value.getMissionId().equals(id)) {
+                    mission = value;
+                    missionExist = false;
+                    break;
+                }
+            }
+        }
+            if(missionExist){
+                System.out.println("Mission not exist! ");
+            }
+
+
+            int noCandidates = console.acceptInt("Please enter the number of candidates you wish to add to the mission");
+
+            //add all candidates to the list that have at least one criteria
+            ArrayList<Candidate> possibleCandidates = new ArrayList<>();
+
+
+            if (Integer.toString(mission.getSelectionCriteria().getMinimumAge()) != null) {
+                    for (int i = 0; i < candidates.size(); i++) {
+                        int age = ageCalculator(LocalDate.parse(candidates.get(i).getCandidateDOB(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+
+                        if (age > mission.getSelectionCriteria().getMinimumAge() && possibleCandidates.contains(candidates.get(i)) == false) {
+                            possibleCandidates.add(candidates.get(i));
+
+                        }
+                    }
+                }
+
+                if (Integer.toString(mission.getSelectionCriteria().getMaximumAge()) != null){
+                    for (int i = 0; i < candidates.size(); i++) {
+                        int age = ageCalculator(LocalDate.parse(candidates.get(i).getCandidateDOB(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+
+                        if (age < mission.getSelectionCriteria().getMaximumAge() && possibleCandidates.contains(candidates.get(i)) == false) {
+                            possibleCandidates.add(candidates.get(i));
+
+                        }
+                    }
+                }
+
+                if (Integer.toString(mission.getSelectionCriteria().getWorkExperience()) != null){
+                    for (int i = 0; i < candidates.size(); i++) {
+                        int exp = 0;
+                        for (int j = 0; j < candidates.get(i).getWork().size(); j++){
+                            if (exp < Integer.parseInt(candidates.get(i).getWork().get(j)[1])) {
+                                exp = Integer.parseInt(candidates.get(i).getWork().get(j)[1]);
+                            }
+
+                            }
+                        if ( exp >= mission.getSelectionCriteria().getWorkExperience() && possibleCandidates.contains(candidates.get(i)) == false){
+                            possibleCandidates.add(candidates.get(i));
+                        }
+
+                    }
+
+                }
+
+                //remove candidates that do not have all criteria
+        if (Integer.toString(mission.getSelectionCriteria().getMinimumAge()) != null) {
+            for (int i = 0; i < possibleCandidates.size(); i++) {
+                int age = ageCalculator(LocalDate.parse(possibleCandidates.get(i).getCandidateDOB(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+
+                if (age < mission.getSelectionCriteria().getMinimumAge()) {
+                    possibleCandidates.remove(possibleCandidates.get(i));
+
+                }
+            }
+        }
+
+        if (Integer.toString(mission.getSelectionCriteria().getMaximumAge()) != null){
+            for (int i = 0; i < possibleCandidates.size(); i++) {
+                int age = ageCalculator(LocalDate.parse(possibleCandidates.get(i).getCandidateDOB(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+
+                if (age > mission.getSelectionCriteria().getMaximumAge()) {
+                    possibleCandidates.remove(possibleCandidates.get(i));
+
+                }
+            }
+        }
+
+        if (Integer.toString(mission.getSelectionCriteria().getWorkExperience()) != null){
+            for (int i = 0; i < possibleCandidates.size(); i++) {
+                int exp = 0;
+                for (int j = 0; j < possibleCandidates.get(i).getWork().size(); j++){
+                    if (exp < Integer.parseInt(possibleCandidates.get(i).getWork().get(j)[1])) {
+                        exp = Integer.parseInt(possibleCandidates.get(i).getWork().get(j)[1]);
+                    }
+
+                }
+                if ( exp < mission.getSelectionCriteria().getWorkExperience() ){
+                    possibleCandidates.remove(possibleCandidates.get(i));
+                }
+
+            }
+
+        }
+
+        //display all Candidates
+         ArrayList<Candidate> shortlistCandidates = new ArrayList<Candidate>(possibleCandidates.subList(0, noCandidates-1));
+
+
+        for (int i = 0; i < shortlistCandidates.size(); i++){
+            System.out.println( i+1 + " " + shortlistCandidates.get(i).getCandidateName());
+        }
+
+        String choice = console.acceptString("Are you happy with this list? (y/n");
+        if (choice.equals("y")){
+            mission.setListOfCandidates(shortlistCandidates);
+        }
+        else{
+            //return to main menu
+        }
+
+
+
+    }
+
 
 }
 
