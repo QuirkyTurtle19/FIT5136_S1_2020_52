@@ -268,7 +268,7 @@ public class Mission {
         boolean choice1 = FALSE,choice2 = FALSE;
         ArrayList<String> display = new ArrayList<>();
         ArrayList<String> selected = new ArrayList<>();
-        System.out.println("\n Select Criteria you want for selecting the candidates ");
+        System.out.println("\n Select criteria that you want for selecting the candidates ");
         System.out.println("=======================================================");
         display.add(age);
         display.add(qual);
@@ -282,12 +282,12 @@ public class Mission {
         String Select = "",del = "";
         int opt = 0;
         do {
-            System.out.println("\n Enter Option : ");
+            System.out.println("\n Enter option: ");
             opt = console.nextInt();
             del=deleteOption(opt, display);
             selected.add(del);
             displayList(display);
-            System.out.println(" \n Do you want to continue adding to the list? (y/n) :");
+            System.out.println(" \n Do you want to continue adding to the list? (y/n): ");
             Select = console.next();
             if(Select.trim().equals("y"))
                 choice1 = TRUE;
@@ -295,27 +295,27 @@ public class Mission {
                 break;
         } while (display.size() >= 1 && choice1==TRUE);
          // display final selected criteria
-        System.out.println("\n Criteria  List for selecting candidates \n");
+        System.out.println("\n Criteria list for selecting candidates \n");
         displayList(selected);
         System.out.println("\n Do you want to make changes to the final Selection Criteria List (y/n)\n ");
         Select = console.next();
         if(Select.trim().equals("y"))
         {
-            System.out.println("\n Which Edit Operation to want to perform on the List");
-            System.out.println("\n 1.Add Criteria ");
-            System.out.println("\n 2.Remove Criteria ");
+            System.out.println("\n Which edit operation to want to perform on the list: ");
+            System.out.println("\n 1. Add Criteria ");
+            System.out.println("\n 2. Remove Criteria ");
             opt = console.nextInt();
             if(opt==1)
             {
-                System.out.println("\n Enter Option to add from the list ");
+                System.out.println("\n Enter option to add from the list: ");
                 do {
                     displayList(display);
-                    System.out.println("\n Enter Option : ");
+                    System.out.println("\n Enter option: ");
                     opt = console.nextInt();
                     del=deleteOption(opt, display);
                     selected.add(del);
                     displayList(selected);
-                    System.out.println(" \n Do you want to continue adding to the list? (y/n) :");
+                    System.out.println(" \n Do you want to continue adding to the list? (y/n): ");
                     Select = console.next();
                     if(Select.trim().equals("y"))
                         choice1 = TRUE;
@@ -325,14 +325,14 @@ public class Mission {
             }
             else if(opt==2)
             {
-                System.out.println("\n Enter Option to Remove from the list ");
+                System.out.println("\n Enter option to remove from the list: ");
                 do{
                     displayList(selected);
-                    System.out.println("Enter Option :");
+                    System.out.println("Enter option: ");
                     opt=console.nextInt();
                     del=deleteOption(opt,selected);
                     display.add(del);
-                    System.out.println(" \n Do you want to continue Remove more options list? (y/n) :");
+                    System.out.println(" \n Do you want to continue removing from the options list? (y/n): ");
                     Select = console.next();
                     if(Select.trim().equals("y"))
                         choice2 = TRUE;
@@ -340,7 +340,7 @@ public class Mission {
                         break;
                 }while(selected.size() >=1 && choice2 == TRUE);
             }
-            else System.out.println("Enter Valid Option");
+            else System.out.println("Please enter a valid option");
 
         }
 
@@ -393,7 +393,7 @@ public class Mission {
                 criteria.askOccupation();
             }
             break;
-            case "Health records" : {
+            case "Health Records" : {
                 criteria.askHealthRecord();
             }
             break;
