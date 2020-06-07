@@ -248,7 +248,7 @@ public class Mission {
         String qual = "Qualifications";
         String work = "Years of work experience";
         String occ = "Occupations";
-        String health = "Health records";
+        String health = "Health Records";
         String criminal = "Criminal Records";
         String skills = "Computer skills";
         String lang = "Languages spoken";

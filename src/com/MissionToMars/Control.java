@@ -895,68 +895,12 @@ public class Control {
         Validate va = new Validate();
         Mission mission = inputMissionId();
         int noCandidates = va.acceptIntegerInput("Please enter the number of candidates you wish to add to the mission");
+        ArrayList<Candidate> possibleCandidates = candidates;
         //add all candidates to the list that have at least one criteria
-        ArrayList<Candidate> possibleCandidates = new ArrayList<>();
-    try
+
+
+        try
     {
-        if (Integer.toString(mission.getSelectionCriteria().getMinimumAge()) != null)
-        {
-            for (int i = 0; i < candidates.size(); i++)
-            {
-                int age = ageCalculator(LocalDate.parse(candidates.get(i).getCandidateDOB(), DateTimeFormatter.ofPattern("MM/dd/yyyy")));
-
-                if (age > mission.getSelectionCriteria().getMinimumAge() && possibleCandidates.contains(candidates.get(i)) == false)
-                {
-                    possibleCandidates.add(candidates.get(i));
-
-                }
-            }
-        }
-        if (Integer.toString(mission.getSelectionCriteria().getMaximumAge()) != null)
-        {
-            for (int i = 0; i < candidates.size(); i++)
-            {
-                int age = ageCalculator(LocalDate.parse(candidates.get(i).getCandidateDOB(), DateTimeFormatter.ofPattern("MM/dd/yyyy")));
-
-                if (age < mission.getSelectionCriteria().getMaximumAge() && possibleCandidates.contains(candidates.get(i)) == false)
-                {
-                    possibleCandidates.add(candidates.get(i));
-
-                }
-            }
-        }
-        if (Integer.toString(mission.getSelectionCriteria().getWorkExperience()) != null)
-        {
-            for (int i = 0; i < candidates.size(); i++)
-            {
-                int exp = 0;
-                for (int j = 0; j < candidates.get(i).getWork().size(); j++)
-                {
-                    if (exp < Integer.parseInt(candidates.get(i).getWork().get(j)[1]))
-                    {
-                        exp = Integer.parseInt(candidates.get(i).getWork().get(j)[1]);
-                    }
-
-                }
-                if (exp >= mission.getSelectionCriteria().getWorkExperience() && possibleCandidates.contains(candidates.get(i)) == false)
-                {
-                    possibleCandidates.add(candidates.get(i));
-                }
-
-            }
-
-        }
-
-        if (mission.getSelectionCriteria().getHealthRecord() != null)
-        {
-            for (int i = 0; i < candidates.size(); i++){
-
-                if ( mission.getSelectionCriteria().getHealthRecord().contains(candidates.get(i).getAllergies())){
-                    possibleCandidates.add(candidates.get(i));
-                }
-
-            }
-        }
 
         //remove candidates that do not have all criteria
         if (Integer.toString(mission.getSelectionCriteria().getMinimumAge()) != null)
@@ -1024,7 +968,16 @@ public class Control {
     }
         //display all Candidates
         //****** need try catch here *****
-        ArrayList<Candidate> shortlistCandidates = new ArrayList<Candidate>(possibleCandidates.subList(0, noCandidates));
+
+        int arg = noCandidates;
+        if (possibleCandidates.size() < noCandidates){
+            arg = possibleCandidates.size();
+        }
+
+
+        ArrayList<Candidate> shortlistCandidates = new ArrayList<Candidate>(possibleCandidates.subList(0, arg));
+
+
         for (int i = 0; i < shortlistCandidates.size(); i++){
             System.out.println( i+1 + " " + shortlistCandidates.get(i).getCandidateName());
         }
