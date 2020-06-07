@@ -1,7 +1,6 @@
 package com.MissionToMars;
 
 import java.util.*;
-import java.io.*;
 import java.lang.*;
 
 import static java.lang.Boolean.TRUE;
@@ -19,7 +18,6 @@ public class SelectionCriteria {
     private String languageRequired;
     private ArrayList<String> secondaryLanguages;
     private FileIO  reader;
-    Validate validate = new Validate();
     public SelectionCriteria(){
         minimumAge = null;
         maximumAge = null;
@@ -125,31 +123,6 @@ public class SelectionCriteria {
         this.secondaryLanguages = secondaryLanguages;
     }
 
-    public void importSelectionCriteria(int index){
-
-        reader = new FileIO();
-
-        String selectionCriteriaString = reader.readFile("selectionCriteria");
-        String[] selectionCriteriaArray = selectionCriteriaString.split("\n");
-
-        String[] singleSelectionCriteriaArray = selectionCriteriaArray[index].split(";");
-
-        String[] secondaryLanguageArray = singleSelectionCriteriaArray[9].split(",");
-        ArrayList<String> secondLanguages = new ArrayList<>();
-
-        if (secondaryLanguageArray.length > 1){
-            int i = 0;
-            while (secondaryLanguageArray.length > i){
-                secondLanguages.add(secondaryLanguageArray[i]);
-                i++;
-            }
-        }else{
-            secondLanguages.add(singleSelectionCriteriaArray[9]);
-        }
-
-
-    }
-
     public void askAge()
     {
         int min,max;
@@ -244,9 +217,7 @@ public class SelectionCriteria {
         }
         else
             System.out.println("Criminal record Updated");
-
         setCriminalRecord(str);
-
     }
 
     public void askComputerSkill()
@@ -297,11 +268,4 @@ public class SelectionCriteria {
         setSecondaryLanguages(str);
 
     }
-
-    public static void main(String[] args)
-    {
-        SelectionCriteria st = new SelectionCriteria();
-
-    }
-
 }

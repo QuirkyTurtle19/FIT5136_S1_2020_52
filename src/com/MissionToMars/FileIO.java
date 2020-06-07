@@ -7,7 +7,6 @@ public class FileIO {
 
     public String readFile(String filename){
         String output = "";
-
         try
         {
             FileReader inputFile = new FileReader(filename);
@@ -26,8 +25,6 @@ public class FileIO {
         }
         return output;
     }
-
-
-    }
+}
 
 

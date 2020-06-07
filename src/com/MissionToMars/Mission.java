@@ -1,18 +1,7 @@
 package com.MissionToMars;
 
-
-import com.MissionToMars.SelectionCriteria;
-import com.MissionToMars.SpaceShuttle;
-
-
-import java.awt.*;
-import java.sql.Array;
-import java.sql.Time;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
-
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
@@ -350,11 +339,7 @@ public class Mission {
         {
             setValues(selected.get(i));
         }
-
-
     }
-
-
 
     public String deleteOption(int option, ArrayList<String> display) {
         String delete="";
@@ -418,11 +403,4 @@ public class Mission {
 
         }
     }
-
-    public static void main(String[] args) {
-        Mission mission = new Mission();
-        mission.Criteria();
-    }
-
-
 }
