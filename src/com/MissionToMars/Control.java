@@ -11,6 +11,7 @@ import java.util.Arrays;
 
 public class Control {
     private FileIO reader;
+    private Administrator administrator;
     private ArrayList<SpaceShuttle> spaceShuttles;
     private ArrayList<Candidate> candidates;
     private ArrayList<Mission> missions;
@@ -33,11 +34,19 @@ public class Control {
         return missions;
     }
 
+    public Administrator getAdministrator()
+    {
+        return administrator;
+    }
+
+    public void setAdministrator(Administrator administrator)
+    {
+        this.administrator = administrator;
+    }
 
     //For Testing
     public void mainMenu(String name){
-        Console console = new Console();
-
+        Validate va = new Validate();
         System.out.println("Welcome: " + name);
         System.out.println("*****Main Menu*****");
         System.out.println("1. Create Mission");
@@ -45,7 +54,7 @@ public class Control {
         System.out.println("3. Select Space Shuttle");
         System.out.println("4. Create Selection Criteria");
         System.out.println("5. Select N Best Candidates");
-        int selection = console.acceptInt("please select an option");
+        int selection = va.acceptIntegerInput("please select an option");
 
         switch (selection){
             case 1:
@@ -816,21 +825,30 @@ public class Control {
     public void selectSpaceShuttle (){
         Validate va = new Validate();
         Mission mission = inputMissionId();
-        for (int i = 0; i < spaceShuttles.size(); i++){
+        boolean flag = true;
+        for (int i = 0; i < spaceShuttles.size(); i++)
+        {
             SpaceShuttle shuttle = spaceShuttles.get(i);
             System.out.println("Shuttle ID: " + shuttle.getShuttleId() + " Shuttle name: " + shuttle.getShuttleName()
                     + " Manufacture year: " + shuttle.getManufactureYear() + " Fuel capacity (Litres): "
                     + shuttle.getFuelCapacity() + " Passenger capacity: " + shuttle.getPassengerCapacity()
                     + " Cargo Capacity (kgs): " + " Travel speed: " + shuttle.getTravelSpeed() + " Origin: " + shuttle.getOrigin());
         }
-        String shuttleSelection = va.acceptStringInput("Please enter the Shuttle ID you would like to select");
-
-        for (int z = 0; z < spaceShuttles.size(); z++){
-            if (spaceShuttles.get(z).getShuttleId().equals(shuttleSelection)){
-                mission.setSpaceShuttle(spaceShuttles.get(z));
-                System.out.println("Space shuttle " + spaceShuttles.get(z).getShuttleName() + "is selected for mission " + mission.getMissionId());
+        do
+        {
+            String shuttleSelection = va.acceptStringInput("Please enter the Shuttle ID you would like to select");
+            for (int z = 0; z < spaceShuttles.size(); z++)
+            {
+                if (spaceShuttles.get(z).getShuttleId().equals(shuttleSelection))
+                {
+                    mission.setSpaceShuttle(spaceShuttles.get(z));
+                    System.out.println("Space shuttle " + spaceShuttles.get(z).getShuttleName() + "is selected for mission " + mission.getMissionId());
+                    flag = false;
+                    break;
+                }
             }
-        }
+            System.out.println("Shuttle ID not found! please choose from the list");
+        } while(flag);
     }
 
     /**
@@ -866,13 +884,11 @@ public class Control {
 
     public void startProgram()
     {
-        importAllData();
-        Administrator administrator = new Administrator();
         boolean start = true;
         while (start)
         {
             String StringInput = menuSelect();
-            start = userSelection(StringInput, administrator);
+            start = userSelection(StringInput);
         }
     }
 
@@ -881,12 +897,12 @@ public class Control {
      *
      * @return A boolean
      */
-    public boolean userSelection(String userInput,Administrator administrator)
+    public boolean userSelection(String userInput)
     {
         switch (userInput)
         {
             case "1":
-                login(administrator);
+                login();
                 return true;
             case "2":
                 if (administrator.getAdminName().trim().length() == 0)
@@ -959,7 +975,7 @@ public class Control {
         return true;
     }
 
-    public void login(Administrator administrator)
+    public void login()
     {
         Validate va = new Validate();
         boolean flag = true;
@@ -1014,10 +1030,9 @@ public class Control {
     public void selectCandidates(){
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-
-        Console console = new Console();
+        Validate va = new Validate();
         Mission mission = inputMissionId();
-        int noCandidates = console.acceptInt("Please enter the number of candidates you wish to add to the mission");
+        int noCandidates = va.acceptIntegerInput("Please enter the number of candidates you wish to add to the mission");
         //add all candidates to the list that have at least one criteria
         ArrayList<Candidate> possibleCandidates = new ArrayList<>();
 
@@ -1136,7 +1151,7 @@ try
             System.out.println( i+1 + " " + shortlistCandidates.get(i).getCandidateName());
         }
 
-        String choice = console.acceptString("Are you happy with this list? (y/n");
+        String choice = va.acceptStringInput("Are you happy with this list? (y/n");
         if (choice.equals("y")){
             mission.setListOfCandidates(shortlistCandidates);
         }

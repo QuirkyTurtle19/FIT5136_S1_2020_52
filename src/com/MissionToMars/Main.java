@@ -17,6 +17,7 @@ public class Main {
 //       control.importAllData();
 //       control.mainMenu("Rory");
 
+        control.importAllData();
         control.startProgram();
 
         }

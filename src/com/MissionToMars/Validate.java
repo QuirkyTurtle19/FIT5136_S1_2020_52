@@ -44,11 +44,33 @@ public class Validate {
         return false;
     }
 
+//    Scanner input = new Scanner(System.in);
+//        System.out.println(displayMessage);
+//    //return input.nextLine();
+
     public String acceptStringInput(String displayMessage)
     {
-        Scanner input = new Scanner(System.in);
-        System.out.println(displayMessage);
-        return input.nextLine();
+        while (true) {
+            System.out.println(displayMessage);
+            System.out.println("===================================\n"
+                    + "==== Enter -M to the main menu ====\n" + "==== Enter -Q to quit ====\n");
+            Scanner input = new Scanner(System.in);
+            String line = input.nextLine();
+            if (line.length() > 0) {
+                if (line.equals("-M")){
+                    Control control = new Control();
+                    control.startProgram();
+                }
+                else if (line.equals("-Q")){
+                    System.out.println("Thanks for using!");
+                    System.exit(0);
+                }
+                return line;
+            }
+            else {
+                System.out.println("Input cannot be empty!");
+            }
+        }
     }
 
     public int acceptIntegerInput(String displayMessage)
