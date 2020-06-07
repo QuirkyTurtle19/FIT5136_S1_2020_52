@@ -244,12 +244,12 @@ public class Mission {
     }
 
     public void Criteria() {
-        String age = "Age Range";
+        String age = "Age range";
         String qual = "Qualifications";
         String work = "Years of work experience";
         String occ = "Occupations";
-        String health = "Health Records";
-        String criminal = "Criminal Records";
+        String health = "Health records";
+        String criminal = "Criminal records";
         String skills = "Computer skills";
         String lang = "Languages spoken";
         Scanner console = new Scanner(System.in);
@@ -257,7 +257,7 @@ public class Mission {
         boolean choice1 = FALSE,choice2 = FALSE;
         ArrayList<String> display = new ArrayList<>();
         ArrayList<String> selected = new ArrayList<>();
-        System.out.println("\n Select criteria that you want for selecting the candidates ");
+        System.out.println("\n Select criteria that you want for selecting the candidates: ");
         System.out.println("=======================================================");
         display.add(age);
         display.add(qual);
@@ -291,8 +291,8 @@ public class Mission {
         if(Select.trim().equals("y"))
         {
             System.out.println("\n Which edit operation to want to perform on the list: ");
-            System.out.println("\n 1. Add Criteria ");
-            System.out.println("\n 2. Remove Criteria ");
+            System.out.println("\n 1. Add criteria ");
+            System.out.println("\n 2. Remove criteria ");
             opt = console.nextInt();
             if(opt==1)
             {
@@ -363,7 +363,7 @@ public class Mission {
         SelectionCriteria criteria = new SelectionCriteria();
         switch(option)
         {
-            case "Age Range" : {
+            case "Age range" : {
                 criteria.askAge();
                 setSelectionCriteria(criteria);
             }
@@ -380,11 +380,11 @@ public class Mission {
                 criteria.askOccupation();
             }
             break;
-            case "Health Records" : {
+            case "Health records" : {
                 criteria.askHealthRecord();
             }
             break;
-            case "Criminal Records" : {
+            case "Criminal records" : {
                 criteria.askCriminalRecord();
             }
             break;
@@ -397,7 +397,7 @@ public class Mission {
             }
             break;
             default: {
-                System.out.println("Invalid Numbers entered");
+                System.out.println("Invalid numbers entered");
             }
             break;
 

@@ -52,23 +52,23 @@ public class Control {
         Mission mission = new Mission();
         Validate va = new Validate();
         //get user's input
-        String mId = va.acceptStringInput("Please Enter Mission ID: ");
+        String mId = va.acceptStringInput("Please enter the mission ID: ");
         mission.setMissionId(mId);
-        String mName = va.acceptStringInput("Please Enter Mission Name: ");
+        String mName = va.acceptStringInput("Please enter mission name: ");
         mission.setMissionName(mName);
-        String mDesc = va.acceptStringInput("Please Enter Mission Description: ");
+        String mDesc = va.acceptStringInput("Please enter mission description: ");
         mission.setMissionDesc(mDesc);
-        String mType = va.acceptStringInput("Please Enter Mission Type: ");
+        String mType = va.acceptStringInput("Please enter mission type: ");
         mission.setMissionType(mType);
-        String origin = va.acceptStringInput("Please Enter Country of origin: ");
+        String origin = va.acceptStringInput("Please enter country of origin: ");
         mission.setOrigin(origin);
         ArrayList<String> countries = inputCountriesAllowed();
         mission.setCountriesAllowed(countries);
-        String date = va.acceptStringInput("Please Enter the Launch Date: ");
+        String date = va.acceptStringInput("Please enter the launch date: ");
         mission.setLaunchDate(date);
-        String destLocation = va.acceptStringInput("Please Enter the Destination Location: ");
+        String destLocation = va.acceptStringInput("Please enter the destination location: ");
         mission.setDestLocation(destLocation);
-        int duration = va.acceptIntegerInput("Please Enter Mission Duration:");
+        int duration = va.acceptIntegerInput("Please enter mission duration:");
         mission.setMissionDuration(duration);
         String mStatus = selectMissionStatus();
         mission.setMissionStatus(mStatus);
@@ -111,27 +111,27 @@ public class Control {
     public void displayMission(Mission mission)
     {
         System.out.println("* Mission ID: " + mission.getMissionId());
-        System.out.println("1.Mission Name: " + mission.getMissionName());
-        System.out.println("2.Mission description: " + mission.getMissionDesc());
-        System.out.println("3.Country of origin: " + mission.getOrigin());
-        System.out.println("4.Countries allowed: " + mission.getCountriesAllowed());
-        System.out.println("5.Coordinator: " + mission.getCoordinator().getName() +
+        System.out.println("1. Mission name: " + mission.getMissionName());
+        System.out.println("2. Mission description: " + mission.getMissionDesc());
+        System.out.println("3. Country of origin: " + mission.getOrigin());
+        System.out.println("4. Countries allowed: " + mission.getCountriesAllowed());
+        System.out.println("5. Coordinator: " + mission.getCoordinator().getName() +
                 " info:" +mission.getCoordinator().getContactNumber());
 
-        System.out.println("6.Job: ");
+        System.out.println("6. Job: ");
         for(int i = 0; i < mission.getJobs().size(); i++)
         {
             System.out.println(Arrays.toString(mission.getJobs().get(i)));
         }
 
-        System.out.println("7.Employment requirements: ");
+        System.out.println("7. Employment requirements: ");
         for(int i = 0 ;i < mission.getEmploymentRequirements().size(); i++)
         {
             System.out.println(Arrays.toString(mission.getEmploymentRequirements().get(i)));
         }
 
-        System.out.println("8.Cargo requirements");
-        System.out.println("a.Cargo requirements for journey: ");
+        System.out.println("8. Cargo requirements");
+        System.out.println("a. Cargo requirements for journey: ");
         try
         {
             for (int i = 0; i < mission.getJourneyCargo().size(); i++)
@@ -146,7 +146,7 @@ public class Control {
         }
         try
         {
-            System.out.println("b.Cargo requirements for Mission: ");
+            System.out.println("b. Cargo requirements for the Mission: ");
             for (int i = 0; i < mission.getMissionCargo().size(); i++)
             {
                 ArrayList<String> ms = new ArrayList<>();
@@ -159,7 +159,7 @@ public class Control {
         }
         try
         {
-            System.out.println("c.Cargo requirements for other Missions: ");
+            System.out.println("c. Cargo requirements for other Missions: ");
             for (int i = 0; i < mission.getOtherMissionCargo().size(); i++)
             {
                 ArrayList<String> os = new ArrayList<>();
@@ -170,10 +170,10 @@ public class Control {
         }catch(Exception e){
             e.fillInStackTrace();
         }
-        System.out.println("9.Launch date: " + mission.getLaunchDate());
-        System.out.println("10.Location of the destination: " + mission.getDestLocation());
-        System.out.println("11.Duration of the mission: " + mission.getMissionDuration());
-        System.out.println("12.Status of the mission: " + mission.getMissionStatus());
+        System.out.println("9. Launch date: " + mission.getLaunchDate());
+        System.out.println("10. Location of the destination: " + mission.getDestLocation());
+        System.out.println("11. Duration of the mission: " + mission.getMissionDuration());
+        System.out.println("12. Status of the mission: " + mission.getMissionStatus());
     }
 
     public void getEditInput()
@@ -187,9 +187,9 @@ public class Control {
             String option = va.acceptStringInput("Please select which information do you want to edit: ");
             if (va.isEditNumber(option)){
                 Mission newMission = editMission(mission, option);
-                System.out.println("Note : Enter y for YES and n for NO.");
+                System.out.println("Note: Enter y for YES and n for NO.");
                 //displayMission(newMission);
-                String choice = va.acceptStringInput("Do You want to edit another information ? Enter y/n");
+                String choice = va.acceptStringInput("Do you want to edit another information? Enter y/n");
                 if (choice.trim().equals("n"))
                 {
                     displayMission(newMission);
@@ -208,35 +208,35 @@ public class Control {
         switch (option)
         {
             case "1":
-                String mName = va.acceptStringInput("Please Enter a new Mission Name: ");
+                String mName = va.acceptStringInput("Please enter a new mission name: ");
                 mission.setMissionName(mName);
-                System.out.println("1.New Mission Name: " + mission.getMissionName());
+                System.out.println("1. New Mission Name: " + mission.getMissionName());
                 return mission;
             case "2":
-                String mId = va.acceptStringInput("Please Enter a new Mission Description: ");
+                String mId = va.acceptStringInput("Please enter a new mission description: ");
                 mission.setMissionDesc(mId);
-                System.out.println("2.New Mission Description: " + mission.getMissionDesc());
+                System.out.println("2. New Mission Description: " + mission.getMissionDesc());
                 return mission;
             case "3":
-                String origin = va.acceptStringInput("Please Enter a new Country of origin: ");
+                String origin = va.acceptStringInput("Please enter a new country of origin: ");
                 mission.setOrigin(origin);
-                System.out.println("3.New Country of origin: " + mission.getOrigin());
+                System.out.println("3. New country of origin: " + mission.getOrigin());
                 return mission;
             case "4":
                 ArrayList<String> countries = inputCountriesAllowed();
                 mission.setCountriesAllowed(countries);
-                System.out.println("4.New Countries allowed: " + mission.getCountriesAllowed());
+                System.out.println("4. New countries allowed: " + mission.getCountriesAllowed());
                 return mission;
             case "5":
                 MissionCoordinator coordinator = inputCoordinator();
                 mission.setCoordinator(coordinator);
-                System.out.println("5.new Coordinator is: " + mission.getCoordinator().getName() +
+                System.out.println("5. New Mission Coordinator is: " + mission.getCoordinator().getName() +
                         " info:" +mission.getCoordinator().getContactNumber());
                 return mission;
             case "6":
                 ArrayList<String[]> jobs = inputJobs();
                 mission.setJobs(jobs);
-                System.out.println("6.New Job: ");
+                System.out.println("6. New job: ");
                 for(int i = 0; i < mission.getJobs().size(); i++)
                 {
                     System.out.println(Arrays.toString(mission.getJobs().get(i)));
@@ -245,7 +245,7 @@ public class Control {
             case "7":
                 ArrayList<String[]> requirements = inputRequirements();
                 mission.setEmploymentRequirements(requirements);
-                System.out.println("7.New Employment requirements: ");
+                System.out.println("7. New employment requirements: ");
                 for(int i = 0 ;i < mission.getEmploymentRequirements().size(); i++)
                 {
                     System.out.println(Arrays.toString(mission.getEmploymentRequirements().get(i)));
@@ -280,27 +280,27 @@ public class Control {
                 mission.setJourneyCargo(stockList);
                 mission.setMissionCargo(stockList2);
                 mission.setOtherMissionCargo(stockList3);
-                System.out.println("8.New Cargo requirements");
+                System.out.println("8. New cargo requirements");
                 return mission;
             case "9":
-                String date = va.acceptStringInput("Please Enter a new Launch Date: ");
+                String date = va.acceptStringInput("Please enter a new launch date: ");
                 mission.setLaunchDate(date);
-                System.out.println("9.New Launch date: " + mission.getLaunchDate());
+                System.out.println("9. New launch date: " + mission.getLaunchDate());
                 return mission;
             case "10":
-                String destLocation = va.acceptStringInput("Please Enter a New Destination Location: ");
+                String destLocation = va.acceptStringInput("Please enter a new destination location: ");
                 mission.setDestLocation(destLocation);
-                System.out.println("10.New Location of the destination: " + mission.getDestLocation());
+                System.out.println("10. New location of the destination: " + mission.getDestLocation());
                 return mission;
             case "11":
-                int duration = va.acceptIntegerInput("Please Enter a new Mission Duration:");
+                int duration = va.acceptIntegerInput("Please enter a new mission duration:");
                 mission.setMissionDuration(duration);
-                System.out.println("11.New Duration of the mission: " + mission.getMissionDuration());
+                System.out.println("11. New duration of the mission: " + mission.getMissionDuration());
                 return mission;
             case "12":
                 String mStatus = selectMissionStatus();
                 mission.setMissionStatus(mStatus);
-                System.out.println("12.New Status of the mission: " + mission.getMissionStatus());
+                System.out.println("12. New status of the mission: " + mission.getMissionStatus());
                 return mission;
         }
         return mission;
@@ -311,13 +311,13 @@ public class Control {
         Validate va = new Validate();
         boolean flag = true;
         ArrayList<String> countryList = new ArrayList<>();
-        System.out.println("Note : Enter at least one country a time.");
+        System.out.println("Note: Enter at least one country a time: ");
         while (flag) {
             Boolean add = true;
-            String country = va.acceptStringInput("Please Enter Countries allowed: ");
+            String country = va.acceptStringInput("Please enter countries allowed: ");
             for (String s : countryList) {
                 if (country.trim().equals(s)) {
-                    System.out.println(country + " already exist! Enter another Country allowed!");
+                    System.out.println(country + " already exist! Enter another country that is allowed.");
                     add = false;
                     break;
                 }
@@ -325,11 +325,11 @@ public class Control {
             if (add) {
                 countryList.add(country);
             }
-            System.out.println("Note : Enter y for YES and n for NO.");
-            String choice = va.acceptStringInput("Do You want to add more ? Enter y/n");
+            System.out.println("Note: Enter y for YES and n for NO.");
+            String choice = va.acceptStringInput("Do you want to add more? Enter y/n");
             if (choice.trim().equals("n")) {
                 flag = false;
-                System.out.println("Countries allowed added" + countryList);
+                System.out.println("Countries allowed added " + countryList);
             }
         }
         return countryList;
@@ -347,7 +347,7 @@ public class Control {
         System.out.println("4. Mission in progress");
         System.out.println("5. Returned to Earth");
         System.out.println("6. Mission completed");
-        int input = va.acceptIntegerInput("Enter the number of status:");
+        int input = va.acceptIntegerInput("Enter the number of status: ");
         switch (input)
         {
             case 1:
@@ -376,15 +376,15 @@ public class Control {
         ArrayList<String[]> jobs = new ArrayList<>();
         Validate va = new Validate();
         boolean flag = true;
-        System.out.println("Note : Enter at least one job name a time.");
+        System.out.println("Note: Enter at least one job name a time.");
         while (flag)
         {
-            String jobName = va.acceptStringInput("Please Enter the Job Name: ");
-            String jobDesc = va.acceptStringInput("Please Enter the Job Description: ");
+            String jobName = va.acceptStringInput("Please enter the job name: ");
+            String jobDesc = va.acceptStringInput("Please enter the job description: ");
             String[] job = new String[]{jobName, jobDesc};
             jobs.add(job);
-            System.out.println("Note : Enter y for YES and n for NO.");
-            String choice = va.acceptStringInput("Do You want to add another Job? Enter y/n");
+            System.out.println("Note: Enter y for YES and n for NO.");
+            String choice = va.acceptStringInput("Do you want to add another job? Enter y/n");
             if (choice.trim().equals("n"))
             {
                 flag = false;
@@ -399,15 +399,15 @@ public class Control {
         ArrayList<String[]> requirements = new ArrayList<>();
         Validate va = new Validate();
         boolean flag = true;
-        System.out.println("Note : Enter at least one Employment Title a time.");
+        System.out.println("Note: Enter at least one employment title a time.");
         while (flag)
         {
-            String reTitle = va.acceptStringInput("Please Enter the Employment Title: ");
-            String reNum = va.acceptStringInput("Please Enter the Number of Employees Required: ");
+            String reTitle = va.acceptStringInput("Please enter the employment title: ");
+            String reNum = va.acceptStringInput("Please enter the number of employees required: ");
             String[] re = new String[]{reTitle, reNum};
             requirements.add(re);
-            System.out.println("Note : Enter y for YES and n for NO.");
-            String choice = va.acceptStringInput("Do You want to add another " +
+            System.out.println("Note: Enter y for YES and n for NO.");
+            String choice = va.acceptStringInput("Do you want to add another " +
                     "Employment requirement? Enter y/n");
             if (choice.trim().equals("n"))
             {
@@ -422,9 +422,9 @@ public class Control {
     public MissionCoordinator inputCoordinator(){
         Validate va = new Validate();
         MissionCoordinator coordinator = new MissionCoordinator();
-        String cName = va.acceptStringInput("Please Enter the Coordinator’s name: ");
+        String cName = va.acceptStringInput("Please enter the Coordinator’s name: ");
         coordinator.setName(cName);
-        String cInfo = va.acceptStringInput("Please Enter the Coordinator’s contact information: ");
+        String cInfo = va.acceptStringInput("Please enter the Coordinator’s contact information: ");
         coordinator.setContactNumber(cInfo);
         return coordinator;
     }
@@ -436,17 +436,17 @@ public class Control {
         ArrayList<String> newMissionCargo = new ArrayList<>();
         ArrayList<String> newOtherMissionCargo = new ArrayList<>();
         ArrayList<ArrayList<String>> cargo = new ArrayList<>();
-        System.out.println("Note : Enter p to skip.");
-        System.out.println("Note : Enter y for YES and n for NO.");
+        System.out.println("Note: Enter p to skip.");
+        System.out.println("Note: Enter y for YES and n for NO.");
         while (flag)
         {
-            String jCargo = va.acceptStringInput("Please Enter the Cargo requirement for journey: ");
+            String jCargo = va.acceptStringInput("Please enter the Cargo requirement for journey: ");
             Boolean add = true;
             for (String s : newJourneyCargo)
             {
                 if (jCargo.equals(s))
                 {
-                    System.out.println(jCargo + " already exist! Enter another cargo!");
+                    System.out.println(jCargo + " already exist. Enter another cargo.");
                     add = false;
                     break;
                 }
@@ -455,11 +455,11 @@ public class Control {
                 break;
             if(add){
                 newJourneyCargo.add(jCargo);
-                String choice = va.acceptStringInput("Do You want to add more ? Enter y/n");
+                String choice = va.acceptStringInput("Do you want to add more? Enter y/n");
                 if (choice.trim().equals("n"))
                 {
                     flag = false;
-                    System.out.println("journey Cargo requirements added" + newJourneyCargo);
+                    System.out.println("Journey Cargo requirements added " + newJourneyCargo);
                 }
             }
         }
@@ -467,14 +467,14 @@ public class Control {
         flag = true;
         while (flag)
         {
-            String mCargo = va.acceptStringInput("Please Enter the Cargo requirement for mission: ");
+            String mCargo = va.acceptStringInput("Please enter the cargo requirement for mission: ");
 
             Boolean add = true;
             for (String s : newMissionCargo)
             {
                 if (mCargo.equals(s))
                 {
-                    System.out.println(mCargo + " already exist! Enter another cargo!");
+                    System.out.println(mCargo + " already exist. Enter another cargo.");
                     add = false;
                     break;
                 }
@@ -483,11 +483,11 @@ public class Control {
                 break;
             if(add){
                 newMissionCargo.add(mCargo);
-                String choice = va.acceptStringInput("Do You want to add more ? Enter y/n");
+                String choice = va.acceptStringInput("Do you want to add more ? Enter y/n");
                 if (choice.trim().equals("n"))
                 {
                     flag = false;
-                    System.out.println("Mission Cargo requirements added" + newMissionCargo);
+                    System.out.println("Mission cargo requirements added " + newMissionCargo);
                 }
             }
         }
@@ -511,11 +511,11 @@ public class Control {
                 break;
             if(add){
                 newOtherMissionCargo.add(oCargo);
-                String choice = va.acceptStringInput("Do You want to add more ? Enter y/n");
+                String choice = va.acceptStringInput("Do you want to add more ? Enter y/n");
                 if (choice.trim().equals("n"))
                 {
                     flag = false;
-                    System.out.println("Other Mission Cargo requirements added" + newOtherMissionCargo);
+                    System.out.println("Other mission cargo requirements added " + newOtherMissionCargo);
                 }
             }
         }
@@ -694,7 +694,7 @@ public class Control {
             System.out.println("Shuttle ID: " + shuttle.getShuttleId() + " Shuttle name: " + shuttle.getShuttleName()
                     + " Manufacture year: " + shuttle.getManufactureYear() + " Fuel capacity (Litres): "
                     + shuttle.getFuelCapacity() + " Passenger capacity: " + shuttle.getPassengerCapacity()
-                    + " Cargo Capacity (kgs): " + " Travel speed: " + shuttle.getTravelSpeed() + " Origin: " + shuttle.getOrigin());
+                    + " Cargo capacity (kgs): " + " Travel speed: " + shuttle.getTravelSpeed() + " Origin: " + shuttle.getOrigin());
         }
         do
         {
@@ -739,7 +739,7 @@ public class Control {
                     || input.equals("6") || input.equals("7"))
                 flag = false;
             else
-                System.out.println("***** Select from given options(1,2,3,4,5,6,7) only! ****");
+                System.out.println("***** Select from given options(1,2,3,4,5,6,7) only. ****");
         }
         return input;
     }
@@ -831,7 +831,7 @@ public class Control {
                     return true;
                 }
             case "7":
-                System.out.println("Thanks for using!");
+                System.out.println("Thank you for using!");
                 return false;
         }
         return true;
@@ -884,7 +884,7 @@ public class Control {
                     return value;
                 }
             }
-            System.out.println("Mission not exist! ");
+            System.out.println("Mission does not exist. ");
             id = va.acceptStringInput("Input Mission ID: ");
         }
     }

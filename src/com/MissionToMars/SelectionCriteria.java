@@ -127,10 +127,10 @@ public class SelectionCriteria {
     {
         int min,max;
         Scanner console = new Scanner(System.in);
-        System.out.println("Enter Minimum Age : ");
+        System.out.println("Enter minimum age: ");
         min=console.nextInt();
         setMinimumAge(min);
-        System.out.println("Enter Maximum Age : ");
+        System.out.println("Enter maximum age: ");
         max=console.nextInt();
         setMaximumAge(max);
     }
@@ -139,7 +139,7 @@ public class SelectionCriteria {
     {
         String qualifications;
         Scanner console = new Scanner(System.in);
-        System.out.println("Enter Qualifications Required:");
+        System.out.println("Enter qualifications required:");
         qualifications=console.nextLine();
         setQualification(qualifications);
     }
@@ -148,7 +148,7 @@ public class SelectionCriteria {
     {
         int we;
         Scanner console = new Scanner(System.in);
-        System.out.println("Enter Experience Required:");
+        System.out.println("Enter experience required:");
         we=console.nextInt();
         setWorkExperience(we);
     }
@@ -157,7 +157,7 @@ public class SelectionCriteria {
     {
         String occ;
         Scanner console = new Scanner(System.in);
-        System.out.println("Enter Occupations Done:");
+        System.out.println("Enter occupations needed:");
         occ=console.nextLine();
         setOccupation(occ);
     }
@@ -167,27 +167,27 @@ public class SelectionCriteria {
         String input,choice,str1;
         Scanner console = new Scanner(System.in);
         ArrayList<String> str = new ArrayList<>();
-        System.out.println("Enter Health Requirements:");
-        System.out.println("Note : Enter Atleast One Requirement");
+        System.out.println("Enter health requirements:");
+        System.out.println("Note: Enter at least one requirement");
         input=console.nextLine();
         str.add(input);
-        System.out.println("Do You want to add more ?");
+        System.out.println("Do you want to add more? ");
         System.out.println("Press y/n");
         choice=console.nextLine();
         if(choice.trim().equals("y")==TRUE)
         {
             while (choice.trim().equals("y")==TRUE)
             {
-                System.out.println("Enter Requirement");
+                System.out.println("Enter requirement");
                 str1 = console.nextLine();
                 str.add(str1);
-                System.out.println("Do You want to add more ?");
+                System.out.println("Do you want to add more? ");
                 System.out.println("Press y/n");
                 choice = console.nextLine();
             }
         }
         else
-            System.out.println("Health Updated");
+            System.out.println("Health updated");
         setHealthRecord(str);
     }
 
@@ -196,27 +196,27 @@ public class SelectionCriteria {
         String input,choice,str1;
         Scanner console = new Scanner(System.in);
         ArrayList<String> str = new ArrayList<>();
-        System.out.println("Enter Criminal Record Requirements:");
-        System.out.println("Note : Enter At least One Requirement");
+        System.out.println("Enter criminal record requirements:");
+        System.out.println("Note: Enter at least one requirement");
         input=console.nextLine();
         str.add(input);
-        System.out.println("Do You want to add more ?");
+        System.out.println("Do you want to add more? ");
         System.out.println("Press y/n");
         choice=console.nextLine();
         if(choice.trim().equals("y")==TRUE)
         {
             while (choice.trim() .equals("y")==TRUE)
             {
-                System.out.println("Enter Requirement");
+                System.out.println("Enter requirement");
                 str1 = console.nextLine();
                 str.add(str1);
-                System.out.println("Do You want to add more ?");
+                System.out.println("Do you want to add more? ");
                 System.out.println("Press y/n");
                 choice = console.nextLine();
             }
         }
         else
-            System.out.println("Criminal record Updated");
+            System.out.println("Criminal record updated");
         setCriminalRecord(str);
     }
 
@@ -224,7 +224,7 @@ public class SelectionCriteria {
     {
         String skill;
         Scanner console = new Scanner(System.in);
-        System.out.println("Enter Skill:");
+        System.out.println("Enter skill:");
         skill =console.nextLine();
         setComputerSkill(skill);
     }
@@ -233,7 +233,7 @@ public class SelectionCriteria {
     {
         String lang;
         Scanner console = new Scanner(System.in);
-        System.out.println("Enter language Required:");
+        System.out.println("Enter language required:");
         lang =console.nextLine();
         setLanguageRequired(lang);
     }
@@ -243,27 +243,27 @@ public class SelectionCriteria {
         String input,choice,str1;
         Scanner console = new Scanner(System.in);
         ArrayList<String> str = new ArrayList<>();
-        System.out.println("Enter Secondary language Requirements:");
-        System.out.println("Note : Enter Atleast One Requirement");
+        System.out.println("Enter secondary language requirements:");
+        System.out.println("Note: Enter at least one requirement");
         input=console.nextLine();
         str.add(input);
-        System.out.println("Do You want to add more ?");
+        System.out.println("Do you want to add more? ");
         System.out.println("Press y/n");
         choice=console.nextLine();
         if(choice.trim().equals("y")==TRUE)
         {
             while (choice.trim().equals("y")==TRUE)
             {
-                System.out.println("Enter Language");
+                System.out.println("Enter language");
                 str1 = console.nextLine();
                 str.add(str1);
-                System.out.println("Do You want to add more ?");
+                System.out.println("Do you want to add more ?");
                 System.out.println("Press y/n");
                 choice = console.nextLine();
             }
         }
         else
-            System.out.println("Secondary languages Updated");
+            System.out.println("Secondary languages updated");
 
         setSecondaryLanguages(str);
 
