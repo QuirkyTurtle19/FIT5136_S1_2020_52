@@ -946,6 +946,18 @@ public class Control {
             }
 
         }
+
+        if (mission.getSelectionCriteria().getHealthRecord() != null)
+        {
+            for (int i = 0; i < candidates.size(); i++){
+
+                if ( mission.getSelectionCriteria().getHealthRecord().contains(candidates.get(i).getAllergies())){
+                    possibleCandidates.add(candidates.get(i));
+                }
+
+            }
+        }
+
         //remove candidates that do not have all criteria
         if (Integer.toString(mission.getSelectionCriteria().getMinimumAge()) != null)
         {
@@ -995,6 +1007,18 @@ public class Control {
             }
 
         }
+
+        if (mission.getSelectionCriteria().getHealthRecord() != null)
+        {
+            for (int i = 0; i < possibleCandidates.size(); i++){
+
+                if ( mission.getSelectionCriteria().getHealthRecord().contains(possibleCandidates.get(i).getAllergies())){
+                    possibleCandidates.remove(possibleCandidates.get(i));
+                }
+
+            }
+        }
+
     }catch(Exception e){
         e.fillInStackTrace();
     }
