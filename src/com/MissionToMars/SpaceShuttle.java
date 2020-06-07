@@ -11,6 +11,9 @@ public class SpaceShuttle {
     private String travelSpeed;
     private String origin;
 
+    /**
+     * Constructor for objects of class Space Shuttle
+     */
     public SpaceShuttle() {
         shuttleId = "";
         shuttleName = "";
@@ -22,6 +25,9 @@ public class SpaceShuttle {
         origin = "";
     }
 
+    /**
+     * Non-Default Constructor for objects of class Space Shuttle
+     */
     public SpaceShuttle (String newShuttleId, String NewShuttleName, String NewManufactureYear, String NewFuelCapacity,
                      String NewPassengerCapacity, String NewCargoCapacity, String NewTravelSpeed, String newOrigin){
 

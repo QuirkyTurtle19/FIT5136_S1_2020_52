@@ -5,6 +5,9 @@ import java.util.Scanner;
 
 public class FileIO {
 
+    /**
+     *Method to read Files
+     */
     public String readFile(String filename){
         String output = "";
         try

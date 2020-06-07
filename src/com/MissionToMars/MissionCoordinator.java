@@ -5,12 +5,18 @@ public class MissionCoordinator {
     private String name;
     private String contactNumber;
 
+    /**
+     * Constructor for objects of class Mission Coordinator
+     */
     public MissionCoordinator(){
         id = "";
         name = "";
         contactNumber = "";
      }
 
+    /**
+     *Non-Default  Constructor for objects of class Administrator
+     */
      public MissionCoordinator(String newId, String newName, String newContact){
         id = newId;
         name = newName;

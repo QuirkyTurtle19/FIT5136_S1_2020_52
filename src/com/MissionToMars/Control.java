@@ -18,6 +18,9 @@ public class Control {
     private ArrayList<Stock> listOfStock;
     private ArrayList<MissionCoordinator> missionCoordinators;
 
+    /**
+     *Non-Default Constructor for objects of class Control
+     */
     public Control() {
         spaceShuttles = new ArrayList<>();
         candidates = new ArrayList<>();
@@ -108,6 +111,9 @@ public class Control {
         System.out.println("Mission Created!");
     }
 
+    /**
+     *Method to display mission
+     */
     public void displayMission(Mission mission)
     {
         System.out.println("* Mission ID: " + mission.getMissionId());
@@ -176,6 +182,9 @@ public class Control {
         System.out.println("12. Status of the mission: " + mission.getMissionStatus());
     }
 
+    /**
+     *Method to get edit input
+     */
     public void getEditInput()
     {
         Mission mission = inputMissionId();
@@ -203,6 +212,11 @@ public class Control {
         }
     }
 
+    /**
+     *Method to Edit mission
+     * @param  mission and option
+     * @return Mission
+     */
     public Mission editMission(Mission mission, String option){
         Validate va = new Validate();
         switch (option)
@@ -306,7 +320,12 @@ public class Control {
         return mission;
     }
 
-    public ArrayList<String> inputCountriesAllowed() {
+
+    /**
+     *Method to enter countries allowed
+     * @return Arraylist of type string
+     */
+        public ArrayList<String> inputCountriesAllowed() {
 
         Validate va = new Validate();
         boolean flag = true;
@@ -335,6 +354,10 @@ public class Control {
         return countryList;
     }
 
+    /**
+     *Method to select the mission status
+     * @return string
+     */
     public String selectMissionStatus(){
         String statusSelect = "Planning phase";
         Validate va = new Validate();
@@ -372,6 +395,10 @@ public class Control {
         return statusSelect;
     }
 
+    /**
+     *Method to enter the jobs list for the mission
+     * @return Arraylist of type string array
+     */
     public ArrayList<String[]> inputJobs(){
         ArrayList<String[]> jobs = new ArrayList<>();
         Validate va = new Validate();
@@ -395,6 +422,10 @@ public class Control {
         return jobs;
     }
 
+    /**
+     *Method to enter input requirements
+     * @return Arraylist of type string array
+     */
     public ArrayList<String[]> inputRequirements(){
         ArrayList<String[]> requirements = new ArrayList<>();
         Validate va = new Validate();
@@ -419,6 +450,10 @@ public class Control {
         return requirements;
     }
 
+    /**
+     *Method to enter Coordinator details
+     * @return MissionCoordinator
+     */
     public MissionCoordinator inputCoordinator(){
         Validate va = new Validate();
         MissionCoordinator coordinator = new MissionCoordinator();
@@ -429,6 +464,10 @@ public class Control {
         return coordinator;
     }
 
+    /**
+     *Method to enter cargo requirements
+     * @return Arraylist of type arraylist of strings
+     */
     public ArrayList<ArrayList<String>> cargoRequirements(){
         Validate va = new Validate();
         boolean flag = true;
@@ -523,6 +562,9 @@ public class Control {
         return cargo;
     }
 
+    /**
+     *Method to import all data
+     */
     public void importAllData(){
         reader = new FileIO();
         //import mission coordinators
@@ -837,6 +879,9 @@ public class Control {
         return true;
     }
 
+    /**
+     *Method to login
+     */
     public void login()
     {
         Validate va = new Validate();
@@ -889,6 +934,9 @@ public class Control {
         }
     }
 
+    /**
+     *Method to select candidates
+     */
     public void selectCandidates(){
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");

@@ -8,12 +8,17 @@ public class Stock {
     private Integer numberOnHand;
     private FileIO reader;
 
+    /**
+     * Constructor for objects of class stock
+     */
     public Stock() {
         code = "";
         name = "";
         numberOnHand = 0;
     }
-
+    /**
+     * Non- Default Constructor for objects of class stock
+     */
     public Stock(String newCode, String newName, Integer newNumberOnHand) {
         code = newCode;
         name = newName;

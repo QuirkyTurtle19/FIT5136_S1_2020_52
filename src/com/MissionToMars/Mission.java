@@ -27,7 +27,9 @@ public class Mission {
     private MissionCoordinator coordinator;
     private FileIO reader;
 
-
+    /**
+     * Constructor of class Mission
+     */
     public Mission() {
 
         missionId = "";
@@ -51,6 +53,9 @@ public class Mission {
         coordinator = new MissionCoordinator();
     }
 
+    /**
+     * Non-Default Constructor of class Mission
+     */
     public Mission(String newMissionId, String newMissionName, String newLaunchDate, String newOrigin,
                    ArrayList<String> newCountriesAllowed, Integer newMissionDuration, String newMissionType,
                    String newMissionDescription, ArrayList<Stock> newJourneyCargo, ArrayList<Stock> newMissionCargo,
@@ -243,7 +248,12 @@ public class Mission {
         return candidates.get(index);
     }
 
+    /**
+     * Method to select and edit criteria
+     */
     public void Criteria() {
+        Mission mission = new Mission();
+
         String age = "Age range";
         String qual = "Qualifications";
         String work = "Years of work experience";
@@ -271,63 +281,80 @@ public class Mission {
         String Select = "",del = "";
         int opt = 0;
         do {
-            System.out.println("\n Enter option: ");
-            opt = console.nextInt();
-            del=deleteOption(opt, display);
+            opt = va.acceptIntegerInput("Enter Option:");
+            del = deleteOption(opt, display);
             selected.add(del);
             displayList(display);
-            System.out.println(" \n Do you want to continue adding to the list? (y/n): ");
-            Select = console.next();
-            if(Select.trim().equals("y"))
-                choice1 = TRUE;
+            Select = va.acceptStringInput(" \n Do you want to continue adding to the list? (y/n): ");
+            if (Select.trim().equals("y")) choice1 = TRUE;
+            else if (!Select.trim().equals("y") && !Select.trim().equals("n"))
+            {
+                System.out.println("Enter  Valid input");
+                mission.Criteria();
+
+            }
             else if(Select.trim().equals("n"))
                 break;
-        } while (display.size() >= 1 && choice1==TRUE);
-         // display final selected criteria
+
+        } while (display.size() >= 1 && choice1==TRUE) ;
+        // display final selected criteria
         System.out.println("\n Criteria list for selecting candidates \n");
         displayList(selected);
-        System.out.println("\n Do you want to make changes to the final Selection Criteria List (y/n)\n ");
-        Select = console.next();
+        Select = va.acceptStringInput("\n Do you want to make changes to the final Selection Criteria List (y/n)\n ");
         if(Select.trim().equals("y"))
         {
             System.out.println("\n Which edit operation to want to perform on the list: ");
+
+            System.out.println("\n 1. Add Criteria ");
+            System.out.println("\n 2. Remove Criteria ");
+            opt = va.acceptIntegerInput("Select Option:");
+
             System.out.println("\n 1. Add criteria ");
             System.out.println("\n 2. Remove criteria ");
             opt = console.nextInt();
+
             if(opt==1)
             {
                 System.out.println("\n Enter option to add from the list: ");
                 do {
                     displayList(display);
-                    System.out.println("\n Enter option: ");
-                    opt = console.nextInt();
+                    opt = va.acceptIntegerInput("Enter Option:");
                     del=deleteOption(opt, display);
                     selected.add(del);
                     displayList(selected);
-                    System.out.println(" \n Do you want to continue adding to the list? (y/n): ");
-                    Select = console.next();
-                    if(Select.trim().equals("y"))
+                    Select = va.acceptStringInput(" \n Do you want to continue adding to the list? (y/n): ");
+                    if (Select.trim().equals("y"))
                         choice1 = TRUE;
+                    else if (!Select.trim().equals("y") && !Select.trim().equals("n"))
+                    {
+                        System.out.println("Enter  Valid input");
+                        mission.Criteria();
+
+                    }
                     else if(Select.trim().equals("n"))
                         break;
-                } while (display.size() >= 1 && choice1==TRUE);
+                } while (display.size() >= 1 && choice1==TRUE && opt <= display.size());
             }
             else if(opt==2)
             {
                 System.out.println("\n Enter option to remove from the list: ");
                 do{
                     displayList(selected);
-                    System.out.println("Enter option: ");
-                    opt=console.nextInt();
+                    opt = va.acceptIntegerInput("Enter Option:");
                     del=deleteOption(opt,selected);
                     display.add(del);
-                    System.out.println(" \n Do you want to continue removing from the options list? (y/n): ");
-                    Select = console.next();
-                    if(Select.trim().equals("y"))
+                    Select = va.acceptStringInput(" \n Do you want to continue removing from list? (y/n): ");
+                    if (Select.trim().equals("y"))
                         choice2 = TRUE;
+                    else if (!Select.trim().equals("y") && !Select.trim().equals("n"))
+                    {
+                        System.out.println("Enter  Valid input");
+                        mission.Criteria();
+
+                    }
                     else if(Select.trim().equals("n"))
                         break;
-                }while(selected.size() >=1 && choice2 == TRUE);
+                }while(selected.size() >=1 && choice2 == TRUE && opt <= selected.size());
             }
             else System.out.println("Please enter a valid option");
 
@@ -341,16 +368,25 @@ public class Mission {
         }
     }
 
+
+    /**
+     * Method to delete options from the display list
+     */
+
+
     public String deleteOption(int option, ArrayList<String> display) {
         String delete="";
         for (int i = 0; i <= display.size(); i++) {
             if (option == (i)) {
-               delete= display.remove(i - 1);
+                delete= display.remove(i - 1);
             }
         }
         return delete;
     }
 
+    /**
+     * Method to display the list
+     */
     public void displayList(ArrayList<String> display) {
         for (int i = 0; i < display.size(); i++) {
             System.out.println(i + 1 + "." + display.get(i));
@@ -358,6 +394,9 @@ public class Mission {
 
     }
 
+    /**
+     * Method to access the the Selection Criteria
+     */
     public void setValues(String option)
     {
         SelectionCriteria criteria = new SelectionCriteria();
@@ -403,4 +442,13 @@ public class Mission {
 
         }
     }
+
+    /**
+     * main method
+     */
+    public static void main(String[] args) {
+        Mission mission = new Mission();
+        mission.Criteria();
+    }
+
 }

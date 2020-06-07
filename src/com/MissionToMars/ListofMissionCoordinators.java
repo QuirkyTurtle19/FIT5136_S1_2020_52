@@ -20,10 +20,17 @@ public class ListofMissionCoordinators {
         return missionCoordinators.get(index);
     }
 
+    /**
+     *Method to add mission coordinator
+     * @param id,name and contact of type string
+     */
     public void addCoordinator(String id, String name, String contact){
         missionCoordinators.add( new MissionCoordinator(id, name, contact));
     }
 
+    /**
+     *Method to enter mission coordinator list
+     */
     public void createMissionCoordinatorsList(){
         reader = new FileIO();
         String coordinatorsString = reader.readFile("missionCoordinators.txt");

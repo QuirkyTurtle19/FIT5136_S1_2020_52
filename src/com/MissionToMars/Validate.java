@@ -6,6 +6,11 @@ import java.util.regex.Pattern;
 
 public class Validate {
 
+    /**
+     * Method to accept string input
+     * @param displayMessage of type String
+     * @return String
+     */
     public String acceptStringInput(String displayMessage)
     {
         while (true) {
@@ -31,6 +36,11 @@ public class Validate {
         }
     }
 
+    /**
+     * Method to accept Integer input
+     * @param displayMessage of type String
+     * @return integer
+     */
     public int acceptIntegerInput(String displayMessage)
     {
         while (true) {
@@ -45,6 +55,11 @@ public class Validate {
         }
     }
 
+    /**
+     * Method to check if string is within the range
+     * @param  value of type string and min,max of type integer
+     * @return boolean
+     */
     public boolean stringLengthWithinRange(String value, int min, int max)
     {
         boolean withinRange = true;
@@ -53,6 +68,11 @@ public class Validate {
         return withinRange;
     }
 
+    /**
+     * Method to accept match pattern
+     * @param  inputString of type String
+     * @return boolean
+     */
     public boolean isEditNumber (String inputString) {
         Pattern pattern = Pattern.compile("^([1-9]|1[0-2])$");
         Matcher matcher = pattern.matcher(inputString);
