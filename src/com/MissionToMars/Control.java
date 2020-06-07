@@ -1,6 +1,5 @@
 package com.MissionToMars;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -416,7 +415,6 @@ public class Control {
             {
                 flag = false;
                 System.out.println("Jobs added");
-                //System.out.println(Arrays.toString(jobs.get(jobs.size() - 1)));
             }
         }
         return jobs;
@@ -938,104 +936,105 @@ public class Control {
      *Method to select candidates
      */
     public void selectCandidates(){
-
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Validate va = new Validate();
         Mission mission = inputMissionId();
+        try {
+            mission.getSelectionCriteria().getMinimumAge();
+        } catch(Exception e) {
+            System.out.println("Select criteria for the mission first");
+            Control control = new Control();
+            control.startProgram();
+        }
         int noCandidates = va.acceptIntegerInput("Please enter the number of candidates you wish to add to the mission");
-        ArrayList<Candidate> possibleCandidates = candidates;
         //add all candidates to the list that have at least one criteria
+        ArrayList<Candidate> possibleCandidates = candidates;
+        //remove candidates that do not have all criteria
+        try {
+            if (Integer.toString(mission.getSelectionCriteria().getMinimumAge()) != null)
+            {
+                for (int i = 0; i < possibleCandidates.size(); i++)
+                {
+                    int age = ageCalculator(LocalDate.parse(possibleCandidates.get(i).getCandidateDOB(), DateTimeFormatter.ofPattern("MM/dd/yyyy")));
 
+                    if (age < mission.getSelectionCriteria().getMinimumAge())
+                    {
+                        possibleCandidates.remove(possibleCandidates.get(i));
+
+                    }
+                }
+            }
+            if (Integer.toString(mission.getSelectionCriteria().getMaximumAge()) != null)
+            {
+                for (int i = 0; i < possibleCandidates.size(); i++)
+                {
+                    int age = ageCalculator(LocalDate.parse(possibleCandidates.get(i).getCandidateDOB(), DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+
+                    if (age > mission.getSelectionCriteria().getMaximumAge())
+                    {
+                        possibleCandidates.remove(possibleCandidates.get(i));
+
+                    }
+                }
+            }
+        }catch(Exception e){
+            System.out.println("Please select the age criteria first");
+        }
+
+        try {
+            if (Integer.toString(mission.getSelectionCriteria().getWorkExperience()) != null)
+            {
+                for (int i = 0; i < possibleCandidates.size(); i++)
+                {
+                    int exp = 0;
+                    if(possibleCandidates.get(i).getWork() != null)
+                    {
+                        for (int j = 0; j < possibleCandidates.get(i).getWork().size(); j++)
+                        {
+                            if (exp < Integer.parseInt(possibleCandidates.get(i).getWork().get(j)[1].trim()))
+                            {
+                                exp = Integer.parseInt(possibleCandidates.get(i).getWork().get(j)[1].trim());
+                            }
+
+                        }
+                        if (exp < mission.getSelectionCriteria().getWorkExperience())
+                        {
+                            possibleCandidates.remove(possibleCandidates.get(i));
+                        }
+                    }
+                }
+            }
+        }catch(Exception e){
+                System.out.println("Please select the work criteria first");
+            }
 
         try
-    {
-
-        //remove candidates that do not have all criteria
-        if (Integer.toString(mission.getSelectionCriteria().getMinimumAge()) != null)
         {
-            for (int i = 0; i < possibleCandidates.size(); i++)
+            if (mission.getSelectionCriteria().getHealthRecord() != null)
             {
-                int age = ageCalculator(LocalDate.parse(possibleCandidates.get(i).getCandidateDOB(), DateTimeFormatter.ofPattern("MM/dd/yyyy")));
-
-                if (age < mission.getSelectionCriteria().getMinimumAge())
+                for (int i = 0; i < possibleCandidates.size(); i++)
                 {
-                    possibleCandidates.remove(possibleCandidates.get(i));
 
-                }
-            }
-        }
-        if (Integer.toString(mission.getSelectionCriteria().getMaximumAge()) != null)
-        {
-            for (int i = 0; i < possibleCandidates.size(); i++)
-            {
-                int age = ageCalculator(LocalDate.parse(possibleCandidates.get(i).getCandidateDOB(), DateTimeFormatter.ofPattern("MM/dd/yyyy")));
-
-                if (age > mission.getSelectionCriteria().getMaximumAge())
-                {
-                    possibleCandidates.remove(possibleCandidates.get(i));
-
-                }
-            }
-        }
-
-        if (Integer.toString(mission.getSelectionCriteria().getWorkExperience()) != null)
-        {
-            for (int i = 0; i < possibleCandidates.size(); i++)
-            {
-                int exp = 0;
-                for (int j = 0; j < possibleCandidates.get(i).getWork().size(); j++)
-                {
-                    if (exp < Integer.parseInt(possibleCandidates.get(i).getWork().get(j)[1]))
+                    if (mission.getSelectionCriteria().getHealthRecord().contains(possibleCandidates.get(i).getAllergies()))
                     {
-                        exp = Integer.parseInt(possibleCandidates.get(i).getWork().get(j)[1]);
+                        possibleCandidates.remove(possibleCandidates.get(i));
                     }
-
                 }
-                if (exp < mission.getSelectionCriteria().getWorkExperience())
-                {
-                    possibleCandidates.remove(possibleCandidates.get(i));
-                }
-
             }
-
+        } catch (Exception e){
+            e.fillInStackTrace();
         }
 
-        if (mission.getSelectionCriteria().getHealthRecord() != null)
-        {
-            for (int i = 0; i < possibleCandidates.size(); i++){
-
-                if ( mission.getSelectionCriteria().getHealthRecord().contains(possibleCandidates.get(i).getAllergies())){
-                    possibleCandidates.remove(possibleCandidates.get(i));
-                }
-
-            }
-        }
-
-    }catch(Exception e){
-        e.fillInStackTrace();
-    }
         //display all Candidates
         //****** need try catch here *****
-
         int arg = noCandidates;
         if (possibleCandidates.size() < noCandidates){
             arg = possibleCandidates.size();
         }
-
-
         ArrayList<Candidate> shortlistCandidates = new ArrayList<Candidate>(possibleCandidates.subList(0, arg));
-
-
         for (int i = 0; i < shortlistCandidates.size(); i++){
             System.out.println( i+1 + " " + shortlistCandidates.get(i).getCandidateName());
         }
-//        String choice = va.acceptStringInput("Are you happy with this list? (y/n");
-//        if (choice.equals("y")){
-//            mission.setListOfCandidates(shortlistCandidates);
-//        }
-//        else{
-//            //return to main menu
-//        }
+        mission.setListOfCandidates(shortlistCandidates);
     }
 }
 

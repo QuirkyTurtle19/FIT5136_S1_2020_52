@@ -252,7 +252,7 @@ public class Mission {
      * Method to select and edit criteria
      */
     public void Criteria() {
-        Mission mission = new Mission();
+        //Mission mission = new Mission();
 
         String age = "Age range";
         String qual = "Qualifications";
@@ -287,12 +287,6 @@ public class Mission {
             displayList(display);
             Select = va.acceptStringInput(" \n Do you want to continue adding to the list? (y/n): ");
             if (Select.trim().equals("y")) choice1 = TRUE;
-            else if (!Select.trim().equals("y") && !Select.trim().equals("n"))
-            {
-                System.out.println("Enter  Valid input");
-                mission.Criteria();
-
-            }
             else if(Select.trim().equals("n"))
                 break;
 
@@ -325,12 +319,6 @@ public class Mission {
                     Select = va.acceptStringInput(" \n Do you want to continue adding to the list? (y/n): ");
                     if (Select.trim().equals("y"))
                         choice1 = TRUE;
-                    else if (!Select.trim().equals("y") && !Select.trim().equals("n"))
-                    {
-                        System.out.println("Enter  Valid input");
-                        mission.Criteria();
-
-                    }
                     else if(Select.trim().equals("n"))
                         break;
                 } while (display.size() >= 1 && choice1==TRUE && opt <= display.size());
@@ -346,12 +334,6 @@ public class Mission {
                     Select = va.acceptStringInput(" \n Do you want to continue removing from list? (y/n): ");
                     if (Select.trim().equals("y"))
                         choice2 = TRUE;
-                    else if (!Select.trim().equals("y") && !Select.trim().equals("n"))
-                    {
-                        System.out.println("Enter  Valid input");
-                        mission.Criteria();
-
-                    }
                     else if(Select.trim().equals("n"))
                         break;
                 }while(selected.size() >=1 && choice2 == TRUE && opt <= selected.size());
@@ -362,9 +344,10 @@ public class Mission {
 
         System.out.println("\n ________ FINAL SELECTION CRITERIA ________ \n");
         displayList(selected);
+        SelectionCriteria criteria = new SelectionCriteria();
         for (int i = 0; i < selected.size(); i++)
         {
-            setValues(selected.get(i));
+            setValues(selected.get(i), criteria);
         }
     }
 
@@ -397,9 +380,9 @@ public class Mission {
     /**
      * Method to access the the Selection Criteria
      */
-    public void setValues(String option)
+    public void setValues(String option, SelectionCriteria criteria)
     {
-        SelectionCriteria criteria = new SelectionCriteria();
+        //SelectionCriteria criteria = new SelectionCriteria();
         switch(option)
         {
             case "Age range" : {
@@ -409,10 +392,12 @@ public class Mission {
             break;
             case "Qualifications" : {
                 criteria.askQualifications();
+                setSelectionCriteria(criteria);
             }
             break;
             case "Years of work experience" : {
                 criteria.askExperience();
+                setSelectionCriteria(criteria);
             }
             break;
             case "Occupations" : {
@@ -421,6 +406,7 @@ public class Mission {
             break;
             case "Health records" : {
                 criteria.askHealthRecord();
+                setSelectionCriteria(criteria);
             }
             break;
             case "Criminal records" : {
@@ -442,13 +428,4 @@ public class Mission {
 
         }
     }
-
-    /**
-     * main method
-     */
-    public static void main(String[] args) {
-        Mission mission = new Mission();
-        mission.Criteria();
-    }
-
 }
