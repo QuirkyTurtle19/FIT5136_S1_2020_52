@@ -22,6 +22,7 @@ public class Validate {
             if (line.length() > 0) {
                 if (line.equals("-M")){
                     Control control = new Control();
+                    control.importAllData();
                     control.startProgram();
                 }
                 else if (line.equals("-Q")){
